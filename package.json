@@ -17,9 +17,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -31,7 +29,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "cypress": "^3.2.0",
     "jsonwebtoken": "^8.5.0",
     "unfetch": "^4.1.0"
   }

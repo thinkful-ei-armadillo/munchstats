@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 
-class LearningRoute extends Component {
+class LogHomeRoute extends Component {
   render() {
     return (
       <section>
-        implement and style me
+        nutritionize yourself
       </section>
     );
   }
 }
 
-export default LearningRoute
+export default LogHomeRoute

@@ -6,9 +6,14 @@ import PublicOnlyRoute from '../PublicOnlyRoute/PublicOnlyRoute'
 import RegistrationRoute from '../../routes/RegistrationRoute/RegistrationRoute'
 import LoginRoute from '../../routes/LoginRoute/LoginRoute'
 import DashboardRoute from '../../routes/DashboardRoute/DashboardRoute'
-import LearningRoute from '../../routes/LearningRoute/LearningRoute'
 import NotFoundRoute from '../../routes/NotFoundRoute/NotFoundRoute'
 import './App.css'
+import LogExerciseRoute from '../../routes/LogExerciseRoute/LogExerciseRoute';
+import LogHomeRoute from '../../routes/LogHomeRoute/LogHomeRoute'
+import LogMealRoute from '../../routes/LogMealRoute/LogMealRoute'
+import LogSnackRoute from '../../routes/LogSnackRoute/LogSnackRoute'
+import MealDetailsRoute from '../../routes/MealDetailsRoute/MealDetailsRoute';
+import MealsRoute from '../../routes/MealsRoute/MealsRoute'
 
 export default class App extends Component {
   state = { hasError: false }
@@ -34,8 +39,28 @@ export default class App extends Component {
               component={DashboardRoute}
             />
             <PrivateRoute
-              path={'/learn'}
-              component={LearningRoute}
+              path={'/meals'}
+              component={MealsRoute}
+            />
+            <PrivateRoute
+              path={'/mealdetails'}
+              component={MealDetailsRoute}
+            />
+            <PrivateRoute
+              path={'/loghome'}
+              component={LogHomeRoute}
+            />
+            <PrivateRoute
+              path={'/logmeal'}
+              component={LogMealRoute}
+            />
+            <PrivateRoute
+              path={'/logsnack'}
+              component={LogSnackRoute}
+            />
+            <PrivateRoute
+              path={'/logexercise'}
+              component={LogExerciseRoute}
             />
             <PublicOnlyRoute
               path={'/register'}
