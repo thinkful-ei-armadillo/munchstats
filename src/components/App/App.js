@@ -38,11 +38,11 @@ export default class App extends Component {
               path={'/'}
               component={DashboardRoute}
             />
-            <PrivateRoute
+            <Route
               path={'/meals'}
               component={MealsRoute}
             />
-            <PrivateRoute
+            <Route
               path={'/mealdetails'}
               component={MealDetailsRoute}
             />
