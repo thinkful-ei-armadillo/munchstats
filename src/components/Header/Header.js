@@ -1,15 +1,15 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import TokenService from '../../services/token-service'
-import UserContext from '../../contexts/UserContext'
-import './Header.css'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import TokenService from '../../services/token-service';
+import UserContext from '../../contexts/UserContext';
+import './Header.css';
 
 class Header extends Component {
-  static contextType = UserContext
+  static contextType = UserContext;
 
   handleLogoutClick = () => {
     this.context.processLogout()
-  }
+  };
 
   renderLogoutLink() {
     return (
@@ -20,29 +20,40 @@ class Header extends Component {
         <nav>
           <Link
             onClick={this.handleLogoutClick}
-            to='/login'>
+            to='/login'
+            style={{textDecoration: 'none'}}>
             Logout
           </Link>
         </nav>
       </div>
-    )
-  }
+    );
+  };
 
   renderLoginLink() {
     return (
       <nav>
-        <Link to='/login'>Login</Link>
-        {' '}
-        <Link to='/register'>Sign up</Link>
+        <Link
+          to='/login'
+          style={{textDecoration: 'none'}}>
+          Log In
+        </Link>
+        {' | '}
+        <Link
+          to='/register'
+          style={{textDecoration: 'none'}}>
+          Sign Up
+        </Link>
       </nav>
-    )
-  }
+    );
+  };
 
   render() {
     return (
       <header>
         <h1>
-          <Link to='/'>
+          <Link
+            to='/'
+            style={{textDecoration: 'none'}}>
             Munch Stats
           </Link>
         </h1>
@@ -51,7 +62,7 @@ class Header extends Component {
           : this.renderLoginLink()}
       </header>
     );
-  }
-}
+  };
+};
 
-export default Header
+export default Header;
