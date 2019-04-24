@@ -18,7 +18,7 @@ export default UserContext
 export class UserProvider extends Component {
   constructor(props) {
     super(props)
-    const state = { user: {}, error: null }
+    const state = { user: {}, error: null, meals: [] }
 
     const jwtPayload = TokenService.parseAuthToken()
 
@@ -58,6 +58,10 @@ export class UserProvider extends Component {
 
   setUser = user => {
     this.setState({ user })
+  }
+
+  setMeals = meals => {
+    this.setState({ meals })
   }
 
   processLogin = authToken => {
@@ -105,9 +109,11 @@ export class UserProvider extends Component {
     const value = {
       user: this.state.user,
       error: this.state.error,
+      meals: this.state.meals,
       setError: this.setError,
       clearError: this.clearError,
       setUser: this.setUser,
+      setMeals: this.setMeals,
       processLogin: this.processLogin,
       processLogout: this.processLogout,
     }
