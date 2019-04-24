@@ -15,38 +15,18 @@ export default class Meals extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.setState({results: []})
-    let encodedInput = encodeURI(this.state.ingredientInput)
-    fetch()
-      .then(res => res.json())
-      .then(res => {
-        for(let i = 0; i < 10; i++){
-          let item = res.hints[i]
-          let newIngredient = {
-            id: item.food.foodId,
-            name: item.food.label,
-            calories: (item.food.nutrients.ENERC_KCAL) ? item.food.nutrients.ENERC_KCAL : 0,
-            protein: (item.food.nutrients.PROCNT) ? item.food.nutrients.PROCNT : 0,
-            fat: (item.food.nutrients.FAT) ? item.food.nutrients.FAT : 0,
-            carbs: (item.food.nutrients.CHOCDF) ? item.food.nutrients.CHOCDF : 0,
-            image: item.food.image,
-            measures: item.measures
-          }
-          this.setState({results: [...this.state.results, newIngredient]})
-         
-        }
-      })
-      .catch(err => console.log(err))
+    
       
   }
 
-  handleClickIngredient = (item) => {
-    this.setState({ 
-      chosenIngredient: item, 
-      results: []
-    })
+  handleClickEdit = (item) => {
+    
   }
 
+  handleClickDelete = (item) => {
+
+  }
+  
   getNutrientInfo = (e) => {
     e.preventDefault();
     let { quantity, measurements } = e.target;
