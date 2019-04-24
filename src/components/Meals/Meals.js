@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
-import Button from '../Button/Button'
+import React, { Component } from 'react';
+import Button from '../Button/Button';
+import './Meals.css';
 
 export default class Meals extends Component {
   state = {
@@ -17,7 +18,7 @@ export default class Meals extends Component {
     e.preventDefault();
     this.setState({results: []})
     let encodedInput = encodeURI(this.state.ingredientInput)
-    fetch()
+    fetch(``)
       .then(res => res.json())
       .then(res => {
         for(let i = 0; i < 10; i++){
@@ -96,7 +97,7 @@ export default class Meals extends Component {
   }
 
   generateMeasureForm = () => { 
-    return <form onSubmit = {e => this.getNutrientInfo(e)}>
+    return <form className="measureForm" onSubmit = {e => this.getNutrientInfo(e)}>
         <p>{this.state.chosenIngredient.name}</p>
         <label htmlFor ='quantity'>how much do you want to add?</label>
         <input type = 'number' name = 'quantity' min = '0' step = '.25'>
@@ -111,7 +112,7 @@ export default class Meals extends Component {
   }
 
   generateResults = () => {
-    return this.state.results.map((item, key) => <div key={key} onClick={() => this.handleClickIngredient(item)}><span>{item.name}</span></div>
+    return this.state.results.map((item, key) => <div id="result" key={key} onClick={() => this.handleClickIngredient(item)}><span>{item.name}</span></div>
     )
   }
 
@@ -128,7 +129,7 @@ export default class Meals extends Component {
       protein += Number(item.total_protein)
     })
     console.log(Math.round(fat), Math.round(calories), Math.round(carbs), Math.round(protein))
-    return <div>
+    return <div className="nutritionInfo">
       <h4>Meal Nutrition Information</h4>
       <p>calories: {Math.round(calories)}</p><p> fat: {Math.round(fat)} </p><p>carbs: {Math.round(carbs)} </p><p>protein: {Math.round(protein)}</p>
     </div>
@@ -158,6 +159,7 @@ export default class Meals extends Component {
           <label htmlFor='ingredient-input'>
             Ingredient
           </label>
+          <br />
           <input
             ref={this.firstInput}
             id='ingredient-input'
@@ -167,6 +169,7 @@ export default class Meals extends Component {
             required
           />
         </div>
+        <br />
         <Button type='submit'>
           Search ingredients
         </Button>
