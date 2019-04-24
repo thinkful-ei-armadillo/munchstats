@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import Button from '../Button/Button'
 import config from '../../config';
 import TokenService from '../../services/token-service';
+import './Meals.css';
 
 export default class Meals extends Component {
   state = {
@@ -20,8 +21,7 @@ export default class Meals extends Component {
     e.preventDefault();
     this.setState({ results: [] })
     let encodedInput = encodeURI(this.state.ingredientInput)
-    fetch(`https://api.edamam.com/api/food-database/parser?ingr=${encodedInput}&app_id=94987ad8&app_key=
-f087d3111d3d6454e43e303f35150db5`)
+    fetch(``)
       .then(res => res.json())
       .then(res => {
         for (let i = 0; i < 10; i++) {
@@ -70,7 +70,7 @@ f087d3111d3d6454e43e303f35150db5`)
         ]
     }
 
-    fetch(`https://api.edamam.com/api/food-database/nutrients?app_id=94987ad8&app_key= f087d3111d3d6454e43e303f35150db5`, {
+    fetch(``, {
       method: 'POST',
       body: JSON.stringify(ingredient),
       headers: {
@@ -103,7 +103,7 @@ f087d3111d3d6454e43e303f35150db5`)
   }
 
   generateMeasureForm = () => {
-    return <form onSubmit={e => this.getNutrientInfo(e)}>
+    return <form className = 'measureForm' onSubmit={e => this.getNutrientInfo(e)}>
       <p>{this.state.chosenIngredient.name}</p>
       <label htmlFor='quantity'>how much do you want to add?</label>
       <input type='number' name='quantity' min='0' step='.25'>
@@ -118,7 +118,7 @@ f087d3111d3d6454e43e303f35150db5`)
   }
 
   generateResults = () => {
-    return this.state.results.map((item, key) => <div key={key} onClick={() => this.handleClickIngredient(item)}><span>{item.name}</span></div>
+    return this.state.results.map((item, key) => <div id = 'results' key={key} onClick={() => this.handleClickIngredient(item)}><span>{item.name}</span></div>
     )
   }
 
@@ -134,7 +134,7 @@ f087d3111d3d6454e43e303f35150db5`)
       carbs += Number(item.total_carbs)
       protein += Number(item.total_protein)
     })
-    return <div>
+    return <div className = 'nutritionInfo' >
       <h4>Meal Nutrition Information</h4>
       <p>calories: {Math.round(calories)}</p><p> fat: {Math.round(fat)} </p><p>carbs: {Math.round(carbs)} </p><p>protein: {Math.round(protein)}</p>
     </div>

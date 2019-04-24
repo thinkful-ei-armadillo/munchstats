@@ -1,13 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import Button from '../Button/Button';
 
-export default class MealDetails extends Component {
 
-  render() {
-    return (
-      <div>
-
-      </div>
-    );
-  }
+export default class Meals extends Component {
+ 
 }
 
