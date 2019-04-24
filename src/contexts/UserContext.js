@@ -64,6 +64,10 @@ export class UserProvider extends Component {
     this.setState({ meals })
   }
 
+  deleteMeal = mealToDelete => {
+    this.setMeals(this.state.meals.filter(meal => meal.id !== Number(mealToDelete)))
+  }
+
   processLogin = authToken => {
     TokenService.saveAuthToken(authToken)
     const jwtPayload = TokenService.parseAuthToken()

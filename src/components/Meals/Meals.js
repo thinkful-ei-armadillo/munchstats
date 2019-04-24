@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Button from '../Button/Button'
-import UserContext from '../contexts/UserContext'
+import UserContext from '../../contexts/UserContext'
 import MealsApiService from '../../services/meals-api-service'
 import { Link } from 'react-router-dom'
 
@@ -14,9 +14,9 @@ export default class Meals extends Component {
 
   componentDidMount() {
     this.context.clearError()
-    MealsApiService.getMeals
-      .then(this.context.setMeals)
-      .catch(this.context.setError)
+    MealsApiService.getMeals()
+      .then(res => this.context.setMeals(res))
+      .catch(e => this.context.setError(e))
   }
 
   handleInput = (e) => {
@@ -25,16 +25,36 @@ export default class Meals extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    
+    const name  = e.target.mealInput.value
+    const user_id = this.context.user.id;
+
+    this.setState({error: null})
+    MealsApiService.postMeal({
+      name,
+      user_id
+    })
+      .then(res => {
+        this.onCreationSuccess(res.id)
+      })
+      .catch(res => {
+        this.setState({ error: res.error })
+      })
       
   }
 
-  handleClickDelete = (item) => {
+  handleCreationSuccess = (id) => {
+    const { history } = this.props
+    history.push(`/meals/${id}`);
+  }
 
+  handleClickDelete = (e) => {
+    const { mealId } = e.currentTarget.value;
+    MealsApiService.deleteMeal(mealId)
+      .then(this.context.deleteMeal(mealId))
   }
 
   render() {
-
+    console.log(this.context.meals)
     return (
       <div>
         <form
@@ -44,26 +64,22 @@ export default class Meals extends Component {
         {/* <div role='alert'>
           {error && <p>{error}</p>}
         </div> */}
-        <div>
-          <label htmlFor='meal-input'>
-            New Meal Name
-          </label>
-          <input
-            ref={this.firstInput}
-            id='meal-input'
-            name='meal-input'
-            value = {this.state.mealInput}
-            onChange = {this.handleInput}
-            required
-          />
-        </div>
+        <label htmlFor='mealInput'>
+          New Meal Name
+        </label>
+        <input
+          ref={this.firstInput}
+          id='mealInput'
+          name='mealInput'
+          value = {this.state.mealInput}
+          onChange = {this.handleInput}
+          required
+        />
         <Button type='submit'>
           Add Meal
         </Button>
         </form>
-        <UserMeals meals={this.state.meals} />
-
-
+        <UserMeals meals={this.context.meals.meal} />
       </div>
     );
   }
