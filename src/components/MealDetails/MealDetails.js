@@ -21,24 +21,30 @@ export default class Meals extends Component {
     e.preventDefault();
     this.setState({ results: [] })
     let encodedInput = encodeURI(this.state.ingredientInput)
-    fetch(``)
+    fetch(`${config.API_ENDPOINT}/proxy/foods`, {
+      method: 'POST',
+      body: JSON.stringify({food: encodedInput}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
       .then(res => res.json())
-      .then(res => {
-        for (let i = 0; i < 10; i++) {
-          let item = res.hints[i]
-          let newIngredient = {
-            id: item.food.foodId,
-            name: item.food.label,
-            calories: (item.food.nutrients.ENERC_KCAL) ? item.food.nutrients.ENERC_KCAL : 0,
-            protein: (item.food.nutrients.PROCNT) ? item.food.nutrients.PROCNT : 0,
-            fat: (item.food.nutrients.FAT) ? item.food.nutrients.FAT : 0,
-            carbs: (item.food.nutrients.CHOCDF) ? item.food.nutrients.CHOCDF : 0,
-            image: item.food.image,
-            measures: item.measures
-          }
-          this.setState({ results: [...this.state.results, newIngredient] })
-
-        }
+      .then(results => {
+        // console.log(res)
+        // for (let i = 0; i < 10; i++) {
+        //   let item = res.hints[i]
+        //   let newIngredient = {
+        //     id: item.food.foodId,
+        //     name: item.food.label,
+        //     calories: (item.food.nutrients.ENERC_KCAL) ? item.food.nutrients.ENERC_KCAL : 0,
+        //     protein: (item.food.nutrients.PROCNT) ? item.food.nutrients.PROCNT : 0,
+        //     fat: (item.food.nutrients.FAT) ? item.food.nutrients.FAT : 0,
+        //     carbs: (item.food.nutrients.CHOCDF) ? item.food.nutrients.CHOCDF : 0,
+        //     image: item.food.image,
+        //     measures: item.measures
+        //   }
+          // this.setState({ results: [...this.state.results, newIngredient] })
+          this.setState({ results})
       })
       .catch(err => console.log(err))
 
@@ -59,8 +65,7 @@ export default class Meals extends Component {
     let uri = measurements[0];
     let label = measurements[1];
 
-    const ingredient = {
-      "ingredients":
+    const ingredients = 
         [
           {
             "quantity": Number(quantity.value),
@@ -68,11 +73,16 @@ export default class Meals extends Component {
             "foodId": this.state.chosenIngredient.id
           }
         ]
-    }
 
-    fetch(``, {
+    const body = {
+      ingredients,
+      name: this.state.chosenIngredient.name,
+      label,
+      quantity: Number(quantity.value)
+    }
+    fetch(`${config.API_ENDPOINT}/proxy/nutrition`, {
       method: 'POST',
-      body: JSON.stringify(ingredient),
+      body: JSON.stringify(body),
       headers: {
         'Content-Type': 'application/json'
       }
@@ -80,24 +90,14 @@ export default class Meals extends Component {
     ).then(res => {
       return (res.json())
     }).then(res => {
-      let resultIngredient = {
-        name: this.state.chosenIngredient.name,
-        meal_id: 1,
-        total_calorie: res.calories,
-        total_fat: (res.totalNutrients.FAT) ? res.totalNutrients.FAT.quantity : 0,
-        total_carbs: (res.totalNutrients.CHOCDF) ? res.totalNutrients.CHOCDF.quantity : 0,
-        total_protein: (res.totalNutrients.PROCNT) ? res.totalNutrients.PROCNT.quantity : 0,
-        amount: quantity.value,
-        unit: label
-      }
       //send ingredient to items table in database
       this.setState({
-        finalIngredients: [...this.state.finalIngredients, resultIngredient],
+        finalIngredients: [...this.state.finalIngredients, res],
         chosenIngredient: '',
         ingredientInput: '',
       })
 
-      fetch(`${config.API_ENDPOINT}/meals/${this.props.meal_id}`)
+      // fetch(`${config.API_ENDPOINT}/meals/${this.props.meal_id}`)
 
     })
   }
