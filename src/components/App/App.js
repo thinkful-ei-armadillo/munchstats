@@ -38,12 +38,12 @@ export default class App extends Component {
               path={'/'}
               component={DashboardRoute}
             />
-            <Route
-              path={'/meals'}
+            <PrivateRoute
+              exact path={'/meals'}
               component={MealsRoute}
             />
-            <Route
-              path={'/mealdetails'}
+            <PrivateRoute
+              path={'/meals/:meal_id'}
               component={MealDetailsRoute}
             />
             <PrivateRoute
