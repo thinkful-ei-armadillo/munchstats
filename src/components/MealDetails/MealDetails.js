@@ -153,11 +153,12 @@ export default class Meals extends Component {
           "authorization": `bearer ${TokenService.getAuthToken()}`
         }
       }).then(test => test.json()).then(data => {console.log(data)})
+      .then(() => {
+        this.getMealInfo();
+        this.getMealIngredients();
+      })
     })
-    .then(() => {
-      this.getMealInfo();
-      this.getMealIngredients();
-    })
+    
   }
 
   generateMeasureForm = () => {
