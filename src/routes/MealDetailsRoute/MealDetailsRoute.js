@@ -6,7 +6,7 @@ class MealDetailsRoute extends Component {
   render() {
     return (
       <section>
-        <MealDetails meal_id = {this.props.match.params.meal_id}/>
+        <MealDetails meal_id = {this.props.match.params.meal_id} history={this.props.history}/>
       </section>
     );
   }
