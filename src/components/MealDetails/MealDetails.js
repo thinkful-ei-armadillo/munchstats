@@ -151,7 +151,6 @@ export default class Meals extends Component {
   }
 
   handleClickDelete = (item) => {
-    console.log(item);
     this.setState({
       finalIngredients: this.state.finalIngredients.filter(ingredient => ingredient.name !== item.name)
   })
