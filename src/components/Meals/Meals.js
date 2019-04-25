@@ -3,6 +3,7 @@ import Button from '../Button/Button'
 import UserContext from '../../contexts/UserContext'
 import MealsApiService from '../../services/meals-api-service'
 import { Link } from 'react-router-dom'
+import './Meals.css'
 
 export default class Meals extends Component {
   static contextType = UserContext
@@ -48,11 +49,40 @@ export default class Meals extends Component {
     history.push(`/meals/${id}`);
   }
 
-  handleClickDelete = (e) => {
-    const { mealId } = e.currentTarget.value;
-    MealsApiService.deleteMeal(mealId)
-      .then(this.context.deleteMeal(mealId))
+  handleClickDelete = (meal) => {
+    console.log(meal)
+    MealsApiService.deleteMeal(meal)
+      .then(() => {
+        MealsApiService.getMeals()
+          .then(res => this.context.setMeals(res))
+          .catch(e => this.context.setError(e))
+      })
   }
+
+
+  genUserMeals(meals) {
+    console.log(meals);
+    return (
+      <ul className='MealsPage__meals'>
+        {meals.map(meal =>
+          <li key={meal.id} className='MealsPage__meals'>
+            {meal.name}
+            <br />
+            <button type="button">
+              <Link
+                to={`/meals/${meal.id}`}
+                style={{textDecoration: 'none'}}>
+                Edit Meal
+              </Link>
+            </button>
+            <br />
+            <Button onClick={() => this.handleClickDelete(meal)} className='delete_button'>Delete Meal</Button>
+          </li>
+        )}
+      </ul>
+    )
+  }
+  
 
   render() {
     return (
@@ -67,6 +97,7 @@ export default class Meals extends Component {
         <label htmlFor='mealInput'>
           New Meal Name
         </label>
+        <br />
         <input
           ref={this.firstInput}
           id='mealInput'
@@ -75,27 +106,16 @@ export default class Meals extends Component {
           onChange = {this.handleInput}
           required
         />
+        <br />
         <Button type='submit'>
           Add Meal
         </Button>
         </form>
-        <UserMeals meals={this.context.meals.meal} />
+        <section>
+          {this.context.meals.meal ? this.genUserMeals(this.context.meals.meal) : null}
+        </section>
+        {/* <UserMeals meals={this.context.meals.meal} /> */}
       </div>
     );
   }
-}
-
-function UserMeals( { meals = [] }) {
-  
-  return (
-    <ul className='MealsPage__meals'>
-      {meals.map(meal =>
-        <li key={meal.id} className='MealsPage__meals'>
-          {meal.name}
-          <Link to={`/meals/${meal.id}`}>Edit Meal</Link>
-          <Button onClick={() => this.handleClickDelete()} className='delete_button'>Delete Meal</Button>
-        </li>
-      )}
-    </ul>
-  )
 }

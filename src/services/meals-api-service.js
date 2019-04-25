@@ -15,14 +15,20 @@ const MealsApiService = {
           : res.json()
       )
     },
-    deleteMeal(mealId) {
+    deleteMeal(meal) {
         return fetch(`${config.API_ENDPOINT}/meal`, {
             method: 'DELETE',
             headers: {
-                'Authorization': `Bearer ${TokenService.getAuthToken()}`
+                'Authorization': `Bearer ${TokenService.getAuthToken()}`,
+                'content-type': 'application/json'
             },
+            body: JSON.stringify({meal: meal})
         })
-      .then(res => res.json)    
+      .then(res => 
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()
+        )    
     },
     postMeal(meal) {
         return fetch(`${config.API_ENDPOINT}/meal`, {
