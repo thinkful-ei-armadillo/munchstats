@@ -10,7 +10,44 @@ export default class Meals extends Component {
     ingredientInput: '',
     results: [],
     chosenIngredient: '',
-    finalIngredients: []
+    finalIngredients: [],
+    mealInfo: {},
+    mealIngredients: []
+  }
+
+  componentDidMount() {
+    this.getMealInfo();
+    this.getMealIngredients();
+  }
+
+  getMealInfo(){
+    return fetch(`${config.API_ENDPOINT}/meal/${this.props.meal_id}`, {
+      headers: {
+        "authorization": `bearer ${TokenService.getAuthToken()}`
+      }
+    })
+    .then(res => (res.json()))
+    .then(res => {
+      this.setState({mealInfo: res[0]});
+    })
+    .catch(err => console.log(err));
+  }
+
+  getMealIngredients(){
+    return fetch(`${config.API_ENDPOINT}/ingredients`, {
+      method: 'POST',
+      headers: {
+          'content-type': 'application/json',
+          'Authorization': `Bearer ${TokenService.getAuthToken()}`
+      },
+      body: JSON.stringify({meal: {id: this.props.meal_id}})
+      })
+      .then(res => 
+          (!res.ok) 
+          ? res.json().then(e => Promise.reject(e)) 
+          : res.json()
+      )
+      .then(res => this.setState({mealIngredients: res.ingredients}));
   }
 
   handleInput = (e) => {
@@ -147,24 +184,6 @@ export default class Meals extends Component {
       </span>
     </div>
     )
-  }
-
-// display the current items in the meal
-  // componentDidMount() {
-  //   this.state.meal_id = 1;
-  //   fetch(`${config.API_ENDPOINT}/meal`, {
-  //     headers: {
-  //       "authorization": `bearer ${TokenService.getAuthToken()}`
-  //     }
-  //   })
-  //   .then(res => (res.json()))
-  //   .then(res => {
-  //     this.state.finalIngredients.push
-  //   })
-  // }
-
-  componentDidMount() {
-    console.log(this.props.meal_id)
   }
 
   render() {
