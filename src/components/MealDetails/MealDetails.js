@@ -145,9 +145,17 @@ export default class Meals extends Component {
       <span>
         {item.name} | {item.amount} {item.unit}
       </span>
+      <Button onClick={() => this.handleClickDelete(item)}>Remove Item</Button>
     </div>
     )
   }
+
+  handleClickDelete = (item) => {
+    console.log(item);
+    this.setState({
+      finalIngredients: this.state.finalIngredients.filter(ingredient => ingredient.name !== item.name)
+  })
+}
 
 // display the current items in the meal
   // componentDidMount() {
