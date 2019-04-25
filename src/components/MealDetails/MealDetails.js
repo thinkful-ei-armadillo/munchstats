@@ -154,6 +154,10 @@ export default class Meals extends Component {
         }
       }).then(test => test.json()).then(data => {console.log(data)})
     })
+    .then(() => {
+      this.getMealInfo();
+      this.getMealIngredients();
+    })
   }
 
   generateMeasureForm = () => {
@@ -181,7 +185,7 @@ export default class Meals extends Component {
     let calories = 0;
     let carbs = 0;
     let protein = 0;
-    this.state.finalIngredients.map((item, key) => {
+    this.state.mealIngredients.map((item, key) => {
       
       fat += Number(item.total_fat)
       calories += Number(item.total_calorie)
@@ -195,7 +199,7 @@ export default class Meals extends Component {
   }
 
   generateFinalIngredients = () => {
-    return this.state.finalIngredients.map((item, key) => <div key={key}>
+    return this.state.mealIngredients.map((item, key) => <div key={key}>
       <span>
         {item.name} | {item.amount} {item.unit}
       </span>
@@ -240,9 +244,9 @@ export default class Meals extends Component {
         </div>
 
         <section className="finalIngredients">
-          <h3>Your meal includes:</h3>
-          {(this.state.finalIngredients[0]) ? this.generateFinalIngredients() : 'Nothing so far!'}
-          {(this.state.finalIngredients[0]) ? this.generateMealStats() : ''}
+          <h3>{this.state.mealInfo ? this.state.mealInfo.name : ''}</h3>
+          {(this.state.mealIngredients[0]) ? this.generateFinalIngredients() : 'Nothing so far!'}
+          {(this.state.mealIngredients[0]) ? this.generateMealStats() : ''}
 
         </section>
 
