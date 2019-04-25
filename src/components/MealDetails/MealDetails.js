@@ -25,7 +25,7 @@ export default class Meals extends Component {
       method: 'POST',
       body: JSON.stringify({food: encodedInput}),
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       }
     })
       .then(res => res.json())
@@ -86,8 +86,7 @@ export default class Meals extends Component {
       headers: {
         'Content-Type': 'application/json'
       }
-    }
-    ).then(res => {
+    }).then(res => {
       return (res.json())
     }).then(res => {
       //send ingredient to items table in database
@@ -96,9 +95,27 @@ export default class Meals extends Component {
         chosenIngredient: '',
         ingredientInput: '',
       })
-
-      // fetch(`${config.API_ENDPOINT}/meals/${this.props.meal_id}`)
-
+      let results = {
+        ingredient: {
+          meal_id: Number(this.props.meal_id),
+          name: res.name,
+          total_calorie: Math.round(res.total_calorie),
+          total_fat: Math.round(res.total_fat),
+          total_carbs: Math.round(res.total_carbs),
+          total_protein: Math.round(res.total_protein),
+          amount: (res.amount),      
+          unit: res.unit
+        }
+      }
+      console.log(this.props.meal_id)
+      fetch(`${config.API_ENDPOINT}/ingredients/${this.props.meal_id}`, {
+        method: 'POST',
+        body: JSON.stringify(results),
+        headers: {
+          'Content-Type': 'application/json',
+          "authorization": `bearer ${TokenService.getAuthToken()}`
+        }
+      }).then(test => test.json()).then(data => {console.log(data)})
     })
   }
 
