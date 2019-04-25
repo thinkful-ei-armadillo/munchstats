@@ -140,11 +140,11 @@ export default class Meals extends Component {
           total_fat: Math.round(res.total_fat),
           total_carbs: Math.round(res.total_carbs),
           total_protein: Math.round(res.total_protein),
-          amount: (res.amount),      
+          amount: Number(quantity.value),      
           unit: res.unit
         }
       }
-      console.log(this.props.meal_id)
+      console.log('>>>>>>>>>>>', results)
       fetch(`${config.API_ENDPOINT}/ingredients/${this.props.meal_id}`, {
         method: 'POST',
         body: JSON.stringify(results),
