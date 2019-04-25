@@ -3,14 +3,51 @@ import React, { Component } from 'react'
 import Button from '../Button/Button'
 import config from '../../config';
 import TokenService from '../../services/token-service';
-import './Meals.css';
+import './MealDetails.css';
 
 export default class Meals extends Component {
   state = {
     ingredientInput: '',
     results: [],
     chosenIngredient: '',
-    finalIngredients: []
+    finalIngredients: [],
+    mealInfo: {},
+    mealIngredients: []
+  }
+
+  componentDidMount() {
+    this.getMealInfo();
+    this.getMealIngredients();
+  }
+
+  getMealInfo(){
+    return fetch(`${config.API_ENDPOINT}/meal/${this.props.meal_id}`, {
+      headers: {
+        "authorization": `bearer ${TokenService.getAuthToken()}`
+      }
+    })
+    .then(res => (res.json()))
+    .then(res => {
+      this.setState({mealInfo: res[0]});
+    })
+    .catch(err => console.log(err));
+  }
+
+  getMealIngredients(){
+    return fetch(`${config.API_ENDPOINT}/ingredients`, {
+      method: 'POST',
+      headers: {
+          'content-type': 'application/json',
+          'Authorization': `Bearer ${TokenService.getAuthToken()}`
+      },
+      body: JSON.stringify({meal: {id: this.props.meal_id}})
+      })
+      .then(res => 
+          (!res.ok) 
+          ? res.json().then(e => Promise.reject(e)) 
+          : res.json()
+      )
+      .then(res => this.setState({mealIngredients: res.ingredients}));
   }
 
   handleInput = (e) => {
@@ -25,7 +62,7 @@ export default class Meals extends Component {
       method: 'POST',
       body: JSON.stringify({food: encodedInput}),
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       }
     })
       .then(res => res.json())
@@ -86,8 +123,7 @@ export default class Meals extends Component {
       headers: {
         'Content-Type': 'application/json'
       }
-    }
-    ).then(res => {
+    }).then(res => {
       return (res.json())
     }).then(res => {
       //send ingredient to items table in database
@@ -96,10 +132,33 @@ export default class Meals extends Component {
         chosenIngredient: '',
         ingredientInput: '',
       })
-
-      // fetch(`${config.API_ENDPOINT}/meals/${this.props.meal_id}`)
-
+      let results = {
+        ingredient: {
+          meal_id: Number(this.props.meal_id),
+          name: res.name,
+          total_calorie: Math.round(res.total_calorie),
+          total_fat: Math.round(res.total_fat),
+          total_carbs: Math.round(res.total_carbs),
+          total_protein: Math.round(res.total_protein),
+          amount: Number(quantity.value),      
+          unit: res.unit
+        }
+      }
+      console.log('>>>>>>>>>>>', results)
+      fetch(`${config.API_ENDPOINT}/ingredients/${this.props.meal_id}`, {
+        method: 'POST',
+        body: JSON.stringify(results),
+        headers: {
+          'Content-Type': 'application/json',
+          "authorization": `bearer ${TokenService.getAuthToken()}`
+        }
+      }).then(test => test.json()).then(data => {console.log(data)})
+      .then(() => {
+        this.getMealInfo();
+        this.getMealIngredients();
+      })
     })
+    
   }
 
   generateMeasureForm = () => {
@@ -118,8 +177,8 @@ export default class Meals extends Component {
   }
 
   generateResults = () => {
-    return this.state.results.map((item, key) => <div id = 'results' key={key} onClick={() => this.handleClickIngredient(item)}><span>{item.name}</span></div>
-    )
+      return this.state.results.map((item, key) => <div id = 'results' key={key} onClick={() => this.handleClickIngredient(item)}><span>{item.name}</span></div>
+      )
   }
 
   generateMealStats = () => {
@@ -127,7 +186,7 @@ export default class Meals extends Component {
     let calories = 0;
     let carbs = 0;
     let protein = 0;
-    this.state.finalIngredients.map((item, key) => {
+    this.state.mealIngredients.map((item, key) => {
       
       fat += Number(item.total_fat)
       calories += Number(item.total_calorie)
@@ -141,7 +200,7 @@ export default class Meals extends Component {
   }
 
   generateFinalIngredients = () => {
-    return this.state.finalIngredients.map((item, key) => <div key={key}>
+    return this.state.mealIngredients.map((item, key) => <div key={key}>
       <span>
         {item.name} | {item.amount} {item.unit}
       </span>
@@ -170,9 +229,6 @@ export default class Meals extends Component {
   //   })
   // }
 
-  componentDidMount() {
-    console.log(this.props.meal_id)
-  }
 
   render() {
 
@@ -211,9 +267,9 @@ export default class Meals extends Component {
         </div>
 
         <section className="finalIngredients">
-          <h3>Your meal includes:</h3>
-          {(this.state.finalIngredients[0]) ? this.generateFinalIngredients() : 'Nothing so far!'}
-          {(this.state.finalIngredients[0]) ? this.generateMealStats() : ''}
+          <h3>{this.state.mealInfo ? this.state.mealInfo.name : ''}</h3>
+          {(this.state.mealIngredients[0]) ? this.generateFinalIngredients() : 'Nothing so far!'}
+          {(this.state.mealIngredients[0]) ? this.generateMealStats() : ''}
 
         </section>
 
