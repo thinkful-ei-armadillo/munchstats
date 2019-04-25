@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import Button from '../Button/Button'
 import config from '../../config';
 import TokenService from '../../services/token-service';
-import './Meals.css';
+import './MealDetails.css';
 
 export default class Meals extends Component {
   state = {
