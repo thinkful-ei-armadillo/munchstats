@@ -155,8 +155,8 @@ export default class Meals extends Component {
   }
 
   generateResults = () => {
-    return this.state.results.map((item, key) => <div id = 'results' key={key} onClick={() => this.handleClickIngredient(item)}><span>{item.name}</span></div>
-    )
+      return this.state.results.map((item, key) => <div id = 'results' key={key} onClick={() => this.handleClickIngredient(item)}><span>{item.name}</span></div>
+      )
   }
 
   generateMealStats = () => {

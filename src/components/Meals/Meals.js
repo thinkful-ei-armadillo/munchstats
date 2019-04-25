@@ -34,7 +34,8 @@ export default class Meals extends Component {
       user_id
     })
       .then(res => {
-        this.onCreationSuccess(res.id)
+        console.log(res)
+        this.handleCreationSuccess(res[0].id)
       })
       .catch(res => {
         this.setState({ error: res.error })
@@ -43,7 +44,7 @@ export default class Meals extends Component {
   }
 
   handleCreationSuccess = (id) => {
-    const { history } = this.props
+    const history = this.props.history
     history.push(`/meals/${id}`);
   }
 
@@ -54,7 +55,6 @@ export default class Meals extends Component {
   }
 
   render() {
-    console.log(this.context.meals)
     return (
       <div>
         <form
