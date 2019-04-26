@@ -204,15 +204,26 @@ export default class Meals extends Component {
       <span>
         {item.name} | {item.amount} {item.unit}
       </span>
-      <Button onClick={() => this.handleClickDelete(item)}>Remove Item</Button>
+      <Button onClick={() => this.handleClickDelete(item.id)}>Remove Item</Button>
     </div>
     )
   }
 
-  handleClickDelete = (item) => {
-    this.setState({
-      finalIngredients: this.state.finalIngredients.filter(ingredient => ingredient.name !== item.name)
-  })
+  handleClickDelete = (ingredient_id) => {
+    fetch(`${config.API_ENDPOINT}/ingredients/`, {
+      method: 'DELETE',
+      body: JSON.stringify({ingredient_id}),
+      headers: {
+        'Content-Type': 'application/json',
+        "authorization": `bearer ${TokenService.getAuthToken()}`
+      }
+    })
+    .then(res => res.json)
+    .then(() => {
+      this.getMealInfo();
+    this.getMealIngredients();
+    })
+    .catch(err => console.log(err))
 }
 
 // display the current items in the meal
