@@ -15,9 +15,16 @@ export default class Meals extends Component {
 
   componentDidMount() {
     this.context.clearError();
+    this.context.setLoadingTrue();
     MealsApiService.getMeals()
-      .then(res => this.context.setMeals(res))
-      .catch(e => this.context.setError(e));
+      .then(res => {
+      this.context.setMeals(res)
+      this.context.setLoadingFalse()
+    })
+      .catch(e => {
+        this.context.setError(e)
+        this.context.setLoadingFalse()
+      });
   }
 
   handleInput = (e) => {
@@ -60,28 +67,36 @@ export default class Meals extends Component {
   }
 
   genUserMeals(meals) {
-    return (
-      <ul className='MealsPage__meals'>
-        {meals.map(meal =>
-          <li key={meal.id} className='MealsPage__meals'>
-            <span className = 'mealName'>{meal.name}</span> 
-            <br />
-              <Link
-                to={`/meals/${meal.id}`}
-                style={{textDecoration: 'none'}}>
-                <Button type="button" className='editMeal'>
-                Edit Meal
-                </Button>
-              </Link>
-            <br />
-            <Button onClick={() => this.handleClickDelete(meal)}>Delete Meal</Button>
-          </li>
-        )}
-      </ul>
-    );
+      return (
+        <ul className='MealsPage__meals'>
+          {meals.map(meal =>
+            <li key={meal.id} className='MealsPage__meals'>
+              <span className = 'mealName'>{meal.name}</span> 
+              <br />
+                <Link
+                  to={`/meals/${meal.id}`}
+                  style={{textDecoration: 'none'}}>
+                  <Button type="button" className='editMeal'>
+                  Edit Meal
+                  </Button>
+                </Link>
+              <br />
+              <Button onClick={() => this.handleClickDelete(meal)}>Delete Meal</Button>
+            </li>
+          )}
+        </ul>
+      );
   }
   
   render() {
+    if (this.context.loading) {
+      return (
+      <div class='loading'>
+        <div class="lds-facebook"><div></div><div></div><div></div></div>
+      </div>
+      )
+    }
+    else {
     return (
       <div>
         <form
@@ -111,5 +126,5 @@ export default class Meals extends Component {
         </section>
       </div>
     );
-  }
+  }}
 }
