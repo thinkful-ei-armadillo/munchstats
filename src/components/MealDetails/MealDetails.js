@@ -169,11 +169,10 @@ export default class Meals extends Component {
             "authorization": `bearer ${TokenService.getAuthToken()}`
           }
         })
-      })
-      .then(() => {
-        this.getMealInfo();
-        this.getMealIngredients();
-        this.generateMealStats();
+        .then(() => {
+          this.getMealInfo();
+          this.getMealIngredients();
+        })
       })
     })
   }
@@ -198,33 +197,33 @@ export default class Meals extends Component {
       )
   }
 
-  generateMealStats = () => {
-    let fat = 0;
-    let calories = 0;
-    let carbs = 0;
-    let protein = 0;
-    this.state.mealIngredients.map((item, key) => {
+  // generateMealStats = () => {
+  //   let fat = 0;
+  //   let calories = 0;
+  //   let carbs = 0;
+  //   let protein = 0;
+  //   this.state.mealIngredients.map((item, key) => {
       
-      fat += Number(item.total_fat)
-      calories += Number(item.total_calorie)
-      carbs += Number(item.total_carbs)
-      protein += Number(item.total_protein)
-    })
-    let newMealInfo = {...this.state.mealInfo}
-    newMealInfo.total_calorie = calories;
-    newMealInfo.total_carbs = carbs;
-    newMealInfo.total_fat = fat;
-    newMealInfo.total_protein = protein;
+  //     fat += Number(item.total_fat)
+  //     calories += Number(item.total_calorie)
+  //     carbs += Number(item.total_carbs)
+  //     protein += Number(item.total_protein)
+  //   })
+  //   let newMealInfo = {...this.state.mealInfo}
+  //   newMealInfo.total_calorie = calories;
+  //   newMealInfo.total_carbs = carbs;
+  //   newMealInfo.total_fat = fat;
+  //   newMealInfo.total_protein = protein;
 
-    this.setState({
-      mealInfo: newMealInfo
-    })
+  //   this.setState({
+  //     mealInfo: newMealInfo
+  //   })
 
-    return <div className = 'nutritionInfo' >
-      <h4>Meal Nutrition Information</h4>
-      <p>calories: {Math.round(calories)}</p><p> fat: {Math.round(fat)} </p><p>carbs: {Math.round(carbs)} </p><p>protein: {Math.round(protein)}</p>
-    </div>
-  }
+  //   return <div className = 'nutritionInfo' >
+  //     <h4>Meal Nutrition Information</h4>
+  //     <p>calories: {Math.round(calories)}</p><p> fat: {Math.round(fat)} </p><p>carbs: {Math.round(carbs)} </p><p>protein: {Math.round(protein)}</p>
+  //   </div>
+  // }
 
   renderMealStats() {
     return <div className='nutritionInfo' >
