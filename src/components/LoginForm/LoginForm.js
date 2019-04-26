@@ -25,7 +25,7 @@ class LoginForm extends Component {
 
     AuthApiService.postLogin({
       username: username.value,
-      password: password.value,
+      password: password.value
     })
       .then(res => {
         username.value = '';
@@ -35,7 +35,7 @@ class LoginForm extends Component {
       })
       .catch(res => {
         this.setState({ error: res.error });
-      })
+      });
   };
 
   componentDidMount() {
@@ -47,8 +47,7 @@ class LoginForm extends Component {
     return (
       <form
         className='LoginForm'
-        onSubmit={this.handleSubmit}
-      >
+        onSubmit={this.handleSubmit}>
         <div role='alert'>
           {error && <p>{error}</p>}
         </div>

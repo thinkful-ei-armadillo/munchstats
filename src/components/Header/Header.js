@@ -8,7 +8,7 @@ class Header extends Component {
   static contextType = UserContext;
 
   handleLogoutClick = () => {
-    this.context.processLogout()
+    this.context.processLogout();
   };
 
   renderLogoutLink() {
