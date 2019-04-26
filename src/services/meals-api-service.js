@@ -2,7 +2,7 @@ import config from '../config';
 import TokenService from './token-service';
 
 const MealsApiService = {
-    //get function that gets all of a user's meals
+    // get all of a user's meals
     getMeals() {
       return fetch(`${config.API_ENDPOINT}/meal`, {
         headers: {
@@ -16,6 +16,7 @@ const MealsApiService = {
         );
     },
 
+    // delete meal based on id
     deleteMeal(meal) {
       return fetch(`${config.API_ENDPOINT}/meal`, {
         method: 'DELETE',
@@ -32,6 +33,7 @@ const MealsApiService = {
         );    
     },
 
+    // add meal to database
     postMeal(meal) {
       return fetch(`${config.API_ENDPOINT}/meal`, {
         method: 'POST',

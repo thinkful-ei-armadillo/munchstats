@@ -78,6 +78,11 @@ export default class Meals extends Component {
     });
   }
 
+  /*
+  // this method is kind of a monster and
+  // could probably be split up later.
+  // possibly make another service file
+  */
   getNutrientInfo = (e) => {
     e.preventDefault();
     let { quantity, measurements } = e.target;
@@ -86,14 +91,13 @@ export default class Meals extends Component {
     let uri = measurements[0];
     let label = measurements[1];
 
-    const ingredients = 
-      [
-        {
-          "quantity": Number(quantity.value),
-          "measureURI": uri,
-          "foodId": this.state.chosenIngredient.id
-        }
-      ];
+    const ingredients = [
+      {
+        "quantity": Number(quantity.value),
+        "measureURI": uri,
+        "foodId": this.state.chosenIngredient.id
+      }
+    ];
 
     const body = {
       ingredients,
@@ -141,6 +145,7 @@ export default class Meals extends Component {
         })
           .then(test => test.json())
           .then(() => {
+            // add calorie/fat/carb/protein counts to meal totals
             const newMealStats = {
               total_calorie: Number(this.state.mealInfo.total_calorie) + Number(results.ingredient.total_calorie),
               total_fat: Number(this.state.mealInfo.total_fat) + Number(results.ingredient.total_fat),
@@ -180,6 +185,7 @@ export default class Meals extends Component {
     );
   }
 
+  // generates the results that come from querying the third-party API for ingredients
   generateResults = () => {
     return this.state.results.map((item, key) => <div id = 'results' key={key} onClick={() => this.handleClickIngredient(item)}><span>{item.name}</span></div>);
   }
@@ -217,6 +223,7 @@ export default class Meals extends Component {
     })
       .then(res => res.json)
       .then(() => {
+        // subtract calorie/fat/carb/protein counts to meal totals
         const newMealStats = {
           total_calorie: Number(this.state.mealInfo.total_calorie) - Number(ingredient.total_calorie),
           total_fat: Number(this.state.mealInfo.total_fat) - Number(ingredient.total_fat),
