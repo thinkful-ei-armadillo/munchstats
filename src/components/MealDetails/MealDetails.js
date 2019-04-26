@@ -144,7 +144,6 @@ export default class Meals extends Component {
           unit: res.unit
         }
       }
-      console.log('>>>>>>>>>>>', results)
       fetch(`${config.API_ENDPOINT}/ingredients/${this.props.meal_id}`, {
         method: 'POST',
         body: JSON.stringify(results),
@@ -152,13 +151,30 @@ export default class Meals extends Component {
           'Content-Type': 'application/json',
           "authorization": `bearer ${TokenService.getAuthToken()}`
         }
-      }).then(test => test.json()).then(data => {console.log(data)})
+      }).then(test => test.json())
       .then(() => {
-        this.getMealInfo();
-        this.getMealIngredients();
+
+        const newMealStats = {
+          total_calorie: Number(this.state.mealInfo.total_calorie) + Number(results.ingredient.total_calorie),
+          total_fat: Number(this.state.mealInfo.total_fat) + Number(results.ingredient.total_fat),
+          total_carbs: Number(this.state.mealInfo.total_carbs) + Number(results.ingredient.total_carbs),
+          total_protein: Number(this.state.mealInfo.total_protein) + Number(results.ingredient.total_protein)
+        }
+        const patchedMeal = {"meal": {...this.state.mealInfo, ...newMealStats} }
+        fetch(`${config.API_ENDPOINT}/meal`, {
+          method: 'PATCH',
+          body: JSON.stringify(patchedMeal),
+          headers: {
+            'Content-Type': 'application/json',
+            "authorization": `bearer ${TokenService.getAuthToken()}`
+          }
+        })
+        .then(() => {
+          this.getMealInfo();
+          this.getMealIngredients();
+        })
       })
     })
-    
   }
 
   generateMeasureForm = () => {
@@ -181,22 +197,42 @@ export default class Meals extends Component {
       )
   }
 
-  generateMealStats = () => {
-    let fat = 0;
-    let calories = 0;
-    let carbs = 0;
-    let protein = 0;
-    this.state.mealIngredients.map((item, key) => {
+  // generateMealStats = () => {
+  //   let fat = 0;
+  //   let calories = 0;
+  //   let carbs = 0;
+  //   let protein = 0;
+  //   this.state.mealIngredients.map((item, key) => {
       
-      fat += Number(item.total_fat)
-      calories += Number(item.total_calorie)
-      carbs += Number(item.total_carbs)
-      protein += Number(item.total_protein)
-    })
-    return <div className = 'nutritionInfo' >
-      <h4>Meal Nutrition Information</h4>
-      <p>calories: {Math.round(calories)}</p><p> fat: {Math.round(fat)} </p><p>carbs: {Math.round(carbs)} </p><p>protein: {Math.round(protein)}</p>
-    </div>
+  //     fat += Number(item.total_fat)
+  //     calories += Number(item.total_calorie)
+  //     carbs += Number(item.total_carbs)
+  //     protein += Number(item.total_protein)
+  //   })
+  //   let newMealInfo = {...this.state.mealInfo}
+  //   newMealInfo.total_calorie = calories;
+  //   newMealInfo.total_carbs = carbs;
+  //   newMealInfo.total_fat = fat;
+  //   newMealInfo.total_protein = protein;
+
+  //   this.setState({
+  //     mealInfo: newMealInfo
+  //   })
+
+  //   return <div className = 'nutritionInfo' >
+  //     <h4>Meal Nutrition Information</h4>
+  //     <p>calories: {Math.round(calories)}</p><p> fat: {Math.round(fat)} </p><p>carbs: {Math.round(carbs)} </p><p>protein: {Math.round(protein)}</p>
+  //   </div>
+  // }
+
+  renderMealStats() {
+    return <div className='nutritionInfo' >
+        <h4>Meal Nutrition Information</h4>
+        <p>calories: {Math.round(this.state.mealInfo.total_calorie)}</p>
+        <p> fat: {Math.round(this.state.mealInfo.total_fat)} </p>
+        <p>carbs: {Math.round(this.state.mealInfo.total_carbs)} </p>
+        <p>protein: {Math.round(this.state.mealInfo.total_protein)}</p>
+      </div>
   }
 
   generateFinalIngredients = () => {
@@ -247,6 +283,7 @@ export default class Meals extends Component {
 
 
   render() {
+    
     return (
       <div>
         <form
@@ -284,8 +321,7 @@ export default class Meals extends Component {
         <section className="finalIngredients">
           <h3>{this.state.mealInfo ? this.state.mealInfo.name : ''}</h3>
           {(this.state.mealIngredients[0]) ? this.generateFinalIngredients() : 'Nothing so far!'}
-          {(this.state.mealIngredients[0]) ? this.generateMealStats() : ''}
-
+          {this.renderMealStats()}
         </section>
         <section className='goBack'>
           <Button onClick={() => this.handleGoBackClicked()} className='back_button'>BACK</Button>
