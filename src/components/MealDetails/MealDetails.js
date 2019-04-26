@@ -224,7 +224,12 @@ export default class Meals extends Component {
     this.getMealIngredients();
     })
     .catch(err => console.log(err))
-}
+  }
+
+  handleGoBackClicked = () => {
+    const  { history } = this.props;
+    history.goBack();
+  }
 
 // display the current items in the meal
   // componentDidMount() {
@@ -242,7 +247,6 @@ export default class Meals extends Component {
 
 
   render() {
-
     return (
       <div>
         <form
@@ -283,8 +287,9 @@ export default class Meals extends Component {
           {(this.state.mealIngredients[0]) ? this.generateMealStats() : ''}
 
         </section>
-
-
+        <section className='goBack'>
+          <Button onClick={() => this.handleGoBackClicked()} className='back_button'>BACK</Button>
+        </section>
       </div>
     );
   }
