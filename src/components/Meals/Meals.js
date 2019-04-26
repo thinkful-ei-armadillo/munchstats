@@ -100,6 +100,8 @@ export default class Meals extends Component {
             name='mealInput'
             value={this.state.mealInput}
             onChange={this.handleInput}
+            autoComplete="off"
+            maxLength="60"
             required />
           <br />
           <Button type='submit'>
