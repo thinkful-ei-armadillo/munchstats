@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import Meals from '../../components/Meals/Meals'
+import React, { Component } from 'react';
+import Meals from '../../components/Meals/Meals';
 
 class MealsRoute extends Component {
   render() {
@@ -11,4 +11,4 @@ class MealsRoute extends Component {
   }
 }
 
-export default MealsRoute
+export default MealsRoute;

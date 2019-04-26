@@ -1,5 +1,5 @@
 ## Munch Stats Client
-+ [Live](https://github.com/thinkful-ei-armadillo/munchstats-client)  
++ [Live](https://munchstats.now.sh/register)  
 + [API Repo](https://github.com/thinkful-ei-armadillo/munchstats-api)  
 
 ### Screenshots

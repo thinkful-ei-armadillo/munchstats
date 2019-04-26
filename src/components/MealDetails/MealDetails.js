@@ -194,7 +194,7 @@ export default class Meals extends Component {
   }
 
   generateResults = () => {
-      return this.state.results.map((item, key) => <div id = 'results' key={key} onClick={() => this.handleClickIngredient(item)}><span>{item.name}</span></div>
+       return this.state.results.map((item, key) => <div id = 'results' key={key} onClick={() => this.handleClickIngredient(item)}><span>{item.name}</span></div>
       )
   }
 
@@ -241,9 +241,42 @@ export default class Meals extends Component {
       <span>
         {item.name} | {item.amount} {item.unit}
       </span>
+      <Button onClick={() => this.handleClickDelete(item.id)}>Remove Item</Button>
     </div>
     )
   }
+
+  handleClickDelete = (ingredient_id) => {
+    fetch(`${config.API_ENDPOINT}/ingredients/`, {
+      method: 'DELETE',
+      body: JSON.stringify({ingredient_id}),
+      headers: {
+        'Content-Type': 'application/json',
+        "authorization": `bearer ${TokenService.getAuthToken()}`
+      }
+    })
+    .then(res => res.json)
+    .then(() => {
+      this.getMealInfo();
+    this.getMealIngredients();
+    })
+    .catch(err => console.log(err))
+}
+
+// display the current items in the meal
+  // componentDidMount() {
+  //   this.state.meal_id = 1;
+  //   fetch(`${config.API_ENDPOINT}/meal`, {
+  //     headers: {
+  //       "authorization": `bearer ${TokenService.getAuthToken()}`
+  //     }
+  //   })
+  //   .then(res => (res.json()))
+  //   .then(res => {
+  //     this.state.finalIngredients.push
+  //   })
+  // }
+
 
   render() {
     
