@@ -25,9 +25,20 @@ export default class Meals extends Component {
         'authorization': `bearer ${TokenService.getAuthToken()}`
       }
     })
-      .then(res => (res.json()))
+      .then(res => 
+        (!res.ok) 
+          ? res.json().then(e => Promise.reject(e)) 
+          : res.json()
+      )
       .then(res => {
-        this.setState({mealInfo: res[0]});
+        if(res.length === 0){
+          this.props.history.push('/nothinghere');
+        } else {
+          // hacky fix to avoid react trying to set state on unmounted component
+          if(res.length !== 0){
+            this.setState({mealInfo: res[0]});
+          }
+        }
       })
       .catch(err => console.log(err));
   }
@@ -36,17 +47,18 @@ export default class Meals extends Component {
     return fetch(`${config.API_ENDPOINT}/ingredients`, {
       method: 'POST',
       headers: {
-          'content-type': 'application/json',
-          'authorization': `bearer ${TokenService.getAuthToken()}`
+        'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`
       },
       body: JSON.stringify({meal: {id: this.props.meal_id}})
-      })
+    })
       .then(res => 
-          (!res.ok) 
+        (!res.ok) 
           ? res.json().then(e => Promise.reject(e)) 
           : res.json()
       )
-      .then(res => this.setState({mealIngredients: res.ingredients}));
+      .then(res => this.setState({mealIngredients: res.ingredients}))
+      .catch(err => console.log(err));
   }
 
   handleInput = (e) => {
@@ -55,8 +67,8 @@ export default class Meals extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.setState({ results: [] })
-    let encodedInput = encodeURI(this.state.ingredientInput)
+    this.setState({ results: [], chosenIngredient: '' });
+    let encodedInput = encodeURI(this.state.ingredientInput);
     fetch(`${config.API_ENDPOINT}/proxy/foods`, {
       method: 'POST',
       body: JSON.stringify({food: encodedInput}),
@@ -68,7 +80,7 @@ export default class Meals extends Component {
       .then(results => {
         this.setState({ results});
       })
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
   }
 
   handleClickIngredient = (item) => {
@@ -93,9 +105,9 @@ export default class Meals extends Component {
 
     const ingredients = [
       {
-        "quantity": Number(quantity.value),
-        "measureURI": uri,
-        "foodId": this.state.chosenIngredient.id
+        'quantity': Number(quantity.value),
+        'measureURI': uri,
+        'foodId': this.state.chosenIngredient.id
       }
     ];
 
@@ -114,7 +126,7 @@ export default class Meals extends Component {
       }
     })
       .then(res => {
-        return (res.json())
+        return (res.json());
       })
       .then(res => {
         //send ingredient to items table in database
@@ -122,7 +134,7 @@ export default class Meals extends Component {
           finalIngredients: [...this.state.finalIngredients, res],
           chosenIngredient: '',
           ingredientInput: ''
-        })
+        });
         let results = {
           ingredient: {
             meal_id: Number(this.props.meal_id),
@@ -152,7 +164,7 @@ export default class Meals extends Component {
               total_carbs: Number(this.state.mealInfo.total_carbs) + Number(results.ingredient.total_carbs),
               total_protein: Number(this.state.mealInfo.total_protein) + Number(results.ingredient.total_protein)
             };
-            const patchedMeal = {"meal": {...this.state.mealInfo, ...newMealStats} };
+            const patchedMeal = {'meal': {...this.state.mealInfo, ...newMealStats} };
             fetch(`${config.API_ENDPOINT}/meal`, {
               method: 'PATCH',
               body: JSON.stringify(patchedMeal),
@@ -164,20 +176,20 @@ export default class Meals extends Component {
               .then(() => {
                 this.getMealInfo();
                 this.getMealIngredients();
-              })
-          })
-      })
+              });
+          });
+      });
   }
 
   generateMeasureForm = () => {
     return (
-      <form autocomplete="off" className='measureForm' onSubmit={e => this.getNutrientInfo(e)}>
+      <form autoComplete="off" className='measureForm' onSubmit={e => this.getNutrientInfo(e)}>
         <p>{this.state.chosenIngredient.name}</p>
         <label htmlFor='quantity'>How much do you want to add?</label>
-        <input type='number' name='quantity' min='0' />
+        <input type='number' name='quantity' min='0' step='.01'/>
         <select name='measurements'>
           {this.state.chosenIngredient.measures.map((measure, index) => {
-            return <option key={index} value={`${measure.uri},${measure.label}`} name={measure.label} >{measure.label}</option>
+            return <option key={index} value={`${measure.uri},${measure.label}`} name={measure.label} >{measure.label}</option>;
           })}
         </select>
         <button type='submit'>Submit</button>
@@ -218,7 +230,7 @@ export default class Meals extends Component {
       body: JSON.stringify({ingredient_id: ingredient.id}),
       headers: {
         'Content-Type': 'application/json',
-        "authorization": `bearer ${TokenService.getAuthToken()}`
+        'authorization': `bearer ${TokenService.getAuthToken()}`
       }
     })
       .then(res => res.json)
@@ -230,30 +242,30 @@ export default class Meals extends Component {
           total_carbs: Number(this.state.mealInfo.total_carbs) - Number(ingredient.total_carbs),
           total_protein: Number(this.state.mealInfo.total_protein) - Number(ingredient.total_protein)
         };
-        const patchedMeal = {"meal": {...this.state.mealInfo, ...newMealStats} };
+        const patchedMeal = {'meal': {...this.state.mealInfo, ...newMealStats} };
 
         fetch(`${config.API_ENDPOINT}/meal`, {
           method: 'PATCH',
           body: JSON.stringify(patchedMeal),
           headers: {
             'Content-Type': 'application/json',
-            "authorization": `bearer ${TokenService.getAuthToken()}`
+            'authorization': `bearer ${TokenService.getAuthToken()}`
           }
         })
-        .then(() => {
-          this.getMealInfo();
-          this.getMealIngredients();
-        })
+          .then(() => {
+            this.getMealInfo();
+            this.getMealIngredients();
+          });
       })
       .then(() => {
         this.getMealInfo();
         this.getMealIngredients();
       })
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
   }
 
   handleGoBackClicked = () => {
-    this.props.history.goBack();
+    this.props.history.push('/meals');
   }
 
   render() {
@@ -276,7 +288,7 @@ export default class Meals extends Component {
               value={this.state.ingredientInput}
               onChange={this.handleInput}
               required
-              />
+            />
           </div>
           <Button type='submit'>
             Search ingredients
@@ -294,7 +306,7 @@ export default class Meals extends Component {
           {this.renderMealStats()}
         </section>
         <section className='goBack'>
-          <Button onClick={() => this.handleGoBackClicked()} className='back_button'>BACK</Button>
+          <Button onClick={() => this.handleGoBackClicked()} className='back_button'>Back to meals</Button>
         </section>
       </div>
     );
