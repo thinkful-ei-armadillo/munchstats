@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 class LogHomeRoute extends Component {
   render() {
@@ -10,4 +10,4 @@ class LogHomeRoute extends Component {
   }
 }
 
-export default LogHomeRoute
+export default LogHomeRoute;

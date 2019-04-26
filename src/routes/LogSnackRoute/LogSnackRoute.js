@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 class LogSnackRoute extends Component {
   render() {
@@ -10,4 +10,4 @@ class LogSnackRoute extends Component {
   }
 }
 
-export default LogSnackRoute
+export default LogSnackRoute;
