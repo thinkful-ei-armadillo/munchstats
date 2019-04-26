@@ -7,19 +7,19 @@ class DashboardRoute extends Component {
     return (
       <section className="dashboard">
         <button type="button">
-          <Link to='/meals' style={{textDecoration: 'none'}}>
+          <Link to='/meals'>
             Create, View, or Edit Your Meals
           </Link>
         </button>
-        <br />
+        
         <button type="button">
-          <Link to='/log' style={{textDecoration: 'none'}}>
+          <Link to='/log'>
             Log a Meal, Snack, or Exercise
           </Link>
         </button>
-        <br />
+        
         <button type="button">
-          <Link to='/reports' style={{textDecoration: 'none'}}>
+          <Link to='/reports'>
             View Your Past Reports
           </Link>
         </button>

@@ -1,3 +1,35 @@
 html{
-  background: #538a46;
+  background: #F4FEC1;
+  color: #152a23;
+
+}
+
+.delete_button {
+  color:#eeeeee;
+}
+
+a:visited {
+  color: #152a23;
+  
+}
+
+button{
+  background-color: #087E8B;
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin-top: 10px;
+  color:#eeeeee;
+}
+
+button a {
+  color:#eeeeee;
+  text-decoration: none;
+}
+
+button a:visited {
+  color: #eeeeee;
+  
 }
