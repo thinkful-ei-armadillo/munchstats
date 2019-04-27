@@ -203,7 +203,6 @@ export default class Meals extends Component {
   }
 
   renderMealStats() {
-<<<<<<< HEAD
     return <>
         <h4>Meal Nutrition Information</h4>
         <div className='nutritionInfo' >
@@ -213,17 +212,6 @@ export default class Meals extends Component {
           <p>protein: {Math.round(this.state.mealInfo.total_protein)}</p>
         </div>
       </>
-=======
-    return (
-      <div className='nutritionInfo' >
-        <h4>Meal Nutrition Information</h4>
-        <p>Calories: {Math.round(this.state.mealInfo.total_calorie)}</p>
-        <p>Fat: {Math.round(this.state.mealInfo.total_fat)}</p>
-        <p>Carbs: {Math.round(this.state.mealInfo.total_carbs)}</p>
-        <p>Protein: {Math.round(this.state.mealInfo.total_protein)}</p>
-      </div>
-    );
->>>>>>> 2cae36eb4978064b68a6564dac7178ea9b1a6b96
   }
 
   generateFinalIngredients = () => {
@@ -231,11 +219,7 @@ export default class Meals extends Component {
       <span>
         {item.name} | {item.amount} {item.unit}
       </span>
-<<<<<<< HEAD
       <span onClick={() => this.handleClickDelete(item.id)}><i class="fas fa-trash"></i></span>
-=======
-      <Button onClick={() => this.handleClickDelete(item)}>Remove Item</Button>
->>>>>>> 2cae36eb4978064b68a6564dac7178ea9b1a6b96
     </div>
     );
   }
@@ -286,7 +270,6 @@ export default class Meals extends Component {
 
   render() {
     return (
-<<<<<<< HEAD
       <>
         <section className='goBack'>
           <span onClick={() => this.handleGoBackClicked()} className='back_button'><i class="fas fa-chevron-left"></i></span>
@@ -344,47 +327,6 @@ export default class Meals extends Component {
           
         </div>
       </>
-=======
-      <div>
-        <form
-          className='mealForm'
-          onSubmit={this.handleSubmit}>
-          {/* <div role='alert'>
-          {error && <p>{error}</p>}
-          </div> */}
-          <div>
-            <label htmlFor='ingredient-input'>
-              Ingredient
-            </label>
-            <input
-              ref={this.firstInput}
-              id='ingredient-input'
-              name='ingredient-input'
-              value={this.state.ingredientInput}
-              onChange={this.handleInput}
-              required
-            />
-          </div>
-          <Button type='submit'>
-            Search ingredients
-          </Button>
-        </form>
-        <section className="results">
-          {this.state.results ? this.generateResults() : null}
-        </section>
-        <div>
-          {this.state.chosenIngredient ? this.generateMeasureForm() : null}
-        </div>
-        <section className="finalIngredients">
-          <h3>{this.state.mealInfo ? this.state.mealInfo.name : ''}</h3>
-          {(this.state.mealIngredients[0]) ? this.generateFinalIngredients() : 'Nothing so far!'}
-          {this.renderMealStats()}
-        </section>
-        <section className='goBack'>
-          <Button onClick={() => this.handleGoBackClicked()} className='back_button'>Back to meals</Button>
-        </section>
-      </div>
->>>>>>> 2cae36eb4978064b68a6564dac7178ea9b1a6b96
     );
   }
 }
