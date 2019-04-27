@@ -203,6 +203,17 @@ export default class Meals extends Component {
   }
 
   renderMealStats() {
+<<<<<<< HEAD
+    return <>
+        <h4>Meal Nutrition Information</h4>
+        <div className='nutritionInfo' >
+          <p>calories: {Math.round(this.state.mealInfo.total_calorie)}</p>
+          <p> fat: {Math.round(this.state.mealInfo.total_fat)} </p>
+          <p>carbs: {Math.round(this.state.mealInfo.total_carbs)} </p>
+          <p>protein: {Math.round(this.state.mealInfo.total_protein)}</p>
+        </div>
+      </>
+=======
     return (
       <div className='nutritionInfo' >
         <h4>Meal Nutrition Information</h4>
@@ -212,6 +223,7 @@ export default class Meals extends Component {
         <p>Protein: {Math.round(this.state.mealInfo.total_protein)}</p>
       </div>
     );
+>>>>>>> 2cae36eb4978064b68a6564dac7178ea9b1a6b96
   }
 
   generateFinalIngredients = () => {
@@ -219,7 +231,11 @@ export default class Meals extends Component {
       <span>
         {item.name} | {item.amount} {item.unit}
       </span>
+<<<<<<< HEAD
+      <span onClick={() => this.handleClickDelete(item.id)}><i class="fas fa-trash"></i></span>
+=======
       <Button onClick={() => this.handleClickDelete(item)}>Remove Item</Button>
+>>>>>>> 2cae36eb4978064b68a6564dac7178ea9b1a6b96
     </div>
     );
   }
@@ -270,6 +286,65 @@ export default class Meals extends Component {
 
   render() {
     return (
+<<<<<<< HEAD
+      <>
+        <section className='goBack'>
+          <span onClick={() => this.handleGoBackClicked()} className='back_button'><i class="fas fa-chevron-left"></i></span>
+        </section>
+        <h3 className='mealName'>{this.state.mealInfo ? this.state.mealInfo.name : ''}</h3>
+
+        <div className = 'mealContainer'> {/* main flex */}
+
+          <div className = 'addIngredientContainer'>
+            <h3>Add an ingredient to your meal</h3>
+            <form
+              className='mealForm'
+              onSubmit={this.handleSubmit}
+            >
+              {/* <div role='alert'>
+              {error && <p>{error}</p>}
+            </div> */}
+              <label htmlFor='ingredient-input'>
+                Ingredient
+              </label>
+              <input
+                ref={this.firstInput}
+                id='ingredient-input'
+                name='ingredient-input'
+                value={this.state.ingredientInput}
+                onChange={this.handleInput}
+                required
+              />
+              <Button type='submit'>
+                Search ingredients
+              </Button>
+            </form>
+
+            {this.state.chosenIngredient ? this.generateMeasureForm() : null}
+            
+            <section className="results">
+              {(this.state.results.length >= 1) && <h4>Pick one from below</h4>}
+              {(this.state.results.length >= 1) && this.generateResults()}
+            </section>
+          </div>
+
+
+          <div className = 'statsContainer'>
+
+            <section className = 'finalIngredientsContainer'>
+              <h4>Meal Ingredients</h4>
+              <div className="finalIngredients">
+                {(this.state.mealIngredients[0]) ? this.generateFinalIngredients() : 'Nothing so far!'}
+              </div>
+            </section>
+            <section className='currentMealStats'>
+              {this.renderMealStats()}
+            </section>
+          </div>
+          
+        </div>
+      </>
+=======
       <div>
         <form
           className='mealForm'
@@ -309,6 +384,7 @@ export default class Meals extends Component {
           <Button onClick={() => this.handleGoBackClicked()} className='back_button'>Back to meals</Button>
         </section>
       </div>
+>>>>>>> 2cae36eb4978064b68a6564dac7178ea9b1a6b96
     );
   }
 }

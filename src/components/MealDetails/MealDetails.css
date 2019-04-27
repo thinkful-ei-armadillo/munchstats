@@ -1,3 +1,96 @@
-.mealForm, .finalIngredients, .nutritionInfo, .measureForm, .goBack, #results{
+.mealName {
   text-align: center;
+  font-size: 2em;
+  margin:30px 50px;
+}
+
+.mealContainer {
+  height:70vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.mealContainer form {
+  display: flex;
+  flex-direction: column;
+}
+.addIngredientContainer h3 {
+  text-align: center;
+  margin:10px;
+  font-size: 1.5em;
+}
+.addIngredientContainer form {
+  margin:0 auto;
+}
+
+.addIngredientContainer, .statsContainer {
+  flex-direction: column;
+  display: flex;
+  width:50%;
+  height:100%;
+  min-width:350px;
+}
+
+.addIngredientContainer {
+}
+
+.currentMealStats h4, .finalIngredientsContainer h4 {
+  text-align: center;
+  font-size: 1.5em;
+  margin: 5px;
+}
+
+.nutritionInfo {
+  display:flex;
+  flex-flow: wrap;
+  align-content: space-evenly;
+  height: 70%;
+  text-align: center;
+}
+
+.nutritionInfo p {
+  width:50%;
+  font-size: 1.3em;
+}
+.finalIngredients {
+  height:80%;
+  padding: 5%;
+  overflow: auto;
+}
+.finalIngredientsContainer, .currentMealStats {
+  height:50%;
+  width: 100%;
+}
+
+.fa-trash {
+  margin-left:15px;
+  cursor: pointer;
+}
+
+.results {
+  margin:15px 0;
+  padding:5px;
+  text-align: center;
+}
+
+.results div {
+  margin:7px;
+  cursor: pointer;
+}
+
+.goBack span {
+  position: absolute;
+  top: 17vh;
+  left:1.5vw;
+  font-size:3em;
+  cursor: pointer;
+}
+
+.measureForm p {
+  font-size:1.3em;
+  margin:15px;
+  text-align: center;
+  font-weight: bold;
 }
