@@ -33,9 +33,6 @@
   min-width:350px;
 }
 
-.addIngredientContainer {
-}
-
 .currentMealStats h4, .finalIngredientsContainer h4 {
   text-align: center;
   font-size: 1.5em;
@@ -58,7 +55,13 @@
   height:80%;
   padding: 5%;
   overflow: auto;
+  text-align: center;
 }
+
+.finalIngredients div {
+  margin:10px;
+}
+
 .finalIngredientsContainer, .currentMealStats {
   height:50%;
   width: 100%;
