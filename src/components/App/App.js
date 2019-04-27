@@ -29,6 +29,7 @@ export default class App extends Component {
 
   render() {
     const { hasError } = this.state;
+
     return (
       <div className='App'>
         <Header />

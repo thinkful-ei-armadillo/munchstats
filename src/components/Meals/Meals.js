@@ -64,17 +64,17 @@ export default class Meals extends Component {
       <ul className='MealsPage__meals'>
         {meals.map(meal =>
           <li key={meal.id} className='MealsPage__meals'>
-            {meal.name}
+            <span className = 'mealName'>{meal.name}</span> 
             <br />
-            <button type="button">
               <Link
                 to={`/meals/${meal.id}`}
                 style={{textDecoration: 'none'}}>
+                <Button type="button" className='editMeal'>
                 Edit Meal
+                </Button>
               </Link>
-            </button>
             <br />
-            <Button onClick={() => this.handleClickDelete(meal)} className='delete_button'>Delete Meal</Button>
+            <Button onClick={() => this.handleClickDelete(meal)}>Delete Meal</Button>
           </li>
         )}
       </ul>
@@ -100,6 +100,8 @@ export default class Meals extends Component {
             name='mealInput'
             value={this.state.mealInput}
             onChange={this.handleInput}
+            autoComplete="off"
+            maxLength="60"
             required />
           <br />
           <Button type='submit'>
