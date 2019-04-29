@@ -85,7 +85,7 @@
 
 .goBack span {
   position: absolute;
-  top: 17vh;
+  top: 105px;
   left:1.5vw;
   font-size:3em;
   cursor: pointer;
@@ -96,4 +96,19 @@
   margin:15px;
   text-align: center;
   font-weight: bold;
+}
+
+.measureForm {
+  align-items: center;
+}
+
+.measureForm input, .measureForm select, .measureForm button {
+  width:200px;
+  
+}
+
+@media only screen and (max-width:400px){
+  .goBack span {
+    top: 135px;
+  }
 }
