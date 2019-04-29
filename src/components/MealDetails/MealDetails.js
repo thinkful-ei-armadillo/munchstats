@@ -219,7 +219,7 @@ export default class Meals extends Component {
       <span>
         {item.name} | {item.amount} {item.unit}
       </span>
-      <span onClick={() => this.handleClickDelete(item)}><i class="fas fa-trash"></i></span>
+      <span onClick={() => this.handleClickDelete(item)}><i className="fas fa-trash"></i></span>
     </div>
     );
   }
@@ -272,7 +272,7 @@ export default class Meals extends Component {
     return (
       <>
         <section className='goBack'>
-          <span onClick={() => this.handleGoBackClicked()} className='back_button'><i class="fas fa-chevron-left"></i></span>
+          <span onClick={() => this.handleGoBackClicked()} className='back_button'><i className="fas fa-chevron-left"></i></span>
         </section>
         <h3 className='mealName'>{this.state.mealInfo ? this.state.mealInfo.name : ''}</h3>
 
