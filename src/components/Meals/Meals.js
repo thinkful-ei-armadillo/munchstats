@@ -55,7 +55,7 @@ export default class Meals extends Component {
       .then(() => {
         MealsApiService.getMeals()
           .then(res => this.context.setMeals(res))
-          .catch(e => this.context.setError(e))
+          .catch(e => this.context.setError(e));
       });
   }
 
@@ -66,13 +66,13 @@ export default class Meals extends Component {
           <li key={meal.id} className='MealsPage__meals'>
             <span className = 'mealName'>{meal.name}</span> 
             <br />
-              <Link
-                to={`/meals/${meal.id}`}
-                style={{textDecoration: 'none'}}>
-                <Button type="button" className='editMeal'>
+            <Link
+              to={`/meals/${meal.id}`}
+              style={{textDecoration: 'none'}}>
+              <Button type="button" className='editMeal'>
                 Edit Meal
-                </Button>
-              </Link>
+              </Button>
+            </Link>
             <br />
             <Button onClick={() => this.handleClickDelete(meal)}>Delete Meal</Button>
           </li>
@@ -85,8 +85,8 @@ export default class Meals extends Component {
     return (
       <div>
         <form
-        className='mealCreationForm'
-        onSubmit={this.handleSubmit}>
+          className='mealCreationForm'
+          onSubmit={this.handleSubmit}>
           {/* <div role='alert'>
             {error && <p>{error}</p>}
           </div> */}

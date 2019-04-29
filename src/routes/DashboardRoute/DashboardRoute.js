@@ -6,26 +6,18 @@ class DashboardRoute extends Component {
   render() {
     return (
       <section className="dashboard">
-        <button type="button">
-          <Link to='/meals'>
+        <Link to='/meals' className="button">
             Create, View, or Edit Your Meals
-          </Link>
-        </button>
-        
-        <button type="button">
-          <Link to='/log'>
+        </Link>
+        <Link to='/log' className="button">
             Log a Meal, Snack, or Exercise
-          </Link>
-        </button>
-        
-        <button type="button">
-          <Link to='/reports'>
+        </Link>
+        <Link to='/reports' className="button">
             View Your Past Reports
-          </Link>
-        </button>
+        </Link>
       </section>
     );
-  };
-};
+  }
+}
 
 export default DashboardRoute;
