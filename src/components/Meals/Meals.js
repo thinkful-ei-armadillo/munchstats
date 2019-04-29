@@ -64,7 +64,7 @@ export default class Meals extends Component {
       <ul className='MealsPage__meals'>
         {meals.map(meal =>
           <li key={meal.id} className='MealsPage__meals'>
-            <span className = 'mealName'>{meal.name}</span> 
+            <span className = 'mealPageMealName'>{meal.name}</span> 
             <br />
             <Link
               to={`/meals/${meal.id}`}
@@ -108,7 +108,7 @@ export default class Meals extends Component {
             Add Meal
           </Button>
         </form>
-        <section>
+        <section className="mealsContainer">
           {this.context.meals.meal ? this.genUserMeals(this.context.meals.meal) : null}
         </section>
       </div>
