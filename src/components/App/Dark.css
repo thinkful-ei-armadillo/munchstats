@@ -1,0 +1,41 @@
+html{
+  background: grey;
+  color: white;
+
+}
+
+.delete_button {
+  color:#eeeeee;
+}
+
+a:visited {
+  color: white;
+}
+
+button{
+  background-color: black;
+  color:#eeeeee;
+}
+
+button a {
+  color:#eeeeee;
+}
+
+button a:visited {
+  color: #eeeeee; 
+}
+
+header{
+  background: black;
+}
+header a:hover{
+  color: white;
+}
+
+li{
+  background: black;
+}
+
+li button {
+  background:grey;
+}

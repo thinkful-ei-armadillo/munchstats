@@ -4,7 +4,10 @@ header{
   background: #B2FFA8;
   font-size: 20px;
   box-shadow:1px 0 6px grey;
-  height:15vh;
+  height:90px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 header h1{
@@ -14,4 +17,11 @@ header h1{
 
 header a:hover{
   color: #000000;
+}
+
+@media only screen and (max-width: 400px) {
+  header {
+    flex-direction: column;
+    height:120px;
+  }
 }

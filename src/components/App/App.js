@@ -15,6 +15,10 @@ import MealDetailsRoute from '../../routes/MealDetailsRoute/MealDetailsRoute';
 import MealsRoute from '../../routes/MealsRoute/MealsRoute';
 import './App.css';
 
+if (false) {
+  require('./Dark.css');
+}
+
 export default class App extends Component {
   state = {
     hasError: false
