@@ -6,20 +6,14 @@ class DashboardRoute extends Component {
   render() {
     return (
       <section className="dashboard">
-        <Link to='/meals'>
-          <button type="button">
+        <Link to='/meals' className="button">
             Create, View, or Edit Your Meals
-          </button>
         </Link>
-        <Link to='/log'>
-          <button type="button">
+        <Link to='/log' className="button">
             Log a Meal, Snack, or Exercise
-          </button>
         </Link>
-        <Link to='/reports'>
-          <button type="button">
+        <Link to='/reports' className="button">
             View Your Past Reports
-          </button>
         </Link>
       </section>
     );
