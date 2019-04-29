@@ -4,6 +4,30 @@
   padding: 0;
 }
 
+
+a{
+  text-decoration: none;
+}
+
+
+#tagline {
+  text-align: center;
+  margin:10px;
+}
+
+button {
+  margin:15px;
+}
+
+h2 {
+  margin:20px;
+}
+
+form { 
+  text-align: center
+}
+
+
 html{
   background: #F4FEC1;
   color: #152a23;

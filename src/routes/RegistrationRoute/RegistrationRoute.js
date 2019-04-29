@@ -16,7 +16,7 @@ class RegistrationRoute extends Component {
   render() {
     return (
       <section>
-        <p>
+        <p id = 'tagline'>
           Create meals, eat them, stay healthy        
         </p>
         <h2>Sign up</h2>

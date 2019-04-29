@@ -219,7 +219,7 @@ export default class Meals extends Component {
       <span>
         {item.name} | {item.amount} {item.unit}
       </span>
-      <span onClick={() => this.handleClickDelete(item.id)}><i class="fas fa-trash"></i></span>
+      <span onClick={() => this.handleClickDelete(item)}><i class="fas fa-trash"></i></span>
     </div>
     );
   }
