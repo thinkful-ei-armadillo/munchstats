@@ -8,13 +8,15 @@ const UserContext = React.createContext({
   error: null,
   meals: [],
   loading: false,
+  ingredient: {},
+  clearIngredient: () => {},
   setError: () => {},
   clearError: () => {},
   setUser: () => {},
   processLogin: () => {},
   processLogout: () => {},
-  setLoadingTrue: () => {},
-  setLoadingFalse: () => {},
+  loadingTrue: () => {},
+  loadingFalse: () => {},
 });
 
 export default UserContext;
@@ -22,7 +24,18 @@ export default UserContext;
 export class UserProvider extends Component {
   constructor(props) {
     super(props);
-    const state = { user: {}, error: null, meals: [], loading: false };
+    const state = {
+      user: {}, 
+      error: null, 
+      meals: [], 
+      ingredient: {},
+      chosenIngredient: '',
+      finalIngredients: [],
+      mealInfo: {},
+      mealIngredients: [], 
+      loading: false  
+    };
+
     const jwtPayload = TokenService.parseAuthToken();
 
     if (jwtPayload){
@@ -48,6 +61,18 @@ export class UserProvider extends Component {
   componentWillUnmount() {
     IdleService.unRegisterIdleResets();
     TokenService.clearCallbackBeforeExpiry();
+  }
+
+  setIngredientWithNutritionStats = (ingredient) => {
+    this.setState({
+      ingredient
+    })
+  }
+
+  clearIngredient = () => {
+    this.setState({
+      ingredient: {}
+    })
   }
 
   setError = error => {
@@ -125,16 +150,26 @@ export class UserProvider extends Component {
       user: this.state.user,
       error: this.state.error,
       meals: this.state.meals,
+      ingredient: this.state.ingredient,
       loading: this.state.loading,
       setError: this.setError,
       clearError: this.clearError,
+      clearIngredient: this.clearIngredient,
+      setIngredientWithNutritionStats: this.setIngredientWithNutritionStats,
       setUser: this.setUser,
       setMeals: this.setMeals,
       processLogin: this.processLogin,
       processLogout: this.processLogout,
+      ingredientInput: this.state.ingredientInput,
+      results: this.state.results,
+      chosenIngredient: this.state.chosenIngredient,
+      finalIngredients: this.state.finalIngredients,
+      mealInfo: this.state.mealInfo,
+      mealIngredients: this.state.mealIngredients,
       loadingFalse: this.loadingFalse,
       loadingTrue: this.loadingTrue
     };
+
     return (
       <UserContext.Provider value={value}>
         {this.props.children}
