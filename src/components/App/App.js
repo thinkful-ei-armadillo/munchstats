@@ -21,7 +21,7 @@ if (false) {
 
 export default class App extends Component {
   state = {
-    hasError: false
+    hasError: false,
   };
 
   static getDerivedStateFromError(error) {
@@ -56,7 +56,7 @@ export default class App extends Component {
               component={MealDetailsRoute}
             />
             <PrivateRoute
-              path={'/loghome'}
+              path={'/log'}
               component={LogHomeRoute}
             />
             <PrivateRoute

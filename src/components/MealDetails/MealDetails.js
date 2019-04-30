@@ -3,6 +3,8 @@ import Button from '../Button/Button';
 import config from '../../config';
 import TokenService from '../../services/token-service';
 import './MealDetails.css';
+import MealsApiService from '../../services/meals-api-service';
+import AddIngredient from '../AddIngredient/AddIngredient';
 
 export default class Meals extends Component {
   state = {
@@ -19,45 +21,24 @@ export default class Meals extends Component {
     this.getMealIngredients();
   }
 
-  getMealInfo(){
-    return fetch(`${config.API_ENDPOINT}/meal/${this.props.meal_id}`, {
-      headers: {
-        'authorization': `bearer ${TokenService.getAuthToken()}`
-      }
-    })
-      .then(res => 
-        (!res.ok) 
-          ? res.json().then(e => Promise.reject(e)) 
-          : res.json()
-      )
+  getMealInfo() {
+    return MealsApiService.getMealById(this.props.meal_id)
       .then(res => {
-        if(res.length === 0){
+        if (res.length === 0) {
           this.props.history.push('/nothinghere');
         } else {
           // hacky fix to avoid react trying to set state on unmounted component
-          if(res.length !== 0){
-            this.setState({mealInfo: res[0]});
+          if (res.length !== 0) {
+            this.setState({ mealInfo: res[0] });
           }
         }
       })
       .catch(err => console.log(err));
   }
 
-  getMealIngredients(){
-    return fetch(`${config.API_ENDPOINT}/ingredients`, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        'authorization': `bearer ${TokenService.getAuthToken()}`
-      },
-      body: JSON.stringify({meal: {id: this.props.meal_id}})
-    })
-      .then(res => 
-        (!res.ok) 
-          ? res.json().then(e => Promise.reject(e)) 
-          : res.json()
-      )
-      .then(res => this.setState({mealIngredients: res.ingredients}))
+  getMealIngredients() {
+      return MealsApiService.getIngredientsForMeal(this.props.meal_id)
+      .then(res => this.setState({ mealIngredients: res.ingredients }))
       .catch(err => console.log(err));
   }
 
@@ -69,16 +50,9 @@ export default class Meals extends Component {
     e.preventDefault();
     this.setState({ results: [], chosenIngredient: '' });
     let encodedInput = encodeURI(this.state.ingredientInput);
-    fetch(`${config.API_ENDPOINT}/proxy/foods`, {
-      method: 'POST',
-      body: JSON.stringify({food: encodedInput}),
-      headers: {
-        'content-Type': 'application/json',
-      }
-    })
-      .then(res => res.json())
+    MealsApiService.getIngredientsFromSearch(encodedInput)
       .then(results => {
-        this.setState({ results});
+        this.setState({ results });
       })
       .catch(err => console.log(err));
   }
@@ -118,16 +92,7 @@ export default class Meals extends Component {
       quantity: Number(quantity.value)
     };
 
-    fetch(`${config.API_ENDPOINT}/proxy/nutrition`, {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers: {
-        'content-Type': 'application/json'
-      }
-    })
-      .then(res => {
-        return (res.json());
-      })
+      MealsApiService.getStatsforServing(body)
       .then(res => {
         //send ingredient to items table in database
         this.setState({
@@ -143,19 +108,11 @@ export default class Meals extends Component {
             total_fat: Math.round(res.total_fat),
             total_carbs: Math.round(res.total_carbs),
             total_protein: Math.round(res.total_protein),
-            amount: Number(quantity.value),      
+            amount: Number(quantity.value),
             unit: res.unit
           }
         };
-        fetch(`${config.API_ENDPOINT}/ingredients/${this.props.meal_id}`, {
-          method: 'POST',
-          body: JSON.stringify(results),
-          headers: {
-            'content-type': 'application/json',
-            'authorization': `bearer ${TokenService.getAuthToken()}`
-          }
-        })
-          .then(test => test.json())
+        MealsApiService.addIngredient(this.props.meal_id, results)
           .then(() => {
             // add calorie/fat/carb/protein counts to meal totals
             const newMealStats = {
@@ -164,15 +121,9 @@ export default class Meals extends Component {
               total_carbs: Number(this.state.mealInfo.total_carbs) + Number(results.ingredient.total_carbs),
               total_protein: Number(this.state.mealInfo.total_protein) + Number(results.ingredient.total_protein)
             };
-            const patchedMeal = {'meal': {...this.state.mealInfo, ...newMealStats} };
-            fetch(`${config.API_ENDPOINT}/meal`, {
-              method: 'PATCH',
-              body: JSON.stringify(patchedMeal),
-              headers: {
-                'content-Type': 'application/json',
-                'authorization': `bearer ${TokenService.getAuthToken()}`
-              }
-            })
+            const patchedMeal = { 'meal': { ...this.state.mealInfo, ...newMealStats } };
+            
+            MealsApiService.updateMeal(patchedMeal)
               .then(() => {
                 this.getMealInfo();
                 this.getMealIngredients();
@@ -186,7 +137,7 @@ export default class Meals extends Component {
       <form autoComplete="off" className='measureForm' onSubmit={e => this.getNutrientInfo(e)}>
         <p>{this.state.chosenIngredient.name}</p>
         <label htmlFor='quantity'>How much do you want to add?</label>
-        <input type='number' name='quantity' min='0' step='.01'/>
+        <input type='number' name='quantity' min='0' step='.01' />
         <select name='measurements'>
           {this.state.chosenIngredient.measures.map((measure, index) => {
             return <option key={index} value={`${measure.uri},${measure.label}`} name={measure.label} >{measure.label}</option>;
@@ -199,19 +150,19 @@ export default class Meals extends Component {
 
   // generates the results that come from querying the third-party API for ingredients
   generateResults = () => {
-    return this.state.results.map((item, key) => <div id = 'results' key={key} onClick={() => this.handleClickIngredient(item)}><span>{item.name}</span></div>);
+    return this.state.results.map((item, key) => <div id='results' key={key} onClick={() => this.handleClickIngredient(item)}><span>{item.name}</span></div>);
   }
 
   renderMealStats() {
     return <>
-        <h4>Meal Nutrition Information</h4>
-        <div className='nutritionInfo' >
-          <p>calories: {Math.round(this.state.mealInfo.total_calorie)}</p>
-          <p> fat: {Math.round(this.state.mealInfo.total_fat)} </p>
-          <p>carbs: {Math.round(this.state.mealInfo.total_carbs)} </p>
-          <p>protein: {Math.round(this.state.mealInfo.total_protein)}</p>
-        </div>
-      </>
+      <h4>Meal Nutrition Information</h4>
+      <div className='nutritionInfo' >
+        <p>calories: {Math.round(this.state.mealInfo.total_calorie)}</p>
+        <p> fat: {Math.round(this.state.mealInfo.total_fat)} </p>
+        <p>carbs: {Math.round(this.state.mealInfo.total_carbs)} </p>
+        <p>protein: {Math.round(this.state.mealInfo.total_protein)}</p>
+      </div>
+    </>
   }
 
   generateFinalIngredients = () => {
@@ -225,15 +176,7 @@ export default class Meals extends Component {
   }
 
   handleClickDelete = (ingredient) => {
-    fetch(`${config.API_ENDPOINT}/ingredients/`, {
-      method: 'DELETE',
-      body: JSON.stringify({ingredient_id: ingredient.id}),
-      headers: {
-        'Content-Type': 'application/json',
-        'authorization': `bearer ${TokenService.getAuthToken()}`
-      }
-    })
-      .then(res => res.json)
+    MealsApiService.deleteIngredient(ingredient.id)
       .then(() => {
         // subtract calorie/fat/carb/protein counts to meal totals
         const newMealStats = {
@@ -242,16 +185,8 @@ export default class Meals extends Component {
           total_carbs: Number(this.state.mealInfo.total_carbs) - Number(ingredient.total_carbs),
           total_protein: Number(this.state.mealInfo.total_protein) - Number(ingredient.total_protein)
         };
-        const patchedMeal = {'meal': {...this.state.mealInfo, ...newMealStats} };
-
-        fetch(`${config.API_ENDPOINT}/meal`, {
-          method: 'PATCH',
-          body: JSON.stringify(patchedMeal),
-          headers: {
-            'Content-Type': 'application/json',
-            'authorization': `bearer ${TokenService.getAuthToken()}`
-          }
-        })
+        const patchedMeal = { 'meal': { ...this.state.mealInfo, ...newMealStats } };
+        MealsApiService.updateMeal(patchedMeal)
           .then(() => {
             this.getMealInfo();
             this.getMealIngredients();
@@ -276,17 +211,15 @@ export default class Meals extends Component {
         </section>
         <h3 className='mealName'>{this.state.mealInfo ? this.state.mealInfo.name : ''}</h3>
 
-        <div className = 'mealContainer'> {/* main flex */}
+        <div className='mealContainer'> {/* main flex */}
 
-          <div className = 'addIngredientContainer'>
+          {/* <div className='addIngredientContainer'>
             <h3>Add an ingredient to your meal</h3>
             <form
               className='mealForm'
               onSubmit={this.handleSubmit}
             >
-              {/* <div role='alert'>
-              {error && <p>{error}</p>}
-            </div> */}
+              
               <label htmlFor='ingredient-input'>
                 Ingredient
               </label>
@@ -304,17 +237,18 @@ export default class Meals extends Component {
             </form>
 
             {this.state.chosenIngredient ? this.generateMeasureForm() : null}
-            
+
             <section className="results">
               {(this.state.results.length >= 1) && <h4>Pick one from below</h4>}
               {(this.state.results.length >= 1) && this.generateResults()}
             </section>
-          </div>
+          </div> */}
+          <AddIngredient/>
 
 
-          <div className = 'statsContainer'>
+          <div className='statsContainer'>
 
-            <section className = 'finalIngredientsContainer'>
+            <section className='finalIngredientsContainer'>
               <h4>Meal Ingredients</h4>
               <div className="finalIngredients">
                 {(this.state.mealIngredients[0]) ? this.generateFinalIngredients() : 'Nothing so far!'}
@@ -324,7 +258,7 @@ export default class Meals extends Component {
               {this.renderMealStats()}
             </section>
           </div>
-          
+
         </div>
       </>
     );

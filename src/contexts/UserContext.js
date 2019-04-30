@@ -18,7 +18,17 @@ export default UserContext;
 export class UserProvider extends Component {
   constructor(props) {
     super(props);
-    const state = { user: {}, error: null, meals: [] };
+    const state = {
+      user: {}, 
+      error: null, 
+      meals: [], 
+      ingredientInput: '',
+      results: [],
+      chosenIngredient: '',
+      finalIngredients: [],
+      mealInfo: {},
+      mealIngredients: [] };
+
     const jwtPayload = TokenService.parseAuthToken();
 
     if (jwtPayload){
@@ -118,7 +128,13 @@ export class UserProvider extends Component {
       setUser: this.setUser,
       setMeals: this.setMeals,
       processLogin: this.processLogin,
-      processLogout: this.processLogout
+      processLogout: this.processLogout,
+      ingredientInput: this.state.ingredientInput,
+      results: this.state.results,
+      chosenIngredient: this.state.chosenIngredient,
+      finalIngredients: this.state.finalIngredients,
+      mealInfo: this.state.mealInfo,
+      mealIngredients: this.state.mealIngredients
     };
     return (
       <UserContext.Provider value={value}>
