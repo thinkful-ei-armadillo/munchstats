@@ -4,6 +4,7 @@ import { Input, Required, Label } from '../Form/Form';
 import AuthApiService from '../../services/auth-api-service';
 import Button from '../Button/Button';
 import UserContext from '../../contexts/UserContext';
+import Loading from '../Loading/Loading';
 import './RegistrationForm.css';
 
 class RegistrationForm extends Component {
@@ -23,17 +24,20 @@ class RegistrationForm extends Component {
 
   handleSubmit = ev => {
     ev.preventDefault();
+    this.context.loadingTrue();
     const { name, username, password } = ev.target;
     AuthApiService.postUser({
       name: name.value,
       username: username.value,
       password: password.value,
     })
-      .then(user => {
-        user.json();
+      .then(res => {
+        // do nothing
       })
       .catch(res => {
         this.setState({ error: res.error });
+        console.log(res);
+        this.context.loadingFalse();
       })
       .then(() => {
         if(!this.state.error){
@@ -43,69 +47,77 @@ class RegistrationForm extends Component {
           })
             .then(res => {
               this.context.processLogin(res.authToken);
+              this.context.loadingFalse();
             })
             .catch(res => {
               this.setState({ error: res.error});
+              this.context.loadingFalse();
             });
         }});
   }
 
   render() {
-    const { error } = this.state;
-    return (
-      <form
-        className="RegistrationForm"
-        onSubmit={this.handleSubmit}>
-        <div role='alert'>
-          {error && <p>{error}</p>}
-        </div>
-        <div>
-          <Label htmlFor='registration-name-input'>
+
+    if(this.context.loading){
+      return <div className="center"><Loading /></div>;
+    } else {
+
+
+      const { error } = this.state;
+      return (
+        <form
+          className="RegistrationForm"
+          onSubmit={this.handleSubmit}>
+          <div role='alert'>
+            {error && <p>{error}</p>}
+          </div>
+          <div>
+            <Label htmlFor='registration-name-input'>
             Name<Required />
-          </Label>
+            </Label>
+            <br />
+            <Input
+              ref={this.firstInput}
+              id='registration-name-input'
+              name='name'
+              required
+            />
+          </div>
           <br />
-          <Input
-            ref={this.firstInput}
-            id='registration-name-input'
-            name='name'
-            required
-          />
-        </div>
-        <br />
-        <div>
-          <Label htmlFor='registration-username-input'>
+          <div>
+            <Label htmlFor='registration-username-input'>
             Choose a Username<Required />
-          </Label>
+            </Label>
+            <br />
+            <Input
+              id='registration-username-input'
+              name='username'
+              required
+            />
+          </div>
           <br />
-          <Input
-            id='registration-username-input'
-            name='username'
-            required
-          />
-        </div>
-        <br />
-        <div>
-          <Label htmlFor='registration-password-input'>
+          <div>
+            <Label htmlFor='registration-password-input'>
             Choose a Password<Required />
-          </Label>
+            </Label>
+            <br />
+            <Input
+              id='registration-password-input'
+              name='password'
+              type='password'
+              required
+            />
+          </div>
           <br />
-          <Input
-            id='registration-password-input'
-            name='password'
-            type='password'
-            required
-          />
-        </div>
-        <br />
-        <Button type='submit'>
+          <Button type='submit'>
           Sign Up
-        </Button>
-        <footer>
-          <p>Already have an account? <Link to='/login'>Log In!</Link></p>
-        </footer>
-      </form>
-    );
-  }
+          </Button>
+          <footer>
+            <p>Already have an account? <Link to='/login'>Log In!</Link></p>
+          </footer>
+        </form>
+      );
+    }}
 }
 
 export default RegistrationForm;

@@ -14,6 +14,7 @@ import LogSnackRoute from '../../routes/LogSnackRoute/LogSnackRoute';
 import MealDetailsRoute from '../../routes/MealDetailsRoute/MealDetailsRoute';
 import MealsRoute from '../../routes/MealsRoute/MealsRoute';
 import './App.css';
+import Loading from '../Loading/Loading';
 
 if (false) {
   require('./Dark.css');
@@ -21,7 +22,7 @@ if (false) {
 
 export default class App extends Component {
   state = {
-    hasError: false
+    hasError: false,
   };
 
   static getDerivedStateFromError(error) {
@@ -56,7 +57,7 @@ export default class App extends Component {
               component={MealDetailsRoute}
             />
             <PrivateRoute
-              path={'/loghome'}
+              path={'/log'}
               component={LogHomeRoute}
             />
             <PrivateRoute
@@ -78,6 +79,10 @@ export default class App extends Component {
             <PublicOnlyRoute
               path={'/login'}
               component={LoginRoute}
+            />
+            <Route 
+              path={'/loading'}
+              component = {Loading}
             />
             <Route
               component={NotFoundRoute}
