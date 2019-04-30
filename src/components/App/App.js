@@ -14,6 +14,7 @@ import LogSnackRoute from '../../routes/LogSnackRoute/LogSnackRoute';
 import MealDetailsRoute from '../../routes/MealDetailsRoute/MealDetailsRoute';
 import MealsRoute from '../../routes/MealsRoute/MealsRoute';
 import './App.css';
+import Loading from '../Loading/Loading';
 
 if (false) {
   require('./Dark.css');
@@ -78,6 +79,10 @@ export default class App extends Component {
             <PublicOnlyRoute
               path={'/login'}
               component={LoginRoute}
+            />
+            <Route 
+              path={'/loading'}
+              component = {Loading}
             />
             <Route
               component={NotFoundRoute}

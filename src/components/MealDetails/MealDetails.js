@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import Button from '../Button/Button';
-import config from '../../config';
-import TokenService from '../../services/token-service';
 import './MealDetails.css';
 import MealsApiService from '../../services/meals-api-service';
 import AddIngredient from '../AddIngredient/AddIngredient';
+import UserContext from '../../contexts/UserContext';
 
 export default class Meals extends Component {
   state = {
@@ -16,6 +14,8 @@ export default class Meals extends Component {
     mealIngredients: []
   };
 
+  static contextType = UserContext;
+  
   componentDidMount() {
     this.getMealInfo();
     this.getMealIngredients();
@@ -42,115 +42,41 @@ export default class Meals extends Component {
       .catch(err => console.log(err));
   }
 
-  handleInput = (e) => {
-    this.setState({ ingredientInput: e.target.value });
-  }
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-    this.setState({ results: [], chosenIngredient: '' });
-    let encodedInput = encodeURI(this.state.ingredientInput);
-    MealsApiService.getIngredientsFromSearch(encodedInput)
-      .then(results => {
-        this.setState({ results });
-      })
-      .catch(err => console.log(err));
-  }
-
-  handleClickIngredient = (item) => {
-    this.setState({
-      chosenIngredient: item,
-      results: []
-    });
-  }
-
-  /*
-  // this method is kind of a monster and
-  // could probably be split up later.
-  // possibly make another service file
-  */
-  getNutrientInfo = (e) => {
-    e.preventDefault();
-    let { quantity, measurements } = e.target;
-    measurements = measurements.value.split(',');
-
-    let uri = measurements[0];
-    let label = measurements[1];
-
-    const ingredients = [
-      {
-        'quantity': Number(quantity.value),
-        'measureURI': uri,
-        'foodId': this.state.chosenIngredient.id
+  updateMeal(res) {
+    //check if ingredient exists in context before calling this function
+    let results = {
+      ingredient: {
+        meal_id: Number(this.props.meal_id), 
+        name: res.name,
+        total_calorie: Math.round(res.total_calorie),
+        total_fat: Math.round(res.total_fat),
+        total_carbs: Math.round(res.total_carbs),
+        total_protein: Math.round(res.total_protein),
+        amount: Number(res.quantity),
+        unit: res.unit
       }
-    ];
-
-    const body = {
-      ingredients,
-      name: this.state.chosenIngredient.name,
-      label,
-      quantity: Number(quantity.value)
     };
+    this.context.clearIngredient();
 
-      MealsApiService.getStatsforServing(body)
-      .then(res => {
-        //send ingredient to items table in database
-        this.setState({
-          finalIngredients: [...this.state.finalIngredients, res],
-          chosenIngredient: '',
-          ingredientInput: ''
-        });
-        let results = {
-          ingredient: {
-            meal_id: Number(this.props.meal_id),
-            name: res.name,
-            total_calorie: Math.round(res.total_calorie),
-            total_fat: Math.round(res.total_fat),
-            total_carbs: Math.round(res.total_carbs),
-            total_protein: Math.round(res.total_protein),
-            amount: Number(quantity.value),
-            unit: res.unit
-          }
+    MealsApiService.addIngredient(this.props.meal_id, results)
+      .then(() => {
+        // add calorie/fat/carb/protein counts to meal totals
+        const newMealStats = {
+          total_calorie: Number(this.state.mealInfo.total_calorie) + Number(results.ingredient.total_calorie),
+          total_fat: Number(this.state.mealInfo.total_fat) + Number(results.ingredient.total_fat),
+          total_carbs: Number(this.state.mealInfo.total_carbs) + Number(results.ingredient.total_carbs),
+          total_protein: Number(this.state.mealInfo.total_protein) + Number(results.ingredient.total_protein)
         };
-        MealsApiService.addIngredient(this.props.meal_id, results)
+        const patchedMeal = { 'meal': { ...this.state.mealInfo, ...newMealStats } };
+
+        MealsApiService.updateMeal(patchedMeal)
           .then(() => {
-            // add calorie/fat/carb/protein counts to meal totals
-            const newMealStats = {
-              total_calorie: Number(this.state.mealInfo.total_calorie) + Number(results.ingredient.total_calorie),
-              total_fat: Number(this.state.mealInfo.total_fat) + Number(results.ingredient.total_fat),
-              total_carbs: Number(this.state.mealInfo.total_carbs) + Number(results.ingredient.total_carbs),
-              total_protein: Number(this.state.mealInfo.total_protein) + Number(results.ingredient.total_protein)
-            };
-            const patchedMeal = { 'meal': { ...this.state.mealInfo, ...newMealStats } };
-            
-            MealsApiService.updateMeal(patchedMeal)
-              .then(() => {
-                this.getMealInfo();
-                this.getMealIngredients();
-              });
+            this.getMealInfo();
+            this.getMealIngredients();
+
           });
       });
-  }
 
-  generateMeasureForm = () => {
-    return (
-      <form autoComplete="off" className='measureForm' onSubmit={e => this.getNutrientInfo(e)}>
-        <p>{this.state.chosenIngredient.name}</p>
-        <label htmlFor='quantity'>How much do you want to add?</label>
-        <input type='number' name='quantity' min='0' step='.01' />
-        <select name='measurements'>
-          {this.state.chosenIngredient.measures.map((measure, index) => {
-            return <option key={index} value={`${measure.uri},${measure.label}`} name={measure.label} >{measure.label}</option>;
-          })}
-        </select>
-        <button type='submit'>Submit</button>
-      </form>
-    );
-  }
-
-  // generates the results that come from querying the third-party API for ingredients
-  generateResults = () => {
-    return this.state.results.map((item, key) => <div id='results' key={key} onClick={() => this.handleClickIngredient(item)}><span>{item.name}</span></div>);
   }
 
   renderMealStats() {
@@ -204,6 +130,11 @@ export default class Meals extends Component {
   }
 
   render() {
+    
+    if(this.context.ingredient.name){
+      this.updateMeal(this.context.ingredient)
+    }
+
     return (
       <>
         <section className='goBack'>
@@ -211,40 +142,9 @@ export default class Meals extends Component {
         </section>
         <h3 className='mealName'>{this.state.mealInfo ? this.state.mealInfo.name : ''}</h3>
 
-        <div className='mealContainer'> {/* main flex */}
-
-          {/* <div className='addIngredientContainer'>
-            <h3>Add an ingredient to your meal</h3>
-            <form
-              className='mealForm'
-              onSubmit={this.handleSubmit}
-            >
-              
-              <label htmlFor='ingredient-input'>
-                Ingredient
-              </label>
-              <input
-                ref={this.firstInput}
-                id='ingredient-input'
-                name='ingredient-input'
-                value={this.state.ingredientInput}
-                onChange={this.handleInput}
-                required
-              />
-              <Button type='submit'>
-                Search ingredients
-              </Button>
-            </form>
-
-            {this.state.chosenIngredient ? this.generateMeasureForm() : null}
-
-            <section className="results">
-              {(this.state.results.length >= 1) && <h4>Pick one from below</h4>}
-              {(this.state.results.length >= 1) && this.generateResults()}
-            </section>
-          </div> */}
+        <div className='mealContainer'> 
+          
           <AddIngredient/>
-
 
           <div className='statsContainer'>
 

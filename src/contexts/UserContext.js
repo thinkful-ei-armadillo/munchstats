@@ -6,11 +6,16 @@ import IdleService from '../services/idle-service';
 const UserContext = React.createContext({
   user: {},
   error: null,
+  loading: false,
+  ingredient: {},
+  clearIngredient: () => {},
   setError: () => {},
   clearError: () => {},
   setUser: () => {},
   processLogin: () => {},
   processLogout: () => {},
+  loadingFalse: () => {},
+  loadingTrue: () => {}
 });
 
 export default UserContext;
@@ -22,12 +27,13 @@ export class UserProvider extends Component {
       user: {}, 
       error: null, 
       meals: [], 
-      ingredientInput: '',
-      results: [],
+      ingredient: {},
       chosenIngredient: '',
       finalIngredients: [],
       mealInfo: {},
-      mealIngredients: [] };
+      mealIngredients: [], 
+      loading: false  
+    };
 
     const jwtPayload = TokenService.parseAuthToken();
 
@@ -36,7 +42,7 @@ export class UserProvider extends Component {
         id: jwtPayload.user_id,
         name: jwtPayload.name,
         username: jwtPayload.sub,
-      }
+      };
     }
     this.state = state;
     IdleService.setIdleCallback(this.logoutBecauseIdle);
@@ -48,12 +54,24 @@ export class UserProvider extends Component {
       TokenService.queueCallbackBeforeExpiry(() => {
         this.fetchRefreshToken();
       });
-    };
+    }
   }
 
   componentWillUnmount() {
     IdleService.unRegisterIdleResets();
     TokenService.clearCallbackBeforeExpiry();
+  }
+
+  setIngredientWithNutritionStats = (ingredient) => {
+    this.setState({
+      ingredient
+    })
+  }
+
+  clearIngredient = () => {
+    this.setState({
+      ingredient: {}
+    })
   }
 
   setError = error => {
@@ -98,6 +116,14 @@ export class UserProvider extends Component {
     this.setUser({});
   }
 
+  loadingFalse = () => {
+    this.setState({loading: false});
+  }
+
+  loadingTrue = () => {
+    this.setState({loading: true});
+  }
+
   logoutBecauseIdle = () => {
     TokenService.clearAuthToken();
     TokenService.clearCallbackBeforeExpiry();
@@ -114,7 +140,7 @@ export class UserProvider extends Component {
         });
       })
       .catch(err => {
-        this.setError(err)
+        this.setError(err);
       });
   }
 
@@ -123,8 +149,12 @@ export class UserProvider extends Component {
       user: this.state.user,
       error: this.state.error,
       meals: this.state.meals,
+      ingredient: this.state.ingredient,
+      loading: this.state.loading,
       setError: this.setError,
       clearError: this.clearError,
+      clearIngredient: this.clearIngredient,
+      setIngredientWithNutritionStats: this.setIngredientWithNutritionStats,
       setUser: this.setUser,
       setMeals: this.setMeals,
       processLogin: this.processLogin,
@@ -134,8 +164,11 @@ export class UserProvider extends Component {
       chosenIngredient: this.state.chosenIngredient,
       finalIngredients: this.state.finalIngredients,
       mealInfo: this.state.mealInfo,
-      mealIngredients: this.state.mealIngredients
+      mealIngredients: this.state.mealIngredients,
+      loadingFalse: this.loadingFalse,
+      loadingTrue: this.loadingTrue
     };
+
     return (
       <UserContext.Provider value={value}>
         {this.props.children}
