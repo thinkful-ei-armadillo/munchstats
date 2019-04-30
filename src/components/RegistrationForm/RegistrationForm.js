@@ -36,7 +36,6 @@ class RegistrationForm extends Component {
       })
       .catch(res => {
         this.setState({ error: res.error });
-        console.log(res);
         this.context.loadingFalse();
       })
       .then(() => {
