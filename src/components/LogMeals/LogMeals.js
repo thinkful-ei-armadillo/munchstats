@@ -122,28 +122,28 @@ export default class LogMeals extends Component {
   }
 
   getSelectedDateTime(meal){
-    let month = document.getElementById("userMon");
-    let day = document.getElementById("userDay");
-    let year = document.getElementById("userYear");
-    let hour = document.getElementById("userHour");
-    let mins = document.getElementById("userMins");
-    let ampm = document.getElementById("userAMPM");
-    let tag = document.getElementById("mealTag");
+    let month = document.getElementById('userMon');
+    let day = document.getElementById('userDay');
+    let year = document.getElementById('userYear');
+    let hour = document.getElementById('userHour');
+    let mins = document.getElementById('userMins');
+    let ampm = document.getElementById('userAMPM');
+    let tag = document.getElementById('mealTag');
     
-    if(hour.value !== "12"){
-      if(ampm.value === "AM"){
+    if(hour.value !== '12'){
+      if(ampm.value === 'AM'){
         hour = hour.value;
       }
-      if(ampm.value === "PM"){
+      if(ampm.value === 'PM'){
         hour = Number(hour.value) + 12;
       }
     }
 
-    if(hour.value === "12"){
-      if(ampm.value === "AM"){
+    if(hour.value === '12'){
+      if(ampm.value === 'AM'){
         hour = '00';
       }
-      if(ampm.value === "PM"){
+      if(ampm.value === 'PM'){
         hour = '12';
       }
     }
@@ -152,29 +152,40 @@ export default class LogMeals extends Component {
     this.handleAddLog(meal, date, tag.value);
   }
 
-  handleAddLog(meal, date, tag){
-    let mealLog = {
-      name: meal.name,
-      date: date,
-      calories: meal.total_calorie,
-      protein: meal.total_protein,
-      fat: meal.total_fat,
-      carbs: meal.total_carbs,
-      tag: tag
-    }
-    
-    fetch(`${config.API_ENDPOINT}/events`, {
+  handleAddLog(meal, date, tag){  
+    console.log('meal', meal)
+    console.log(
+      JSON.stringify({
+        name: meal.name,
+        date,
+        calories: meal.total_calorie,
+        protein: meal.total_protein,
+        fat: meal.total_fat,
+        carbs: meal.total_carbs,
+        tag
+      })
+    );  
+    return fetch(`${config.API_ENDPOINT}/events`, {
       method: 'POST',
       headers: {
+        'content-type': 'application/json',
         'authorization': `bearer ${TokenService.getAuthToken()}`
       },
-      body: JSON.stringify(mealLog)
+      body: JSON.stringify({
+        name: meal.name,
+        date,
+        calories: meal.total_calorie,
+        protein: meal.total_protein,
+        fat: meal.total_fat,
+        carbs: meal.total_carbs,
+        tag
+      })
     })
       .then(res =>
         (!res.ok)
           ? res.json().then(e => Promise.reject(e))
           : res.json()
-        );
+      );
   }
 
   render() {
