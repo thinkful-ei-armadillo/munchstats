@@ -6,14 +6,15 @@ import IdleService from '../services/idle-service';
 const UserContext = React.createContext({
   user: {},
   error: null,
+  meals: [],
   loading: false,
   setError: () => {},
   clearError: () => {},
   setUser: () => {},
   processLogin: () => {},
   processLogout: () => {},
-  loadingFalse: () => {},
-  loadingTrue: () => {}
+  setLoadingTrue: () => {},
+  setLoadingFalse: () => {},
 });
 
 export default UserContext;
@@ -21,7 +22,7 @@ export default UserContext;
 export class UserProvider extends Component {
   constructor(props) {
     super(props);
-    const state = { user: {}, error: null, meals: [] , loading: false};
+    const state = { user: {}, error: null, meals: [], loading: false };
     const jwtPayload = TokenService.parseAuthToken();
 
     if (jwtPayload){

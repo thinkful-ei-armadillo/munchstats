@@ -19,7 +19,7 @@ export default class Meals extends Component {
     this.context.loadingTrue();
     MealsApiService.getMeals()
       .then(res => {
-        this.context.setMeals(res); 
+        this.context.setMeals(res);
         this.context.loadingFalse();
       })
       .catch(e => {
