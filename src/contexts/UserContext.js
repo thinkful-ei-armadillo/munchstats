@@ -6,11 +6,14 @@ import IdleService from '../services/idle-service';
 const UserContext = React.createContext({
   user: {},
   error: null,
+  loading: false,
   setError: () => {},
   clearError: () => {},
   setUser: () => {},
   processLogin: () => {},
   processLogout: () => {},
+  loadingFalse: () => {},
+  loadingTrue: () => {}
 });
 
 export default UserContext;
@@ -18,7 +21,7 @@ export default UserContext;
 export class UserProvider extends Component {
   constructor(props) {
     super(props);
-    const state = { user: {}, error: null, meals: [] };
+    const state = { user: {}, error: null, meals: [] , loading: false};
     const jwtPayload = TokenService.parseAuthToken();
 
     if (jwtPayload){
@@ -26,7 +29,7 @@ export class UserProvider extends Component {
         id: jwtPayload.user_id,
         name: jwtPayload.name,
         username: jwtPayload.sub,
-      }
+      };
     }
     this.state = state;
     IdleService.setIdleCallback(this.logoutBecauseIdle);
@@ -38,7 +41,7 @@ export class UserProvider extends Component {
       TokenService.queueCallbackBeforeExpiry(() => {
         this.fetchRefreshToken();
       });
-    };
+    }
   }
 
   componentWillUnmount() {
@@ -88,6 +91,14 @@ export class UserProvider extends Component {
     this.setUser({});
   }
 
+  loadingFalse = () => {
+    this.setState({loading: false});
+  }
+
+  loadingTrue = () => {
+    this.setState({loading: true});
+  }
+
   logoutBecauseIdle = () => {
     TokenService.clearAuthToken();
     TokenService.clearCallbackBeforeExpiry();
@@ -104,7 +115,7 @@ export class UserProvider extends Component {
         });
       })
       .catch(err => {
-        this.setError(err)
+        this.setError(err);
       });
   }
 
@@ -113,12 +124,15 @@ export class UserProvider extends Component {
       user: this.state.user,
       error: this.state.error,
       meals: this.state.meals,
+      loading: this.state.loading,
       setError: this.setError,
       clearError: this.clearError,
       setUser: this.setUser,
       setMeals: this.setMeals,
       processLogin: this.processLogin,
-      processLogout: this.processLogout
+      processLogout: this.processLogout,
+      loadingFalse: this.loadingFalse,
+      loadingTrue: this.loadingTrue
     };
     return (
       <UserContext.Provider value={value}>
