@@ -4,6 +4,7 @@ import { Input, Label } from '../Form/Form';
 import AuthApiService from '../../services/auth-api-service';
 import UserContext from '../../contexts/UserContext';
 import Button from '../Button/Button';
+import Loading from '../Loading/Loading';
 import './LoginForm.css';
 
 class LoginForm extends Component {
@@ -19,6 +20,7 @@ class LoginForm extends Component {
 
   handleSubmit = ev => {
     ev.preventDefault();
+    this.context.loadingTrue();
     const { username, password } = ev.target;
 
     this.setState({ error: null });
@@ -32,60 +34,67 @@ class LoginForm extends Component {
         password.value = '';
         this.context.processLogin(res.authToken);
         this.props.onLoginSuccess();
+        this.context.loadingFalse();
       })
       .catch(res => {
         this.setState({ error: res.error });
+        this.context.loadingFalse();
       });
   };
 
   componentDidMount() {
     this.firstInput.current.focus();
-  };
+  }
 
   render() {
-    const { error } = this.state;
-    return (
-      <form
-        className='LoginForm'
-        onSubmit={this.handleSubmit}>
-        <div role='alert'>
-          {error && <p>{error}</p>}
-        </div>
-        <div>
-          <Label htmlFor='login-username-input'>
+
+    if(this.context.loading){
+      return <div className="center"><Loading /></div>;
+    } else {
+
+      const { error } = this.state;
+      return (
+        <form
+          className='LoginForm'
+          onSubmit={this.handleSubmit}>
+          <div role='alert'>
+            {error && <p>{error}</p>}
+          </div>
+          <div>
+            <Label htmlFor='login-username-input'>
             Username
-          </Label>
+            </Label>
+            <br />
+            <Input
+              ref={this.firstInput}
+              id='login-username-input'
+              name='username'
+              required
+            />
+          </div>
           <br />
-          <Input
-            ref={this.firstInput}
-            id='login-username-input'
-            name='username'
-            required
-          />
-        </div>
-        <br />
-        <div>
-          <Label htmlFor='login-password-input'>
+          <div>
+            <Label htmlFor='login-password-input'>
             Password
-          </Label>
+            </Label>
+            <br />
+            <Input
+              id='login-password-input'
+              name='password'
+              type='password'
+              required
+            />
+          </div>
           <br />
-          <Input
-            id='login-password-input'
-            name='password'
-            type='password'
-            required
-          />
-        </div>
-        <br />
-        <Button type='submit'>
+          <Button type='submit'>
           Log In
-        </Button>
-        <footer>
-          <p>Don't have an account? <Link to='/register' style={{textDecoration: 'none'}}>Sign Up!</Link></p>
-        </footer>
-      </form>
-    );
-  };
-};
+          </Button>
+          <footer>
+            <p>Don't have an account? <Link to='/register' style={{textDecoration: 'none'}}>Sign Up!</Link></p>
+          </footer>
+        </form>
+      );
+    }}
+}
 
 export default LoginForm;

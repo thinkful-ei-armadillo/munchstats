@@ -4,6 +4,7 @@ import UserContext from '../../contexts/UserContext';
 import MealsApiService from '../../services/meals-api-service';
 import { Link } from 'react-router-dom';
 import './Meals.css';
+import Loading from '../Loading/Loading';
 
 export default class Meals extends Component {
   static contextType = UserContext;
@@ -15,9 +16,16 @@ export default class Meals extends Component {
 
   componentDidMount() {
     this.context.clearError();
+    this.context.loadingTrue();
     MealsApiService.getMeals()
-      .then(res => this.context.setMeals(res))
-      .catch(e => this.context.setError(e));
+      .then(res => {
+        this.context.setMeals(res); 
+        this.context.loadingFalse();
+      })
+      .catch(e => {
+        this.context.setError(e);
+        this.context.loadingFalse();
+      });
   }
 
   handleInput = (e) => {
@@ -28,6 +36,7 @@ export default class Meals extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    this.context.loadingTrue();
     const name  = e.target.mealInput.value;
     const user_id = this.context.user.id;
 
@@ -39,9 +48,11 @@ export default class Meals extends Component {
     })
       .then(res => {
         this.handleCreationSuccess(res[0].id);
+        this.context.loadingFalse();
       })
       .catch(res => {
         this.setState({ error: res.error });
+        this.context.loadingFalse();
       });
   }
 
@@ -51,11 +62,18 @@ export default class Meals extends Component {
   }
 
   handleClickDelete = (meal) => {
+    this.context.loadingTrue();
     MealsApiService.deleteMeal(meal)
       .then(() => {
         MealsApiService.getMeals()
-          .then(res => this.context.setMeals(res))
-          .catch(e => this.context.setError(e));
+          .then(res => {
+            this.context.setMeals(res);
+            this.context.loadingFalse();
+          })
+          .catch(e => {
+            this.context.setError(e);
+            this.context.loadingFalse(); 
+          });
       });
   }
 
@@ -82,36 +100,39 @@ export default class Meals extends Component {
   }
   
   render() {
-    return (
-      <div>
-        <form
-          className='mealCreationForm'
-          onSubmit={this.handleSubmit}>
-          {/* <div role='alert'>
+    if(this.context.loading){
+      return <div className="center"><Loading/></div>;
+    } else {
+      return (
+        <div>
+          <form
+            className='mealCreationForm'
+            onSubmit={this.handleSubmit}>
+            {/* <div role='alert'>
             {error && <p>{error}</p>}
           </div> */}
-          <label htmlFor='mealInput'>
+            <label htmlFor='mealInput'>
             New Meal Name
-          </label>
-          <br />
-          <input
-            ref={this.firstInput}
-            id='mealInput'
-            name='mealInput'
-            value={this.state.mealInput}
-            onChange={this.handleInput}
-            autoComplete="off"
-            maxLength="60"
-            required />
-          <br />
-          <Button type='submit'>
+            </label>
+            <br />
+            <input
+              ref={this.firstInput}
+              id='mealInput'
+              name='mealInput'
+              value={this.state.mealInput}
+              onChange={this.handleInput}
+              autoComplete="off"
+              maxLength="60"
+              required />
+            <br />
+            <Button type='submit'>
             Add Meal
-          </Button>
-        </form>
-        <section className="mealsContainer">
-          {this.context.meals.meal ? this.genUserMeals(this.context.meals.meal) : null}
-        </section>
-      </div>
-    );
+            </Button>
+          </form>
+          <section className="mealsContainer">
+            {this.context.meals.meal ? this.genUserMeals(this.context.meals.meal) : null}
+          </section>
+        </div>
+      );}
   }
 }
