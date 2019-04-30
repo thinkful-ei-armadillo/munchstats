@@ -6,6 +6,7 @@ import IdleService from '../services/idle-service';
 const UserContext = React.createContext({
   user: {},
   error: null,
+  meals: [],
   loading: false,
   ingredient: {},
   clearIngredient: () => {},
@@ -14,8 +15,8 @@ const UserContext = React.createContext({
   setUser: () => {},
   processLogin: () => {},
   processLogout: () => {},
+  loadingTrue: () => {},
   loadingFalse: () => {},
-  loadingTrue: () => {}
 });
 
 export default UserContext;
