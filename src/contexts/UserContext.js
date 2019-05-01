@@ -9,6 +9,7 @@ const UserContext = React.createContext({
   meals: [],
   loading: false,
   ingredient: {},
+  todayEvents: [],
   clearIngredient: () => {},
   setError: () => {},
   clearError: () => {},
@@ -17,6 +18,7 @@ const UserContext = React.createContext({
   processLogout: () => {},
   loadingTrue: () => {},
   loadingFalse: () => {},
+  setTodayEvents: () => {}
 });
 
 export default UserContext;
@@ -33,6 +35,7 @@ export class UserProvider extends Component {
       finalIngredients: [],
       mealInfo: {},
       mealIngredients: [], 
+      todayEvents: [],
       loading: false  
     };
 
@@ -66,13 +69,13 @@ export class UserProvider extends Component {
   setIngredientWithNutritionStats = (ingredient) => {
     this.setState({
       ingredient
-    })
+    });
   }
 
   clearIngredient = () => {
     this.setState({
       ingredient: {}
-    })
+    });
   }
 
   setError = error => {
@@ -124,6 +127,11 @@ export class UserProvider extends Component {
   loadingTrue = () => {
     this.setState({loading: true});
   }
+  
+  setTodayEvents = (todayEvents) => {
+    this.setState({todayEvents});
+  }
+
 
   logoutBecauseIdle = () => {
     TokenService.clearAuthToken();
@@ -167,7 +175,9 @@ export class UserProvider extends Component {
       mealInfo: this.state.mealInfo,
       mealIngredients: this.state.mealIngredients,
       loadingFalse: this.loadingFalse,
-      loadingTrue: this.loadingTrue
+      loadingTrue: this.loadingTrue,
+      todayEvents: this.state.todayEvents,
+      setTodayEvents: this.setTodayEvents
     };
 
     return (
