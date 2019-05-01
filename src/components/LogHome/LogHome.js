@@ -1,51 +1,44 @@
 import React, { Component } from 'react';
-import './App.css';
-import config from '../../config';
+import moment from 'moment';
+import { Link } from 'react-router-dom';
+import UserContext from '../../contexts/UserContext';
+import EventsApiService from '../../services/events-api-service';
 
 export default class LogHome extends Component {
-
-
-
-  getMealsByDate(start, end){
-
-    fetch(`${config.API_ENDPOINT}/events/date`, {
-      method: 'POST',
-      body: JSON.stringify({
-        'start': start,
-        'end': end
-      }),
-      headers: {
-        'content-Type': 'application/json',
-      }
-    })
-      .then(res => res.json())
-      .then(results => {
-        const sortedEvents = this.sortEvents(results);
-        // either set state or context here
-        this.setState({ userEvents: sortedEvents });
-      })
-      .catch(err => console.log(err));
+  state = {
+    todayLog: []
   }
-  
-  sortEvents = events => {
-    return events.sort(function(a,b){
-      if (a.date < b.date) {
-        return 1;
-      }
-      if (a.date > b.date) {
-        return -1;
-      }
-      return 0;
+
+  static contextType = UserContext;
+
+  componentDidMount(){
+    EventsApiService.getTodaysEvents()
+      .then(sortedEvents => this.context.setTodayEvents(sortedEvents));
+  }
+
+  generateReport = () => {
+    return this.context.todayEvents.map((event, key) => { 
+      let date = moment(event.date).format('h:mm a');
+      return(
+        <div key={key}>
+          <h3>{event.name}</h3><p>calories: {event.calories}</p><p>carbs: {event.carbs}</p> <p>fat: {event.fat}</p><p>protein: {event.protein}</p> <p>{date}</p><p>{event.tag}</p>
+        </div>
+      );
     });
   }
 
-  // NOTE: START AND END FORMAT SHOULD BE: 2011-12-25 19:00:00 AS STRINGS
-
   render() {
     return (
-      <div>
-        
-      </div>
+      <section className="dashboard">
+        <Link to='/logmeal' className="button">
+          Log a meal that you've created
+        </Link>
+        <Link to='/logsnack' className="button">
+          Log a single item snack
+        </Link>
+        <h2>Today's activity:</h2>
+        {this.generateReport()}
+      </section>
     );
   }
 }
