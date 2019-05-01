@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Button from '../Button/Button';
 import config from '../../config';
 import MealsApiService from '../../services/meals-api-service';
+import IngredientsApiService from '../../services/ingredients-api-service';
+import ProxyApiService from '../../services/proxy-api-service';
 import UserContext from '../../contexts/UserContext';
 
 export default class AddIngredient extends Component {
@@ -38,7 +40,7 @@ export default class AddIngredient extends Component {
       label,
       quantity: Number(quantity.value)
     };
-    MealsApiService.getStatsforServing(body)
+    ProxyApiService.getStatsforServing(body)
       .then(res => {
         //send ingredient to items table in database
         this.setState({
@@ -82,7 +84,7 @@ export default class AddIngredient extends Component {
     e.preventDefault();
     this.setState({ results: [], chosenIngredient: '' });
     let encodedInput = encodeURI(this.state.ingredientInput);
-    MealsApiService.getIngredientsFromSearch(encodedInput)
+    IngredientsApiService.getIngredientsFromSearch(encodedInput)
       .then(results => {
         this.setState({ results });
       })
