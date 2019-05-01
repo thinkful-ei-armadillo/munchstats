@@ -149,43 +149,8 @@ export default class LogMeals extends Component {
     }
 
     let date = `${year.value}-${month.value}-${day.value} ${hour}:${mins.value}:00`;
-    this.handleAddLog(meal, date, tag.value);
-  }
-
-  handleAddLog(meal, date, tag){  
-    console.log('meal', meal)
-    console.log(
-      JSON.stringify({
-        name: meal.name,
-        date,
-        calories: meal.total_calorie,
-        protein: meal.total_protein,
-        fat: meal.total_fat,
-        carbs: meal.total_carbs,
-        tag
-      })
-    );  
-    return fetch(`${config.API_ENDPOINT}/events`, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        'authorization': `bearer ${TokenService.getAuthToken()}`
-      },
-      body: JSON.stringify({
-        name: meal.name,
-        date,
-        calories: meal.total_calorie,
-        protein: meal.total_protein,
-        fat: meal.total_fat,
-        carbs: meal.total_carbs,
-        tag
-      })
-    })
-      .then(res =>
-        (!res.ok)
-          ? res.json().then(e => Promise.reject(e))
-          : res.json()
-      );
+    
+    MealsApiService.logFood(meal, date, tag.value);
   }
 
   render() {
