@@ -58,6 +58,7 @@ export default class AddIngredient extends Component {
             unit: res.unit
           }
         this.context.setIngredientWithNutritionStats(ingredient)
+        this.props.handleModal();
       });
   }
 
@@ -108,7 +109,11 @@ export default class AddIngredient extends Component {
   }
 
   generateResults = () => {
-    return this.state.results.map((item, key) => <div id='results' key={key} onClick={() => this.handleClickIngredient(item)}><span>{item.name}</span></div>);
+    return this.state.results.map((item, key) => {
+      return <div id='results' key={key} onClick={() => this.handleClickIngredient(item)}>
+        <span>{item.name}</span>
+      </div>
+    })
   }
 
   handleClickIngredient = (item) => {
@@ -119,38 +124,45 @@ export default class AddIngredient extends Component {
   }
 
   render() {
-    return (
-      <>
-        <form
-          className='mealForm'
-          onSubmit={this.handleSubmit}
-        >
-          {/* <div role='alert'>
-              {error && <p>{error}</p>}
-            </div> */}
-          <label htmlFor='ingredient-input'>
-            Ingredient
-          </label>
-          <input
-            ref={this.firstInput}
-            id='ingredient-input'
-            name='ingredient-input'
-            value={this.state.ingredientInput}
-            onChange={this.handleInput}
-            required
-          />
-          <Button type='submit'>
-            Search ingredients
-          </Button>
-        </form>
+    if (!this.state.chosenIngredient) {
+      return (
+        <>
+          <form
+            className='mealForm'
+            onSubmit={this.handleSubmit}
+          >
+            {/* <div role='alert'>
+                {error && <p>{error}</p>}
+              </div> */}
+            <label htmlFor='ingredient-input'>
+              Ingredient
+            </label>
+            <input
+              ref={this.firstInput}
+              id='ingredient-input'
+              name='ingredient-input'
+              value={this.state.ingredientInput}
+              onChange={this.handleInput}
+              required
+            />
+            <Button type='submit'>
+              Search ingredients
+            </Button>
+          </form>
 
-        {this.state.chosenIngredient ? this.generateMeasureForm() : null}
+          
 
-        <section className="results">
-          {(this.state.results.length >= 1) && <h4>Pick one from below</h4>}
-          {(this.state.results.length >= 1) && this.generateResults()}
-        </section>
-      </>
-    );
+          <section className="results">
+            {(this.state.results.length >= 1) && <h4>Pick one from below</h4>}
+            {(this.state.results.length >= 1) && this.generateResults()}
+          </section>
+        </>  
+      );
+    }
+    else {
+      return (
+        this.generateMeasureForm()
+      )
+    }
   }
 }

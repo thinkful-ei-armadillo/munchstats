@@ -1,13 +1,18 @@
 header{
   padding: 10px;
   text-align: center;
-  background: #B2FFA8;
+  background: #0E4749;
+  color:#EFE7DA;
   font-size: 20px;
   box-shadow:1px 0 6px grey;
   height:90px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+header a:visited {
+  color:#EFE7DA;
 }
 
 header h1{
