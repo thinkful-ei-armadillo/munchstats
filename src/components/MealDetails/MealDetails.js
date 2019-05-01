@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './MealDetails.css';
 import MealsApiService from '../../services/meals-api-service';
+import IngredientsApiService from '../../services/ingredients-api-service';
 import AddIngredient from '../AddIngredient/AddIngredient';
 import UserContext from '../../contexts/UserContext';
 
@@ -37,7 +38,7 @@ export default class Meals extends Component {
   }
 
   getMealIngredients() {
-      return MealsApiService.getIngredientsForMeal(this.props.meal_id)
+      return IngredientsApiService.getIngredientsForMeal(this.props.meal_id)
       .then(res => this.setState({ mealIngredients: res.ingredients }))
       .catch(err => console.log(err));
   }
@@ -58,7 +59,7 @@ export default class Meals extends Component {
     };
     this.context.clearIngredient();
 
-    MealsApiService.addIngredient(this.props.meal_id, results)
+    IngredientsApiService.addIngredient(this.props.meal_id, results)
       .then(() => {
         // add calorie/fat/carb/protein counts to meal totals
         const newMealStats = {
@@ -102,7 +103,7 @@ export default class Meals extends Component {
   }
 
   handleClickDelete = (ingredient) => {
-    MealsApiService.deleteIngredient(ingredient.id)
+    IngredientsApiService.deleteIngredient(ingredient.id)
       .then(() => {
         // subtract calorie/fat/carb/protein counts to meal totals
         const newMealStats = {
