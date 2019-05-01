@@ -143,8 +143,10 @@ export default class Meals extends Component {
         <h3 className='mealName'>{this.state.mealInfo ? this.state.mealInfo.name : ''}</h3>
 
         <div className='mealContainer'> 
-          
-          <AddIngredient/>
+          <div className='addIngredientContainer'>
+            <h3>Add an ingredient to your meal</h3>
+            <AddIngredient/>
+          </div>
 
           <div className='statsContainer'>
 
