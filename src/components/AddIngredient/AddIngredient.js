@@ -118,8 +118,7 @@ export default class AddIngredient extends Component {
 
   render() {
     return (
-      <div className='addIngredientContainer'>
-        <h3>Add an ingredient to your meal</h3>
+      <>
         <form
           className='mealForm'
           onSubmit={this.handleSubmit}
@@ -149,7 +148,7 @@ export default class AddIngredient extends Component {
           {(this.state.results.length >= 1) && <h4>Pick one from below</h4>}
           {(this.state.results.length >= 1) && this.generateResults()}
         </section>
-      </div>
+      </>
     );
   }
 }
