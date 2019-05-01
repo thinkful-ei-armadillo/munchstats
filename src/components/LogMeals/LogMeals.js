@@ -46,7 +46,6 @@ export default class LogMeals extends Component {
 
   getDatetimeInput(meal){
     let tag = document.getElementById('mealTag');
-<<<<<<< HEAD
     let datetime = document.getElementsByClassName('form-control')[0].value;
     let date = moment(datetime).format('YYYY-MM-DD HH:mm:ss');
     this.handleAddLog(meal, date, tag.value);
@@ -85,30 +84,6 @@ export default class LogMeals extends Component {
           ? res.json().then(e => Promise.reject(e))
           : res.json()
       );
-=======
-    
-    if(hour.value !== '12'){
-      if(ampm.value === 'AM'){
-        hour = hour.value;
-      }
-      if(ampm.value === 'PM'){
-        hour = Number(hour.value) + 12;
-      }
-    }
-
-    if(hour.value === '12'){
-      if(ampm.value === 'AM'){
-        hour = '00';
-      }
-      if(ampm.value === 'PM'){
-        hour = '12';
-      }
-    }
-
-    let date = `${year.value}-${month.value}-${day.value} ${hour}:${mins.value}:00`;
-    
-    MealsApiService.logFood(meal, date, tag.value);
->>>>>>> c5388a04009ff21dd1d4846c58c83e1cc96c1877
   }
 
   render() {
