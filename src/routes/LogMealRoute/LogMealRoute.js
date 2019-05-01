@@ -5,7 +5,7 @@ class LogMealRoute extends Component {
   render() {
     return (
       <section>
-        <LogMeals />
+        <LogMeals history = {this.props.history}/>
       </section>
     );
   }
