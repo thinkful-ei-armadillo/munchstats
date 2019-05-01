@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import UserContext from '../../contexts/UserContext';
-import TokenService from '../../services/token-service';
 import EventsApiService from '../../services/events-api-service';
-import config from '../../config';
 
 export default class LogHome extends Component {
   state = {
