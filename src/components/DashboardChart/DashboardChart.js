@@ -1,41 +1,47 @@
 import React, { Component } from 'react';
 // import './App.css';
-import config from '../../config';
 import Chart from 'chart.js';
+import EventsApiService from '../../services/events-api-service'
+import UserContext from '../../contexts/UserContext'
 
 export default class DashboardChart extends Component {
+    state = {
+        ChartRef: this.chartRef.current.getContext("2d")
+    }
 
-//   getMealsByDate(start, end){
+static contextType = UserContext;
 
-//     fetch(`${config.API_ENDPOINT}/events/date`, {
-//       method: 'POST',
-//       body: JSON.stringify({
-//         'start': start,
-//         'end': end
-//       }),
-//       headers: {
-//         'content-Type': 'application/json',
-//       }
-//     })
-//       .then(res => res.json())
-//       .then(results => {
-//         const sortedEvents = this.sortEvents(results);
-//         // either set state or context here
-//         this.setState({ userEvents: sortedEvents });
-//       })
-//       .catch(err => console.log(err));
-//   }
 chartRef = React.createRef();
-componentDidMount() {
-    const myChartRef = this.chartRef.current.getContext("2d");
 
-    new Chart(myChartRef, {
+componentDidMount() {
+    this.context.clearError();
+    EventsApiService.getTodaysEvents()
+    .then(resj => console.log(resj))
+      .then(res => this.context.setTodayEvents(res))
+      .catch(e => this.context.setError(e));
+
+      this.buildChart(this.context.todayEvents);
+      console.log(this.context.todayEvents);
+}
+
+buildChart = (array) => {
+    console.log(array);
+    const chartData = [0, 0, 0, 0];
+    for(let i = 0; i < array.length; i++) {
+        chartData[0] += array[i].calories;
+        chartData[1] += array[i].carbs;
+        chartData[2] += array[i].protein;
+        chartData[3] += array[i].fat;
+    }
+    console.log(chartData);
+
+    new Chart(this.state.ChartRef, {
         type: 'bar',
         data: {
             labels: ['Calories', 'Carbs', 'Fat', 'Protein'],
             datasets: [{
                 label: "Today's Nutrition",
-                data: [1000, 100, 12, 30],
+                data: chartData,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -61,9 +67,15 @@ componentDidMount() {
             }
         }
     });
+
     }
 
   render() {
+
+    //   let x;
+    //   if(!x) {
+    //       x = new Chart
+    //   }
     return (
     <div className="dashboardChart">
         <canvas id="myChart" ref={this.chartRef} />
