@@ -13,7 +13,7 @@ class DashboardRoute extends Component {
         <Link to='/log' className="button">
             Log a Meal or Snack
         </Link>
-        <Link to='/reports' className="button">
+        <Link to='/charts' className="button">
             View Your Past Reports
         </Link>
       </section>
