@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import config from '../../config'
 import AddIngredient from '../AddIngredient/AddIngredient';
 import UserContext from '../../contexts/UserContext';
 import MealsApiService from '../../services/meals-api-service';

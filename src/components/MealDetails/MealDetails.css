@@ -165,6 +165,10 @@
   padding-top:18px; 
 }
 
+.ReactModal__Content, .ReactModal__Content--after-open, .modal{
+  outline: none;
+}
+
 @media only screen and (max-width:500px){
   .goBack span {
     top: 135px;
