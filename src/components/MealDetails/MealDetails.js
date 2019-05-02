@@ -22,6 +22,7 @@ export default class Meals extends Component {
   componentDidMount() {
     this.getMealInfo();
     this.getMealIngredients();
+    ReactModal.setAppElement('body');
   }
 
   getMealInfo() {
@@ -132,10 +133,12 @@ export default class Meals extends Component {
     this.setState({
       showModal: !this.state.showModal
     })
-    console.log(this.state.showModal)
   }
 
   
+  componentWillUnmount() {
+    this.context.clearIngredient();
+  }
 
   render() {
     

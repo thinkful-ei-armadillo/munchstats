@@ -40,6 +40,10 @@ export default class LogSnack extends Component {
     MealsApiService.logFood(meal, date, 'snack');
   }
 
+  componentWillUnmount() {
+    this.context.clearIngredient();
+  }
+
   render() {
 
     if (this.context.ingredient.name) {

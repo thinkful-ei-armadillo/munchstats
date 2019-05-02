@@ -3,6 +3,7 @@ import Button from '../Button/Button';
 import MealsApiService from '../../services/meals-api-service';
 import ProxyApiService from '../../services/proxy-api-service';
 import UserContext from '../../contexts/UserContext';
+import PropTypes from 'prop-types'
 
 export default class AddIngredient extends Component {
 
@@ -13,6 +14,8 @@ export default class AddIngredient extends Component {
     mealInfo: {},
     mealIngredients: []
   };
+
+
 
   static contextType = UserContext;
 
@@ -56,7 +59,7 @@ export default class AddIngredient extends Component {
           unit: res.unit
         };
         this.context.setIngredientWithNutritionStats(ingredient);
-        this.props.handleModal();
+        (this.props.handleModal());
       });
   }
 
@@ -164,3 +167,7 @@ export default class AddIngredient extends Component {
     }
   }
 }
+
+AddIngredient.defaultProps = {
+  handleModal: () => null
+} 
