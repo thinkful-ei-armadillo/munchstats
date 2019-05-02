@@ -6,7 +6,6 @@ import UserContext from '../../contexts/UserContext';
 import MealsApiService from '../../services/meals-api-service';
 import TokenService from '../../services/token-service';
 import './logMeals.css';
-
 const moment = require('moment');
 
 export default class LogMeals extends Component {
@@ -19,7 +18,10 @@ export default class LogMeals extends Component {
   componentDidMount(){
     this.context.clearError();
     MealsApiService.getMeals()
-      .then(res => this.context.setMeals(res))
+      .then(res => {
+        this.context.setMeals(res);
+        this.setMeal();
+      })
       .catch(e => this.context.setError(e));
   }
 

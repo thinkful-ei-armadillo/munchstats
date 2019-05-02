@@ -5,7 +5,7 @@ class LogSnackRoute extends Component {
   render() {
     return (
       <section>
-        <LogSnack />
+        <LogSnack history = {this.props.history}/>
       </section>
     );
   }
