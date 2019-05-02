@@ -85,7 +85,7 @@ export default class Meals extends Component {
 
   renderMealStats() {
     return <>
-      <h3 className = 'panelHeader'>Meal Nutrition Information</h3>
+      <h3 className = 'panelHeader backgroundColor2 textColor2'>Meal Nutrition Information</h3>
       <div className='nutritionInfo' >
         <p>calories: {Math.round(this.state.mealInfo.total_calorie)}</p>
         <p> fat: {Math.round(this.state.mealInfo.total_fat)} </p>
@@ -96,7 +96,7 @@ export default class Meals extends Component {
   }
 
   generateFinalIngredients = () => {
-    return this.state.mealIngredients.map((item, key) => <div className = 'ingredient' key={key}>
+    return this.state.mealIngredients.map((item, key) => <div className = 'ingredient gradientUnderline1' key={key}>
       <span>
         {item.name} | {item.amount} {item.unit}
       </span>
@@ -159,8 +159,8 @@ export default class Meals extends Component {
           </div> */}
           
           <section className='finalIngredientsContainer'>
-            <div className = 'panel'>
-              <div className = 'panelHeader'>
+            <div className = 'panel backgroundColor5'>
+              <div className = 'panelHeader backgroundColor2 textColor2'>
                 <h3>Meal Ingredients</h3>
                 <p className = 'modalOpener' onClick={this.handleModal}>click here to add ingredient</p>
               </div>
@@ -172,8 +172,8 @@ export default class Meals extends Component {
                   contentLabel="Minimal Modal Example"
                   className='modal'
                 > 
-                  <div className = 'modalAddIngredient panel'>
-                    <h3 className = 'panelHeader'>Search For an Ingredient</h3>
+                  <div className = 'modalAddIngredient panel backgroundColor5'>
+                    <h3 className = 'panelHeader backgroundColor2 textColor2'>Search For an Ingredient</h3>
                     <AddIngredient handleModal={this.handleModal} />
                   </div>
                   <i onClick={this.handleModal} className="fas fa-times modalCloser"></i>
@@ -183,7 +183,7 @@ export default class Meals extends Component {
           </section>
 
           <section className='currentMealStats'>
-            <div className = 'panel'>
+            <div className = 'panel backgroundColor5'>
               {this.renderMealStats()}
             </div>
           </section>
