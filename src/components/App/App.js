@@ -15,6 +15,7 @@ import MealDetailsRoute from '../../routes/MealDetailsRoute/MealDetailsRoute';
 import MealsRoute from '../../routes/MealsRoute/MealsRoute';
 import './App.css';
 import Loading from '../Loading/Loading';
+import DashboardChart from '../DashboardChart/DashboardChart';
 
 if (false) {
   require('./Dark.css');
@@ -69,8 +70,8 @@ export default class App extends Component {
               component={LogSnackRoute}
             />
             <PrivateRoute
-              path={'/logexercise'}
-              component={LogExerciseRoute}
+              path={'/charts'}
+              component={DashboardChart}
             />
             <PublicOnlyRoute
               path={'/register'}

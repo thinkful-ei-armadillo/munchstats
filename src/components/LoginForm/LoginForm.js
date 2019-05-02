@@ -39,7 +39,6 @@ class LoginForm extends Component {
         this.props.onLoginSuccess();
         this.context.loadingFalse();
         EventsApiService.getTodaysEvents()
-          .then(resj => console.log(resj))
           .then(res => this.context.setTodayEvents(res))
           .catch(e => this.context.setError(e));
       })
