@@ -16,13 +16,19 @@ export default class LogHome extends Component {
       .then(sortedEvents => this.context.setTodayEvents(sortedEvents));
   }
 
+  clickDelete(event) {
+    EventsApiService.deleteEvent(event)
+      .then(() => EventsApiService.getTodaysEvents())
+      .then(sortedEvents => this.context.setTodayEvents(sortedEvents));
+  }
+
   generateReport = () => {
     return this.context.todayEvents.map((event, key) => { 
       const slicedDate = event.date.toString().slice(0,event.date.length-1);
       let date = moment(slicedDate).format('h:mm a');
       return(
         <div key={key}>
-          <h3>{event.name}</h3><p>calories: {event.calories}</p><p>carbs: {event.carbs}</p> <p>fat: {event.fat}</p><p>protein: {event.protein}</p> <p>{date}</p><p>{event.tag}</p>
+          <h3>{event.name}</h3><p>calories: {event.calories}</p><p>carbs: {event.carbs}</p> <p>fat: {event.fat}</p><p>protein: {event.protein}</p> <p>{date}</p><p>{event.tag}<span onClick={() => this.clickDelete(event)}><i className="fas fa-trash"></i></span></p>
         </div>
       );
     });
