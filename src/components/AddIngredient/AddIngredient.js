@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Button from '../Button/Button';
-import config from '../../config';
 import MealsApiService from '../../services/meals-api-service';
-import IngredientsApiService from '../../services/ingredients-api-service';
 import ProxyApiService from '../../services/proxy-api-service';
 import UserContext from '../../contexts/UserContext';
 
@@ -33,7 +31,7 @@ export default class AddIngredient extends Component {
         'foodId': this.state.chosenIngredient.id
       }
     ];
-
+  
     const body = {
       ingredients,
       name: this.state.chosenIngredient.name,
@@ -49,15 +47,15 @@ export default class AddIngredient extends Component {
         });
 
         let ingredient = {
-            name: res.name,
-            total_calorie: Math.round(res.total_calorie),
-            total_fat: Math.round(res.total_fat),
-            total_carbs: Math.round(res.total_carbs),
-            total_protein: Math.round(res.total_protein),
-            amount: Number(quantity.value),
-            unit: res.unit
-          }
-        this.context.setIngredientWithNutritionStats(ingredient)
+          name: res.name,
+          total_calorie: Math.round(res.total_calorie),
+          total_fat: Math.round(res.total_fat),
+          total_carbs: Math.round(res.total_carbs),
+          total_protein: Math.round(res.total_protein),
+          amount: Number(quantity.value),
+          unit: res.unit
+        };
+        this.context.setIngredientWithNutritionStats(ingredient);
         this.props.handleModal();
       });
   }
@@ -85,7 +83,7 @@ export default class AddIngredient extends Component {
     e.preventDefault();
     this.setState({ results: [], chosenIngredient: '' });
     let encodedInput = encodeURI(this.state.ingredientInput);
-    IngredientsApiService.getIngredientsFromSearch(encodedInput)
+    ProxyApiService.getIngredientsFromSearch(encodedInput)
       .then(results => {
         this.setState({ results });
       })
@@ -112,8 +110,8 @@ export default class AddIngredient extends Component {
     return this.state.results.map((item, key) => {
       return <div id='results' key={key} onClick={() => this.handleClickIngredient(item)}>
         <span>{item.name}</span>
-      </div>
-    })
+      </div>;
+    });
   }
 
   handleClickIngredient = (item) => {
@@ -162,7 +160,7 @@ export default class AddIngredient extends Component {
     else {
       return (
         this.generateMeasureForm()
-      )
+      );
     }
   }
 }

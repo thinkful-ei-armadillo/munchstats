@@ -11,7 +11,7 @@ const ProxyApiService = {
     })
       .then(res => {
         return (res.json());
-      })
+      });
   },
 
   getIngredientsFromSearch(food) {
@@ -22,8 +22,8 @@ const ProxyApiService = {
         'content-Type': 'application/json',
       }
     })
-      .then(res => res.json())
+      .then(res => res.json());
   }
-}
+};
 
 export default ProxyApiService;
