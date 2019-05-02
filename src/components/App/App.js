@@ -72,6 +72,8 @@ export default class App extends Component {
             <PrivateRoute
               path={'/profile'}
               component={ProfileRoute}
+            />
+            <PrivateRoute
               path={'/charts'}
               component={ChartRoute}
             />
