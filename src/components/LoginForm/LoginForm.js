@@ -5,6 +5,7 @@ import AuthApiService from '../../services/auth-api-service';
 import UserContext from '../../contexts/UserContext';
 import Button from '../Button/Button';
 import Loading from '../Loading/Loading';
+import EventsApiService from '../../services/events-api-service'
 import './LoginForm.css';
 
 class LoginForm extends Component {
@@ -35,6 +36,9 @@ class LoginForm extends Component {
         this.context.processLogin(res.authToken);
         this.props.onLoginSuccess();
         this.context.loadingFalse();
+        EventsApiService.getTodaysEvents()
+          .then(res => this.context.setTodayEvents(res))
+          .catch(e => this.context.setError(e));
       })
       .catch(res => {
         this.setState({ error: res.error });
