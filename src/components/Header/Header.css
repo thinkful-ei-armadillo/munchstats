@@ -24,7 +24,18 @@ header a:hover{
   color: #000000;
 }
 
-@media only screen and (max-width: 400px) {
+.goBack span {
+  position: absolute;
+  top: 105px;
+  left:1.5vw;
+  font-size:3em;
+  cursor: pointer;
+}
+
+@media only screen and (max-width:500px){
+  .goBack span {
+    top: 135px;
+  }
   header {
     flex-direction: column;
     height:120px;
