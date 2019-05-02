@@ -7,7 +7,6 @@ import RegistrationRoute from '../../routes/RegistrationRoute/RegistrationRoute'
 import LoginRoute from '../../routes/LoginRoute/LoginRoute';
 import DashboardRoute from '../../routes/DashboardRoute/DashboardRoute';
 import NotFoundRoute from '../../routes/NotFoundRoute/NotFoundRoute';
-import LogExerciseRoute from '../../routes/LogExerciseRoute/LogExerciseRoute';
 import LogHomeRoute from '../../routes/LogHomeRoute/LogHomeRoute';
 import LogMealRoute from '../../routes/LogMealRoute/LogMealRoute';
 import LogSnackRoute from '../../routes/LogSnackRoute/LogSnackRoute';
@@ -15,7 +14,7 @@ import MealDetailsRoute from '../../routes/MealDetailsRoute/MealDetailsRoute';
 import MealsRoute from '../../routes/MealsRoute/MealsRoute';
 import './App.css';
 import Loading from '../Loading/Loading';
-import DashboardChart from '../DashboardChart/DashboardChart';
+import ChartRoute from '../../routes/ChartRoute/ChartRoute';
 
 if (false) {
   require('./Dark.css');
@@ -71,7 +70,7 @@ export default class App extends Component {
             />
             <PrivateRoute
               path={'/charts'}
-              component={DashboardChart}
+              component={ChartRoute}
             />
             <PublicOnlyRoute
               path={'/register'}

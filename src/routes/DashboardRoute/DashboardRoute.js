@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import './DashboardRoute.css';
-import DashboardChart from '../../components/DashboardChart/DashboardChart';
+
 
 class DashboardRoute extends Component {
   render() {
@@ -14,13 +14,11 @@ class DashboardRoute extends Component {
           <Link to='/log' className="button">
               Log a Meal, Snack, or Exercise
           </Link>
-          <Link to='/reports' className="button">
+          <Link to='/charts' className="button">
               View Your Past Reports
           </Link>
         </section>
-        <section className="dashChart">
-          <DashboardChart />
-        </section>
+        
       </div>
     );
   }
