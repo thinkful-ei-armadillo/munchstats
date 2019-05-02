@@ -89,6 +89,7 @@ export class UserProvider extends Component {
 
   setUser = user => {
     this.setState({ user });
+    console.log(user);
   }
 
   setMeals = meals => {

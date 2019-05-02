@@ -7,6 +7,7 @@ import RegistrationRoute from '../../routes/RegistrationRoute/RegistrationRoute'
 import LoginRoute from '../../routes/LoginRoute/LoginRoute';
 import DashboardRoute from '../../routes/DashboardRoute/DashboardRoute';
 import NotFoundRoute from '../../routes/NotFoundRoute/NotFoundRoute';
+import ProfileRoute from '../../routes/ProfileRoute/ProfileRoute'
 import LogHomeRoute from '../../routes/LogHomeRoute/LogHomeRoute';
 import LogMealRoute from '../../routes/LogMealRoute/LogMealRoute';
 import LogSnackRoute from '../../routes/LogSnackRoute/LogSnackRoute';
@@ -69,6 +70,8 @@ export default class App extends Component {
               component={LogSnackRoute}
             />
             <PrivateRoute
+              path={'/profile'}
+              component={ProfileRoute}
               path={'/charts'}
               component={ChartRoute}
             />

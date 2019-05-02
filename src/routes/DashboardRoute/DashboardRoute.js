@@ -6,20 +6,17 @@ import './DashboardRoute.css';
 class DashboardRoute extends Component {
   render() {
     return (
-      <div>
-        <section className="dashboard">
-          <Link to='/meals' className="button">
-              Create, View, or Edit Your Meals
-          </Link>
-          <Link to='/log' className="button">
-              Log a Meal, Snack, or Exercise
-          </Link>
-          <Link to='/charts' className="button">
-              View Your Past Reports
-          </Link>
-        </section>
-        
-      </div>
+      <section className="dashboard">
+        <Link to='/meals' className="button">
+            Create, View, or Edit Your Meals
+        </Link>
+        <Link to='/log' className="button">
+            Log a Meal or Snack
+        </Link>
+        <Link to='/reports' className="button">
+            View Your Past Reports
+        </Link>
+      </section>
     );
   }
 }
