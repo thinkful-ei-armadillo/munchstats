@@ -6,7 +6,6 @@ import UserContext from '../../contexts/UserContext';
 import MealsApiService from '../../services/meals-api-service';
 import TokenService from '../../services/token-service';
 import './logMeals.css';
-
 const moment = require('moment');
 
 export default class LogMeals extends Component {
@@ -19,7 +18,10 @@ export default class LogMeals extends Component {
   componentDidMount(){
     this.context.clearError();
     MealsApiService.getMeals()
-      .then(res => this.context.setMeals(res))
+      .then(res => {
+        this.context.setMeals(res);
+        this.setMeal();
+      })
       .catch(e => this.context.setError(e));
   }
 
@@ -42,18 +44,7 @@ export default class LogMeals extends Component {
   handleAddLog(){
     let tag = document.getElementById('mealTag').value;
     let datetime = document.getElementsByClassName('form-control')[0].value;
-    let date = moment(datetime).format('YYYY-MM-DD HH:mm:ss');
-    console.log(
-      JSON.stringify({
-        name: this.state.meal.name,
-        date: date,
-        calories: this.state.meal.total_calorie,
-        protein: this.state.meal.total_protein,
-        fat: this.state.meal.total_fat,
-        carbs: this.state.meal.total_carbs,
-        tag: tag
-      })
-    );  
+    let date = moment(datetime).format('YYYY-MM-DD HH:mm:ss'); 
     return fetch(`${config.API_ENDPOINT}/events`, {
       method: 'POST',
       headers: {

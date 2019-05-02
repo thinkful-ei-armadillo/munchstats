@@ -15,6 +15,7 @@ import MealDetailsRoute from '../../routes/MealDetailsRoute/MealDetailsRoute';
 import MealsRoute from '../../routes/MealsRoute/MealsRoute';
 import './App.css';
 import Loading from '../Loading/Loading';
+import ChartRoute from '../../routes/ChartRoute/ChartRoute';
 
 if (false) {
   require('./Dark.css');
@@ -71,6 +72,8 @@ export default class App extends Component {
             <PrivateRoute
               path={'/profile'}
               component={ProfileRoute}
+              path={'/charts'}
+              component={ChartRoute}
             />
             <PublicOnlyRoute
               path={'/register'}
