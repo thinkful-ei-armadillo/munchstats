@@ -10,7 +10,7 @@ class DashboardRoute extends Component {
             Create, View, or Edit Your Meals
         </Link>
         <Link to='/log' className="button">
-            Log a Meal, Snack, or Exercise
+            Log a Meal or Snack
         </Link>
         <Link to='/reports' className="button">
             View Your Past Reports
