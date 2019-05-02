@@ -22,6 +22,7 @@ export default class AddIngredient extends Component {
 
   getNutrientInfo = (e) => {
     e.preventDefault();
+    this.context.loadingTrue();
     let { quantity, measurements } = e.target;
     measurements = measurements.value.split(',');
 
@@ -61,22 +62,29 @@ export default class AddIngredient extends Component {
         };
         this.context.setIngredientWithNutritionStats(ingredient);
         (this.props.handleModal());
+        this.context.loadingFalse();
       });
   }
 
   getMealInfo() {
+    this.context.loadingTrue();
     return MealsApiService.getMealById(this.props.meal_id)
       .then(res => {
         if (res.length === 0) {
           this.props.history.push('/nothinghere');
+          this.context.loadingFalse();
         } else {
           // hacky fix to avoid react trying to set state on unmounted component
           if (res.length !== 0) {
             this.setState({ mealInfo: res[0] });
+            this.context.loadingFalse();
           }
         }
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        this.context.loadingFalse();
+      });
   }
 
   handleInput = (e) => {

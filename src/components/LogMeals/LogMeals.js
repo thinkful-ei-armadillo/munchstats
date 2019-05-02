@@ -5,6 +5,7 @@ import config from '../../config';
 import UserContext from '../../contexts/UserContext';
 import MealsApiService from '../../services/meals-api-service';
 import TokenService from '../../services/token-service';
+import Loading from '../Loading/Loading';
 import './logMeals.css';
 const moment = require('moment');
 
@@ -42,6 +43,7 @@ export default class LogMeals extends Component {
   }
 
   handleAddLog(){
+    this.context.loadingTrue();
     let tag = document.getElementById('mealTag').value;
     let datetime = document.getElementsByClassName('form-control')[0].value;
     let date = moment(datetime).format('YYYY-MM-DD HH:mm:ss'); 
@@ -61,30 +63,39 @@ export default class LogMeals extends Component {
         tag: tag
       })
     })
-      .then(res =>
+      .then(res => {
+        this.context.loadingFalse();
         (!res.ok)
           ? res.json().then(e => Promise.reject(e))
-          : this.props.history.push('/log')
-      );
+          : this.props.history.push('/log');
+      });
   }
 
   render() {
-    return (
-      <div className="flex mealLogContainer">
-        <section>
-          {this.context.meals.meal ? this.genUserMeals(this.context.meals.meal) : null}
-        </section>
-        <section id="userTag">
-          <select id="mealTag">
-            <option value="breakfast">Breakfast</option>
-            <option value="brunch">Brunch</option>
-            <option value="lunch">Lunch</option>
-            <option value="dinner">Dinner</option>
-          </select>
-        </section>
-        <Datetime defaultValue={moment()} locale={'true'}/>
-        <Button onClick={() => this.handleAddLog()}>Add</Button>
-      </div>
-    );
-  }
+
+    if(this.context.loading){
+      return (
+        <div className="center">
+          <Loading />
+        </div>
+      );
+    } else {
+      return (
+        <div className="flex mealLogContainer">
+          <section>
+            {this.context.meals.meal ? this.genUserMeals(this.context.meals.meal) : null}
+          </section>
+          <section id="userTag">
+            <select id="mealTag">
+              <option value="breakfast">Breakfast</option>
+              <option value="brunch">Brunch</option>
+              <option value="lunch">Lunch</option>
+              <option value="dinner">Dinner</option>
+            </select>
+          </section>
+          <Datetime defaultValue={moment()} locale={'true'}/>
+          <Button onClick={() => this.handleAddLog()}>Add</Button>
+        </div>
+      );
+    }}
 }

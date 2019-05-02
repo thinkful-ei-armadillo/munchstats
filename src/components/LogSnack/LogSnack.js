@@ -4,6 +4,7 @@ import UserContext from '../../contexts/UserContext';
 import Datetime from 'react-datetime';
 import config from '../../config';
 import TokenService from '../../services/token-service';
+import './LogSnack.css';
 const moment = require('moment');
 
 export default class LogSnack extends Component {
@@ -42,16 +43,17 @@ export default class LogSnack extends Component {
   render() {
 
     if (this.context.ingredient.name) {
-      return (<>
-        <h3>when did you eat the {this.context.ingredient.name}?</h3>
+      return (
+        <div className="mealLogContainer">
+          <h3>when did you eat the {this.context.ingredient.name}?</h3>
           <Datetime defaultValue={moment()} locale={'true'}/>
           <button onClick={() => this.handleAddLog()}>Log Your Snack!</button>
-        </>
+        </div>
       );
     }
 
     return (
-      <div>
+      <div className="mealLogContainer">
         <h3>Log a Single Item Snack!</h3>
         <AddIngredient />
       </div>

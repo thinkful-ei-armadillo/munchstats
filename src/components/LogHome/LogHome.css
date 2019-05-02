@@ -1,0 +1,30 @@
+.event{
+  border: 1px black solid;
+  border-radius: 5px;
+  padding: 10px;
+  background: #c5f3dd63;
+  margin-bottom: 10px;
+}
+
+.eventTitle{
+  display: flex;
+  justify-content: space-between
+}
+
+.eventTime{
+  margin: 5px 0 5px 0;
+}
+
+.linkContainer{
+  display:flex;
+  flex-direction: column;
+  width:95%;
+  margin:5% auto 0;
+  justify-content: space-around;
+  min-height: 225px;
+  max-width:400px;
+}
+
+.eventsHeading{
+  margin-bottom: 50px;
+}
