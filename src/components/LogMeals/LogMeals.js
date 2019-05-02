@@ -44,18 +44,7 @@ export default class LogMeals extends Component {
   handleAddLog(){
     let tag = document.getElementById('mealTag').value;
     let datetime = document.getElementsByClassName('form-control')[0].value;
-    let date = moment(datetime).format('YYYY-MM-DD HH:mm:ss');
-    console.log(
-      JSON.stringify({
-        name: this.state.meal.name,
-        date: date,
-        calories: this.state.meal.total_calorie,
-        protein: this.state.meal.total_protein,
-        fat: this.state.meal.total_fat,
-        carbs: this.state.meal.total_carbs,
-        tag: tag
-      })
-    );  
+    let date = moment(datetime).format('YYYY-MM-DD HH:mm:ss'); 
     return fetch(`${config.API_ENDPOINT}/events`, {
       method: 'POST',
       headers: {
