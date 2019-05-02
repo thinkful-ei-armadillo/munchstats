@@ -3,7 +3,8 @@ import Button from '../Button/Button';
 import MealsApiService from '../../services/meals-api-service';
 import ProxyApiService from '../../services/proxy-api-service';
 import UserContext from '../../contexts/UserContext';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import Loading from '../Loading/Loading';
 
 export default class AddIngredient extends Component {
 
@@ -84,13 +85,17 @@ export default class AddIngredient extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    this.context.loadingTrue();
     this.setState({ results: [], chosenIngredient: '' });
     let encodedInput = encodeURI(this.state.ingredientInput);
     ProxyApiService.getIngredientsFromSearch(encodedInput)
       .then(results => {
         this.setState({ results });
+        this.context.loadingFalse();
       })
-      .catch(err => console.log(err));
+      .catch(err => {console.log(err);
+        this.context.loadingFalse();
+      });
   }
 
   generateMeasureForm = () => {
@@ -126,7 +131,10 @@ export default class AddIngredient extends Component {
 
   render() {
     if (!this.state.chosenIngredient) {
-      return (
+
+      if(this.context.loading){
+        return (<div className="center"><Loading /></div>);
+      } else {return (
         <>
           <form
             className='mealForm'
@@ -158,7 +166,7 @@ export default class AddIngredient extends Component {
             {(this.state.results.length >= 1) && this.generateResults()}
           </section>
         </>  
-      );
+      );}
     }
     else {
       return (
@@ -170,4 +178,4 @@ export default class AddIngredient extends Component {
 
 AddIngredient.defaultProps = {
   handleModal: () => null
-} 
+}; 
