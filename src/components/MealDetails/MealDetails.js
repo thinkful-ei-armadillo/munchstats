@@ -135,9 +135,7 @@ export default class Meals extends Component {
     console.log(this.state.showModal)
   }
 
-  handleGoBackClicked = () => {
-    this.props.history.push('/meals');
-  }
+  
 
   render() {
     
@@ -147,9 +145,7 @@ export default class Meals extends Component {
 
     return (
       <>
-        <section className='goBack'>
-          <span onClick={() => this.handleGoBackClicked()} className='back_button'><i className="fas fa-chevron-left"></i></span>
-        </section>
+        
         <h3 className='mealName'>{this.state.mealInfo ? this.state.mealInfo.name : ''}</h3>
 
         <div className='mealContainer'>

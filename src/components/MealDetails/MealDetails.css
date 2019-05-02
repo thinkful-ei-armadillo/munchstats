@@ -86,13 +86,6 @@
   
 } */
 
-.goBack span {
-  position: absolute;
-  top: 105px;
-  left:1.5vw;
-  font-size:3em;
-  cursor: pointer;
-}
 
 .mealContainer {
   display: flex;
@@ -163,6 +156,8 @@
 
 .modalAddIngredient {
   height:80vh;
+  width:40%;
+  margin:50px auto;
 }
 
 .modalAddIngredient .panelHeader {
