@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import UserContext from '../../contexts/UserContext';
-import TokenService from '../../services/token-service';
 import EventsApiService from '../../services/events-api-service';
-import config from '../../config';
 
 export default class LogHome extends Component {
   state = {
@@ -20,7 +18,8 @@ export default class LogHome extends Component {
 
   generateReport = () => {
     return this.context.todayEvents.map((event, key) => { 
-      let date = moment(event.date).format('h:mm a');
+      const slicedDate = event.date.toString().slice(0,event.date.length-1);
+      let date = moment(slicedDate).format('h:mm a');
       return(
         <div key={key}>
           <h3>{event.name}</h3><p>calories: {event.calories}</p><p>carbs: {event.carbs}</p> <p>fat: {event.fat}</p><p>protein: {event.protein}</p> <p>{date}</p><p>{event.tag}</p>
