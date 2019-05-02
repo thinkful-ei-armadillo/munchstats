@@ -58,3 +58,32 @@
   border-image-slice: 1;
   border-image-source: linear-gradient(90deg, whitesmoke, black, whitesmoke);
 }
+
+/* buttons and links: */
+
+button, .button{
+  background-color: #087E8B;
+  color: #eeeeee;
+}
+
+.button:visited {
+  color: #eeeeee;
+}
+
+button a {
+  color:#eeeeee;
+  text-decoration: none;
+}
+
+button a:visited {
+  color: #eeeeee;  
+}
+
+a:visited {
+  color: #152a23;
+}
+
+html{
+  background: #EFE7DA;
+  color: #152a23;
+}
