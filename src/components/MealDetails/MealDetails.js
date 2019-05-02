@@ -4,7 +4,7 @@ import MealsApiService from '../../services/meals-api-service';
 import IngredientsApiService from '../../services/ingredients-api-service';
 import AddIngredient from '../AddIngredient/AddIngredient';
 import UserContext from '../../contexts/UserContext';
-import ReactModal from 'react-modal'
+import ReactModal from 'react-modal';
 
 export default class Meals extends Component {
   state = {
@@ -41,7 +41,7 @@ export default class Meals extends Component {
   }
 
   getMealIngredients() {
-      return IngredientsApiService.getIngredientsForMeal(this.props.meal_id)
+    return IngredientsApiService.getIngredientsForMeal(this.props.meal_id)
       .then(res => this.setState({ mealIngredients: res.ingredients }))
       .catch(err => console.log(err));
   }
@@ -92,7 +92,7 @@ export default class Meals extends Component {
         <p>carbs: {Math.round(this.state.mealInfo.total_carbs)} </p>
         <p>protein: {Math.round(this.state.mealInfo.total_protein)}</p>
       </div>
-    </>
+    </>;
   }
 
   generateFinalIngredients = () => {
@@ -132,7 +132,7 @@ export default class Meals extends Component {
   handleModal = () => {
     this.setState({
       showModal: !this.state.showModal
-    })
+    });
   }
 
   
@@ -143,7 +143,7 @@ export default class Meals extends Component {
   render() {
     
     if(this.context.ingredient.name){
-      this.updateMeal(this.context.ingredient)
+      this.updateMeal(this.context.ingredient);
     }
 
     return (
@@ -158,35 +158,35 @@ export default class Meals extends Component {
             <AddIngredient/>
           </div> */}
           
-            <section className='finalIngredientsContainer'>
-              <div className = 'panel'>
-                <div className = 'panelHeader'>
-                  <h3>Meal Ingredients</h3>
-                  <p className = 'modalOpener' onClick={this.handleModal}>click here to add ingredient</p>
-                </div>
-                <div className="finalIngredients">
-                  {(this.state.mealIngredients[0]) ? this.generateFinalIngredients() : 'Nothing so far!'}
-                  <ReactModal
-                    isOpen={this.state.showModal}
-                    onRequestClose={this.handleModal}
-                    contentLabel="Minimal Modal Example"
-                    className='modal'
-                  > 
-                    <div className = 'modalAddIngredient panel'>
-                      <h3 className = 'panelHeader'>Search For an Ingredient</h3>
-                      <AddIngredient handleModal={this.handleModal} />
-                    </div>
-                    <i onClick={this.handleModal} className="fas fa-times modalCloser"></i>
-                  </ReactModal>
-                </div>
+          <section className='finalIngredientsContainer'>
+            <div className = 'panel'>
+              <div className = 'panelHeader'>
+                <h3>Meal Ingredients</h3>
+                <p className = 'modalOpener' onClick={this.handleModal}>click here to add ingredient</p>
               </div>
-            </section>
+              <div className="finalIngredients">
+                {(this.state.mealIngredients[0]) ? this.generateFinalIngredients() : 'Nothing so far!'}
+                <ReactModal
+                  isOpen={this.state.showModal}
+                  onRequestClose={this.handleModal}
+                  contentLabel="Minimal Modal Example"
+                  className='modal'
+                > 
+                  <div className = 'modalAddIngredient panel'>
+                    <h3 className = 'panelHeader'>Search For an Ingredient</h3>
+                    <AddIngredient handleModal={this.handleModal} />
+                  </div>
+                  <i onClick={this.handleModal} className="fas fa-times modalCloser"></i>
+                </ReactModal>
+              </div>
+            </div>
+          </section>
 
-            <section className='currentMealStats'>
-              <div className = 'panel'>
-                {this.renderMealStats()}
-              </div>
-            </section>
+          <section className='currentMealStats'>
+            <div className = 'panel'>
+              {this.renderMealStats()}
+            </div>
+          </section>
           
         </div>
       </>
