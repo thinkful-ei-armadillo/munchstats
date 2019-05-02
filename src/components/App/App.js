@@ -17,6 +17,8 @@ import './App.css';
 import Loading from '../Loading/Loading';
 import ChartRoute from '../../routes/ChartRoute/ChartRoute';
 
+import './Light.css'
+
 if (false) {
   require('./Dark.css');
 }

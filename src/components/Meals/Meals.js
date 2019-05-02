@@ -81,7 +81,7 @@ export default class Meals extends Component {
     return (
       <ul className='MealsPage__meals'>
         {meals.map(meal =>
-          <li key={meal.id} className='MealsPage__meals'>
+          <li key={meal.id} className='MealsPage__meals backgroundColor4 border1'>
             <span className = 'mealPageMealName'>{meal.name}</span> 
             <br />
             <Link

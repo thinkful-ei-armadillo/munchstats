@@ -32,7 +32,6 @@
 .rdtDays tfoot tr td{
   text-align: center;
   padding: 10px;
-  border: 1px black solid;
   cursor: pointer;
 }
 

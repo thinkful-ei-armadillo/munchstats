@@ -1,8 +1,6 @@
 header{
   padding: 10px;
   text-align: center;
-  background: #0E4749;
-  color:#EFE7DA;
   font-size: 20px;
   box-shadow:1px 0 6px grey;
   height:90px;
@@ -18,7 +16,6 @@ header a:visited {
 header h1{
   margin: 0;
 }
-
 
 header a:hover{
   color: #000000;
