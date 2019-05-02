@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import './App.css';
 import Chart from 'chart.js';
 import UserContext from '../../contexts/UserContext'
 
@@ -18,7 +17,6 @@ componentDidMount() {
         chartData[1] += this.context.todayEvents[i].fat;
         chartData[2] += this.context.todayEvents[i].protein;
     }
-    console.log(chartData);
     const myChartRef = this.chartRef.current.getContext("2d");
 
     new Chart(myChartRef, {
@@ -26,13 +24,13 @@ componentDidMount() {
         data: {
             labels: ['Carbs', 'Fat', 'Protein'],
             datasets: [{
-                label: "In grams",
+                label: "Grams",
                 data: chartData,
                 backgroundColor: [
                     // 'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)'
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)'
                 ],
                 borderColor: [
                     // 'rgba(255, 99, 132, 1)',
@@ -44,10 +42,16 @@ componentDidMount() {
             }]
         },
         options: {
+            legend: {
+                display: false
+            },
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        callback: function (value, index, values) {
+                            return value + 'g';
+                        }
                     }
                 }],
                 xAxes: [{
@@ -61,7 +65,6 @@ componentDidMount() {
     }
 
   render() {
-    console.log('render context' + this.context);
     return (
     <div className="gramChart">
         <canvas id="gChart" ref={this.chartRef} />

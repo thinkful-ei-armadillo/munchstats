@@ -5,7 +5,6 @@ import AuthApiService from '../../services/auth-api-service';
 import UserContext from '../../contexts/UserContext';
 import Button from '../Button/Button';
 import Loading from '../Loading/Loading';
-import TokenService from '../../services/token-service'
 import EventsApiService from '../../services/events-api-service'
 import './LoginForm.css';
 
@@ -35,7 +34,6 @@ class LoginForm extends Component {
         username.value = '';
         password.value = '';
         this.context.processLogin(res.authToken);
-        console.log(TokenService.parseJwt(res.authToken));
         this.props.onLoginSuccess();
         this.context.loadingFalse();
         EventsApiService.getTodaysEvents()

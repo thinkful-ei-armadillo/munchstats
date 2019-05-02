@@ -1,0 +1,8 @@
+.chartsPage h3 {
+    text-align: center;
+    padding: 10px;
+}
+
+#myChart, #gChart {
+    padding: 20px;
+}
