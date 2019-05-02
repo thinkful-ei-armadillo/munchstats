@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import TokenService from '../../services/token-service';
 import UserContext from '../../contexts/UserContext';
+import { withRouter } from "react-router";
 import './Header.css';
 
 class Header extends Component {
@@ -47,8 +48,22 @@ class Header extends Component {
     );
   };
 
+  handleGoBackClicked = () => {
+    this.props.history.goBack();
+  }
+
   render() {
-    return (
+
+    let backArrow = <section className='goBack'>
+      <span onClick={() => this.handleGoBackClicked()} className='back_button'><i className="fas fa-chevron-left"></i></span>
+    </section>
+
+    return (<>
+      {(this.props.location.pathname !== '/')
+        && (this.props.location.pathname !== '/reports')
+        && (this.props.location.pathname !== '/login') 
+        && (this.props.location.pathname !== '/register') 
+        && backArrow}
       <header>
         <h1>
           <Link
@@ -61,8 +76,9 @@ class Header extends Component {
           ? this.renderLogoutLink()
           : this.renderLoginLink()}
       </header>
+    </>
     );
   };
 };
 
-export default Header;
+export default withRouter(Header);

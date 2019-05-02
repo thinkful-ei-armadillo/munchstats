@@ -1,13 +1,18 @@
 header{
   padding: 10px;
   text-align: center;
-  background: #B2FFA8;
+  background: #0E4749;
+  color:#EFE7DA;
   font-size: 20px;
   box-shadow:1px 0 6px grey;
   height:90px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+header a:visited {
+  color:#EFE7DA;
 }
 
 header h1{
@@ -19,7 +24,18 @@ header a:hover{
   color: #000000;
 }
 
-@media only screen and (max-width: 400px) {
+.goBack span {
+  position: absolute;
+  top: 105px;
+  left:1.5vw;
+  font-size:3em;
+  cursor: pointer;
+}
+
+@media only screen and (max-width:500px){
+  .goBack span {
+    top: 135px;
+  }
   header {
     flex-direction: column;
     height:120px;

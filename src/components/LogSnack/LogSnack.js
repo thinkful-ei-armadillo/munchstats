@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import config from '../../config'
 import AddIngredient from '../AddIngredient/AddIngredient';
 import UserContext from '../../contexts/UserContext';
 import MealsApiService from '../../services/meals-api-service';
@@ -39,6 +38,10 @@ export default class LogSnack extends Component {
       meal ${meal}`
     )
     MealsApiService.logFood(meal, date, 'snack');
+  }
+
+  componentWillUnmount() {
+    this.context.clearIngredient();
   }
 
   render() {

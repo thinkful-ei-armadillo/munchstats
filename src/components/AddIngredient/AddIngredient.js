@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Button from '../Button/Button';
-import config from '../../config';
 import MealsApiService from '../../services/meals-api-service';
+import ProxyApiService from '../../services/proxy-api-service';
 import UserContext from '../../contexts/UserContext';
+import PropTypes from 'prop-types'
 
 export default class AddIngredient extends Component {
 
@@ -13,6 +14,8 @@ export default class AddIngredient extends Component {
     mealInfo: {},
     mealIngredients: []
   };
+
+
 
   static contextType = UserContext;
 
@@ -31,14 +34,14 @@ export default class AddIngredient extends Component {
         'foodId': this.state.chosenIngredient.id
       }
     ];
-
+  
     const body = {
       ingredients,
       name: this.state.chosenIngredient.name,
       label,
       quantity: Number(quantity.value)
     };
-    MealsApiService.getStatsforServing(body)
+    ProxyApiService.getStatsforServing(body)
       .then(res => {
         //send ingredient to items table in database
         this.setState({
@@ -47,15 +50,16 @@ export default class AddIngredient extends Component {
         });
 
         let ingredient = {
-            name: res.name,
-            total_calorie: Math.round(res.total_calorie),
-            total_fat: Math.round(res.total_fat),
-            total_carbs: Math.round(res.total_carbs),
-            total_protein: Math.round(res.total_protein),
-            amount: Number(quantity.value),
-            unit: res.unit
-          }
-        this.context.setIngredientWithNutritionStats(ingredient)
+          name: res.name,
+          total_calorie: Math.round(res.total_calorie),
+          total_fat: Math.round(res.total_fat),
+          total_carbs: Math.round(res.total_carbs),
+          total_protein: Math.round(res.total_protein),
+          amount: Number(quantity.value),
+          unit: res.unit
+        };
+        this.context.setIngredientWithNutritionStats(ingredient);
+        (this.props.handleModal());
       });
   }
 
@@ -82,7 +86,7 @@ export default class AddIngredient extends Component {
     e.preventDefault();
     this.setState({ results: [], chosenIngredient: '' });
     let encodedInput = encodeURI(this.state.ingredientInput);
-    MealsApiService.getIngredientsFromSearch(encodedInput)
+    ProxyApiService.getIngredientsFromSearch(encodedInput)
       .then(results => {
         this.setState({ results });
       })
@@ -106,7 +110,11 @@ export default class AddIngredient extends Component {
   }
 
   generateResults = () => {
-    return this.state.results.map((item, key) => <div id='results' key={key} onClick={() => this.handleClickIngredient(item)}><span>{item.name}</span></div>);
+    return this.state.results.map((item, key) => {
+      return <div id='results' key={key} onClick={() => this.handleClickIngredient(item)}>
+        <span>{item.name}</span>
+      </div>;
+    });
   }
 
   handleClickIngredient = (item) => {
@@ -117,38 +125,49 @@ export default class AddIngredient extends Component {
   }
 
   render() {
-    return (
-      <>
-        <form
-          className='mealForm'
-          onSubmit={this.handleSubmit}
-        >
-          {/* <div role='alert'>
-              {error && <p>{error}</p>}
-            </div> */}
-          <label htmlFor='ingredient-input'>
-            Ingredient
-          </label>
-          <input
-            ref={this.firstInput}
-            id='ingredient-input'
-            name='ingredient-input'
-            value={this.state.ingredientInput}
-            onChange={this.handleInput}
-            required
-          />
-          <Button type='submit'>
-            Search ingredients
-          </Button>
-        </form>
+    if (!this.state.chosenIngredient) {
+      return (
+        <>
+          <form
+            className='mealForm'
+            onSubmit={this.handleSubmit}
+          >
+            {/* <div role='alert'>
+                {error && <p>{error}</p>}
+              </div> */}
+            <label htmlFor='ingredient-input'>
+              Ingredient
+            </label>
+            <input
+              ref={this.firstInput}
+              id='ingredient-input'
+              name='ingredient-input'
+              value={this.state.ingredientInput}
+              onChange={this.handleInput}
+              required
+            />
+            <Button type='submit'>
+              Search ingredients
+            </Button>
+          </form>
 
-        {this.state.chosenIngredient ? this.generateMeasureForm() : null}
+          
 
-        <section className="results">
-          {(this.state.results.length >= 1) && <h4>Pick one from below</h4>}
-          {(this.state.results.length >= 1) && this.generateResults()}
-        </section>
-      </>
-    );
+          <section className="results">
+            {(this.state.results.length >= 1) && <h4>Pick one from below</h4>}
+            {(this.state.results.length >= 1) && this.generateResults()}
+          </section>
+        </>  
+      );
+    }
+    else {
+      return (
+        this.generateMeasureForm()
+      );
+    }
   }
 }
+
+AddIngredient.defaultProps = {
+  handleModal: () => null
+} 

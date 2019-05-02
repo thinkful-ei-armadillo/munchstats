@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import './MealDetails.css';
 import MealsApiService from '../../services/meals-api-service';
+import IngredientsApiService from '../../services/ingredients-api-service';
 import AddIngredient from '../AddIngredient/AddIngredient';
 import UserContext from '../../contexts/UserContext';
+import ReactModal from 'react-modal'
 
 export default class Meals extends Component {
   state = {
@@ -11,7 +13,8 @@ export default class Meals extends Component {
     chosenIngredient: '',
     finalIngredients: [],
     mealInfo: {},
-    mealIngredients: []
+    mealIngredients: [],
+    showModal: false
   };
 
   static contextType = UserContext;
@@ -19,6 +22,7 @@ export default class Meals extends Component {
   componentDidMount() {
     this.getMealInfo();
     this.getMealIngredients();
+    ReactModal.setAppElement('body');
   }
 
   getMealInfo() {
@@ -37,7 +41,7 @@ export default class Meals extends Component {
   }
 
   getMealIngredients() {
-      return MealsApiService.getIngredientsForMeal(this.props.meal_id)
+      return IngredientsApiService.getIngredientsForMeal(this.props.meal_id)
       .then(res => this.setState({ mealIngredients: res.ingredients }))
       .catch(err => console.log(err));
   }
@@ -58,7 +62,7 @@ export default class Meals extends Component {
     };
     this.context.clearIngredient();
 
-    MealsApiService.addIngredient(this.props.meal_id, results)
+    IngredientsApiService.addIngredient(this.props.meal_id, results)
       .then(() => {
         // add calorie/fat/carb/protein counts to meal totals
         const newMealStats = {
@@ -81,7 +85,7 @@ export default class Meals extends Component {
 
   renderMealStats() {
     return <>
-      <h4>Meal Nutrition Information</h4>
+      <h3 className = 'panelHeader'>Meal Nutrition Information</h3>
       <div className='nutritionInfo' >
         <p>calories: {Math.round(this.state.mealInfo.total_calorie)}</p>
         <p> fat: {Math.round(this.state.mealInfo.total_fat)} </p>
@@ -92,7 +96,7 @@ export default class Meals extends Component {
   }
 
   generateFinalIngredients = () => {
-    return this.state.mealIngredients.map((item, key) => <div key={key}>
+    return this.state.mealIngredients.map((item, key) => <div className = 'ingredient' key={key}>
       <span>
         {item.name} | {item.amount} {item.unit}
       </span>
@@ -102,7 +106,7 @@ export default class Meals extends Component {
   }
 
   handleClickDelete = (ingredient) => {
-    MealsApiService.deleteIngredient(ingredient.id)
+    IngredientsApiService.deleteIngredient(ingredient.id)
       .then(() => {
         // subtract calorie/fat/carb/protein counts to meal totals
         const newMealStats = {
@@ -125,8 +129,15 @@ export default class Meals extends Component {
       .catch(err => console.log(err));
   }
 
-  handleGoBackClicked = () => {
-    this.props.history.push('/meals');
+  handleModal = () => {
+    this.setState({
+      showModal: !this.state.showModal
+    })
+  }
+
+  
+  componentWillUnmount() {
+    this.context.clearIngredient();
   }
 
   render() {
@@ -137,30 +148,46 @@ export default class Meals extends Component {
 
     return (
       <>
-        <section className='goBack'>
-          <span onClick={() => this.handleGoBackClicked()} className='back_button'><i className="fas fa-chevron-left"></i></span>
-        </section>
+        
         <h3 className='mealName'>{this.state.mealInfo ? this.state.mealInfo.name : ''}</h3>
 
-        <div className='mealContainer'> 
-          <div className='addIngredientContainer'>
+        <div className='mealContainer'>
+          
+          {/* <div className='addIngredientContainer'>
             <h3>Add an ingredient to your meal</h3>
             <AddIngredient/>
-          </div>
-
-          <div className='statsContainer'>
-
+          </div> */}
+          
             <section className='finalIngredientsContainer'>
-              <h4>Meal Ingredients</h4>
-              <div className="finalIngredients">
-                {(this.state.mealIngredients[0]) ? this.generateFinalIngredients() : 'Nothing so far!'}
+              <div className = 'panel'>
+                <div className = 'panelHeader'>
+                  <h3>Meal Ingredients</h3>
+                  <p className = 'modalOpener' onClick={this.handleModal}>click here to add ingredient</p>
+                </div>
+                <div className="finalIngredients">
+                  {(this.state.mealIngredients[0]) ? this.generateFinalIngredients() : 'Nothing so far!'}
+                  <ReactModal
+                    isOpen={this.state.showModal}
+                    onRequestClose={this.handleModal}
+                    contentLabel="Minimal Modal Example"
+                    className='modal'
+                  > 
+                    <div className = 'modalAddIngredient panel'>
+                      <h3 className = 'panelHeader'>Search For an Ingredient</h3>
+                      <AddIngredient handleModal={this.handleModal} />
+                    </div>
+                    <i onClick={this.handleModal} className="fas fa-times modalCloser"></i>
+                  </ReactModal>
+                </div>
               </div>
             </section>
-            <section className='currentMealStats'>
-              {this.renderMealStats()}
-            </section>
-          </div>
 
+            <section className='currentMealStats'>
+              <div className = 'panel'>
+                {this.renderMealStats()}
+              </div>
+            </section>
+          
         </div>
       </>
     );

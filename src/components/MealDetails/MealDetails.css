@@ -4,33 +4,32 @@
   margin:30px 50px;
 }
 
-.mealContainer {
-  height:70vh;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
+.modalOpener {
+  cursor: pointer;
+  text-decoration: underline;
 }
 
-.mealContainer form {
-  display: flex;
-  flex-direction: column;
-}
-.addIngredientContainer h3 {
-  text-align: center;
-  margin:10px;
-  font-size: 1.5em;
-}
-.addIngredientContainer form {
-  margin:0 auto;
+.modalOpener:hover {
+  text-decoration: none;
 }
 
-.addIngredientContainer, .statsContainer {
-  flex-direction: column;
+.modalCloser {
+  font-size:2.5em;
+  position: absolute;
+  right:20px;
+  top:20px;
+  cursor: pointer;
+}
+
+/* .mealContainer form {
   display: flex;
-  width:50%;
-  height:100%;
-  min-width:350px;
+  flex-direction: column;
+} */
+
+/* .statsContainer {
+  display: flex;
+  height:100vh;
+  justify-content: flex-start;
 }
 
 .currentMealStats h4, .finalIngredientsContainer h4 {
@@ -39,18 +38,7 @@
   margin: 5px;
 }
 
-.nutritionInfo {
-  display:flex;
-  flex-flow: wrap;
-  align-content: space-evenly;
-  height: 70%;
-  text-align: center;
-}
 
-.nutritionInfo p {
-  width:50%;
-  font-size: 1.3em;
-}
 .finalIngredients {
   height:80%;
   padding: 5%;
@@ -67,10 +55,7 @@
   width: 100%;
 }
 
-.fa-trash {
-  margin-left:15px;
-  cursor: pointer;
-}
+
 
 .results {
   margin:15px 0;
@@ -83,13 +68,7 @@
   cursor: pointer;
 }
 
-.goBack span {
-  position: absolute;
-  top: 105px;
-  left:1.5vw;
-  font-size:3em;
-  cursor: pointer;
-}
+
 
 .measureForm p {
   font-size:1.3em;
@@ -105,10 +84,99 @@
 .measureForm input, .measureForm select, .measureForm button {
   width:200px;
   
+} */
+
+
+.mealContainer {
+  display: flex;
+  flex-wrap:wrap;
+  width:100%;
+  justify-content: space-between;
 }
 
-@media only screen and (max-width:400px){
+.panel {
+  margin: 50px;
+  height:40vh;
+  background: whitesmoke;
+  border-radius: 20px;
+  box-shadow: 1px 1px 10px;
+  overflow:auto;
+}
+
+.panelHeader {
+  background: #0E4749;
+  color: #EFE7DA;
+  border-top-right-radius: inherit;
+  border-top-left-radius: inherit;
+  padding: 10px;
+}
+
+.ingredient {
+  display:flex;
+  justify-content: space-between;
+  margin:15px;
+  border-bottom:1px solid;
+  border-image-source: linear-gradient(90deg, whitesmoke, black, whitesmoke);
+  border-image-slice: 1;
+  padding-bottom:10px;
+}
+
+.finalIngredients  {
+  margin: 0 20px;
+}
+
+.mealContainer section {
+  margin:0 auto 20px;
+  width:50%;
+  min-width:250px;
+  text-align: center;
+  height:60vh;
+}
+
+.mealContainer h3 {
+  font-size: 1.7em;
+}
+
+.nutritionInfo {
+  display:flex;
+  flex-flow: wrap;
+  align-content: space-evenly;
+  height: 70%;
+  text-align: center;
+}
+
+.nutritionInfo p {
+  width:50%;
+  font-size: 1.3em;
+}
+
+.fa-trash {
+  cursor: pointer;
+}
+
+.modalAddIngredient {
+  height:80vh;
+  width:40%;
+  margin:50px auto;
+}
+
+.modalAddIngredient .panelHeader {
+  height:8vh;
+  padding-top:18px; 
+}
+
+.ReactModal__Content, .ReactModal__Content--after-open, .modal{
+  outline: none;
+}
+
+@media only screen and (max-width:500px){
   .goBack span {
     top: 135px;
+  }
+  .mealContainer section {
+    width:90%;
+  }
+  .panel {
+    margin:0;
   }
 }
