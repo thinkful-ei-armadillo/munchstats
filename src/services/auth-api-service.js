@@ -2,6 +2,21 @@ import config from '../config';
 import TokenService from './token-service';
 
 const AuthApiService = {
+  getUserBudgets() {
+    return fetch(`${config.API_ENDPOINT}/user`, {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`
+      }
+    })
+      .then(res =>
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()
+      );
+  },
+
   postUser(user) {
     return fetch(`${config.API_ENDPOINT}/user`, {
       method: 'POST',
@@ -18,13 +33,14 @@ const AuthApiService = {
   },
 
   patchUser(user){
+    console.log(user)
     return fetch(`${config.API_ENDPOINT}/user`, {
       method: 'PATCH',
       headers: {
         'content-type': 'application/json',
         'authorization': `Bearer ${TokenService.getAuthToken()}`
       },
-      body: JSON.stringify(user)
+      body: JSON.stringify({'user':{...user}})
     })
       .then(res =>
         (!res.ok)

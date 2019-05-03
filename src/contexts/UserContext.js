@@ -89,7 +89,6 @@ export class UserProvider extends Component {
 
   setUser = user => {
     this.setState({ user });
-    console.log(user);
   }
 
   setMeals = meals => {
@@ -106,17 +105,19 @@ export class UserProvider extends Component {
     this.setUser({
       id: jwtPayload.user_id,
       name: jwtPayload.name,
-      username: jwtPayload.sub,
-      isDark: jwtPayload.isDark,
-      calorieBudget: jwtPayload.calorieBudget,
-      fatBudget: jwtPayload.fatBudget,
-      carbBudget: jwtPayload.calorieBudget,
-      proteinBudget: jwtPayload.proteinBudget
+      username: jwtPayload.sub
     });
     IdleService.regiserIdleTimerResets();
     TokenService.queueCallbackBeforeExpiry(() => {
       this.fetchRefreshToken();
     });
+    AuthApiService.getUserBudgets()
+      .then(res => {
+        this.setUser({
+          ...this.state.user,
+          ...res.user[0]
+        })
+      })
   }
 
   processLogout = () => {

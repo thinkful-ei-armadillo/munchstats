@@ -10,7 +10,6 @@ chartRef = React.createRef();
 
 componentDidMount() {
     this.context.clearError();
-
     let chartData = [0, 0];
     chartData[1] = this.context.user.calorieBudget;
     for(let i = 0; i < this.context.todayEvents.length; i++) {
