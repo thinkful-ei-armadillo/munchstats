@@ -7,77 +7,42 @@ import './Profile.css';
 export default class Profile extends Component {
   static contextType = UserContext;
 
-  state = {
+  componentDidMount() {
+    console.log(this.context.user)
+  }
 
-  };
+  handleModeToggle = () => {
+    let isDark = !this.context.user.isDark;    
+    this.context.setUser({
+      ...this.context.user,
+      isDark
+    })
 
-  handleModeToggle(){
-    const checkbox = document.getElementById("modeToggle");
-    if(checkbox.checked === true){
-      // require dark mode
+    AuthApiService.patchUserDark(this.context.user);
+  }
+
+  setUserBudgets(budget){
+    let newBudget = null;
+    if(this.context.user[budget] === null || !this.context.user[budget]){
+      newBudget = Number(document.getElementById(`${budget}`).value);
     }
-    else{
-      // require light mode
+    if(this.context.user[budget] !== null && Number(document.getElementById(`${budget}`).value) !== 0){
+      newBudget = Number(document.getElementById(`${budget}`).value);
     }
+    if(this.context.user[budget] !== null && Number(document.getElementById(`${budget}`).value) === 0){
+      newBudget = this.context.user[budget];
+    }
+    if(!this.context.user[budget] && Number(document.getElementById(`${budget}`).value) === 0){
+      newBudget = null;
+    }
+    return newBudget;
   }
 
   submitUserBudgets = () => {
-    // TODO: refactor this atrocity
-    let calorieBudget = null;
-    if(this.context.user.calorieBudget === null || !this.context.user.calorieBudget){
-      calorieBudget = Number(document.getElementById("calorieBudget").value);
-    }
-    if(this.context.user.calorieBudget !== null && Number(document.getElementById("calorieBudget").value) !== 0){
-      calorieBudget = Number(document.getElementById("calorieBudget").value);
-    }
-    if(this.context.user.calorieBudget !== null && Number(document.getElementById("calorieBudget").value) === 0){
-      calorieBudget = this.context.user.calorieBudget;
-    }
-    if(!this.context.user.calorieBudget && Number(document.getElementById("calorieBudget").value) === 0){
-      calorieBudget = null;
-    }
-
-    let fatBudget = null;
-    if(this.context.user.fatBudget === null || !this.context.user.fatBudget){
-      fatBudget = Number(document.getElementById("fatBudget").value);
-    }
-    if(this.context.user.fatBudget !== null && Number(document.getElementById("fatBudget").value) !== 0){
-      fatBudget = Number(document.getElementById("fatBudget").value);
-    }
-    if(this.context.user.fatBudget !== null && Number(document.getElementById("fatBudget").value) === 0){
-      fatBudget = this.context.user.fatBudget;
-    }
-    if(!this.context.user.fatBudget && Number(document.getElementById("fatBudget").value) === 0){
-      fatBudget = null;
-    }
-
-    let carbBudget = null;
-    if(this.context.user.carbBudget === null || !this.context.user.carbBudget){
-      carbBudget = Number(document.getElementById("carbBudget").value);
-    }
-    if(this.context.user.carbBudget !== null && Number(document.getElementById("carbBudget").value) !== 0){
-      carbBudget = Number(document.getElementById("carbBudget").value);
-    }
-    if(this.context.user.carbBudget !== null && Number(document.getElementById("carbBudget").value) === 0){
-      carbBudget = this.context.user.carbBudget;
-    }
-    if(!this.context.user.carbBudget && Number(document.getElementById("carbBudget").value) === 0){
-      carbBudget = null;
-    }
-
-    let proteinBudget = null;
-    if(this.context.user.proteinBudget === null || !this.context.user.proteinBudget){
-      proteinBudget = Number(document.getElementById("proteinBudget").value);
-    }
-    if(this.context.user.proteinBudget !== null && Number(document.getElementById("proteinBudget").value) !== 0){
-      proteinBudget = Number(document.getElementById("proteinBudget").value);
-    }
-    if(this.context.user.proteinBudget !== null && Number(document.getElementById("proteinBudget").value) === 0){
-      proteinBudget = this.context.user.proteinBudget;
-    }
-    if(!this.context.user.proteinBudget && Number(document.getElementById("proteinBudget").value) === 0){
-      proteinBudget = null;
-    }
+    let calorieBudget = this.setUserBudgets('calorieBudget');
+    let fatBudget = this.setUserBudgets('fatBudget');
+    let carbBudget = this.setUserBudgets('carbBudget');
+    let proteinBudget = this.setUserBudgets('proteinBudget');
 
     this.context.setUser({
       ...this.context.user,
@@ -87,7 +52,7 @@ export default class Profile extends Component {
       proteinBudget
     })
 
-    // AuthApiService.patchUser(this.context.user);
+    AuthApiService.patchUser(this.context.user);
   }
 
   render() { 
@@ -130,6 +95,6 @@ export default class Profile extends Component {
           <Button type="button" onClick={this.submitUserBudgets}>Submit</Button>
         </form>
       </>
-      );
+    );
   }
 }
