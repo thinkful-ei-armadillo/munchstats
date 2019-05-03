@@ -20,8 +20,6 @@ import Loading from '../Loading/Loading';
 import ChartRoute from '../../routes/ChartRoute/ChartRoute';
 import './ColorStyles.css';
 
-
-
 export default class App extends Component {
   state = {
     hasError: false,
@@ -45,8 +43,8 @@ export default class App extends Component {
         this.context.setUser({
           ...this.context.user,
           ...res.user[0]
-        })
-      })
+        });
+      });
   }
 
   render() {
