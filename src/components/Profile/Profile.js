@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Button from '../Button/Button';
 import UserContext from '../../contexts/UserContext';
+import AuthApiService from '../../services/auth-api-service';
 import './Profile.css';
 
 export default class Profile extends Component {
@@ -21,18 +22,62 @@ export default class Profile extends Component {
   }
 
   submitUserBudgets = () => {
-    let calorieBudget = Number(document.getElementById("calorieBudget").value)
-      ? Number(document.getElementById("calorieBudget").value)
-      : null;
-    let fatBudget = Number(document.getElementById("fatBudget").value)
-      ? Number(document.getElementById("fatBudget").value)
-      : null;
-    let carbBudget = Number(document.getElementById("carbBudget").value)
-      ? Number(document.getElementById("carbBudget").value)
-      : null;
-    let proteinBudget = Number(document.getElementById("proteinBudget").value)
-      ? Number(document.getElementById("proteinBudget").value)
-      : null;
+    // TODO: refactor this atrocity
+    let calorieBudget = null;
+    if(this.context.user.calorieBudget === null || !this.context.user.calorieBudget){
+      calorieBudget = Number(document.getElementById("calorieBudget").value);
+    }
+    if(this.context.user.calorieBudget !== null && Number(document.getElementById("calorieBudget").value) !== 0){
+      calorieBudget = Number(document.getElementById("calorieBudget").value);
+    }
+    if(this.context.user.calorieBudget !== null && Number(document.getElementById("calorieBudget").value) === 0){
+      calorieBudget = this.context.user.calorieBudget;
+    }
+    if(!this.context.user.calorieBudget && Number(document.getElementById("calorieBudget").value) === 0){
+      calorieBudget = null;
+    }
+
+    let fatBudget = null;
+    if(this.context.user.fatBudget === null || !this.context.user.fatBudget){
+      fatBudget = Number(document.getElementById("fatBudget").value);
+    }
+    if(this.context.user.fatBudget !== null && Number(document.getElementById("fatBudget").value) !== 0){
+      fatBudget = Number(document.getElementById("fatBudget").value);
+    }
+    if(this.context.user.fatBudget !== null && Number(document.getElementById("fatBudget").value) === 0){
+      fatBudget = this.context.user.fatBudget;
+    }
+    if(!this.context.user.fatBudget && Number(document.getElementById("fatBudget").value) === 0){
+      fatBudget = null;
+    }
+
+    let carbBudget = null;
+    if(this.context.user.carbBudget === null || !this.context.user.carbBudget){
+      carbBudget = Number(document.getElementById("carbBudget").value);
+    }
+    if(this.context.user.carbBudget !== null && Number(document.getElementById("carbBudget").value) !== 0){
+      carbBudget = Number(document.getElementById("carbBudget").value);
+    }
+    if(this.context.user.carbBudget !== null && Number(document.getElementById("carbBudget").value) === 0){
+      carbBudget = this.context.user.carbBudget;
+    }
+    if(!this.context.user.carbBudget && Number(document.getElementById("carbBudget").value) === 0){
+      carbBudget = null;
+    }
+
+    let proteinBudget = null;
+    if(this.context.user.proteinBudget === null || !this.context.user.proteinBudget){
+      proteinBudget = Number(document.getElementById("proteinBudget").value);
+    }
+    if(this.context.user.proteinBudget !== null && Number(document.getElementById("proteinBudget").value) !== 0){
+      proteinBudget = Number(document.getElementById("proteinBudget").value);
+    }
+    if(this.context.user.proteinBudget !== null && Number(document.getElementById("proteinBudget").value) === 0){
+      proteinBudget = this.context.user.proteinBudget;
+    }
+    if(!this.context.user.proteinBudget && Number(document.getElementById("proteinBudget").value) === 0){
+      proteinBudget = null;
+    }
 
     this.context.setUser({
       ...this.context.user,
@@ -41,6 +86,8 @@ export default class Profile extends Component {
       carbBudget,
       proteinBudget
     })
+
+    // AuthApiService.patchUser(this.context.user);
   }
 
   render() { 
