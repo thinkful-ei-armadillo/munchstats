@@ -5,6 +5,7 @@ import MealsApiService from '../../services/meals-api-service';
 import { Link } from 'react-router-dom';
 import './Meals.css';
 import Loading from '../Loading/Loading';
+import Error from '../Error/Error';
 
 export default class Meals extends Component {
   static contextType = UserContext;
@@ -37,6 +38,7 @@ export default class Meals extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.context.loadingTrue();
+    this.context.clearError();
     const name  = e.target.mealInput.value;
     const user_id = this.context.user.id;
 
@@ -50,8 +52,8 @@ export default class Meals extends Component {
         this.handleCreationSuccess(res[0].id);
         this.context.loadingFalse();
       })
-      .catch(res => {
-        this.setState({ error: res.error });
+      .catch(e => {
+        this.context.setError(e);
         this.context.loadingFalse();
       });
   }
@@ -63,6 +65,7 @@ export default class Meals extends Component {
 
   handleClickDelete = (meal) => {
     this.context.loadingTrue();
+    this.context.clearError();
     MealsApiService.deleteMeal(meal)
       .then(() => {
         MealsApiService.getMeals()
@@ -103,8 +106,10 @@ export default class Meals extends Component {
     if(this.context.loading){
       return <div className="center"><Loading/></div>;
     } else {
+      
       return (
         <div>
+          <Error />
           <form
             className='mealCreationForm'
             onSubmit={this.handleSubmit}>

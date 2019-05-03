@@ -7,9 +7,7 @@ import './Profile.css';
 export default class Profile extends Component {
   static contextType = UserContext;
 
-  componentDidMount() {
-    console.log(this.context.user)
-  }
+  
 
   handleModeToggle = () => {
     let isDark = !this.context.user.isDark;    
@@ -35,6 +33,7 @@ export default class Profile extends Component {
     if(!this.context.user[budget] && Number(document.getElementById(`${budget}`).value) === 0){
       newBudget = null;
     }
+    document.getElementById(`${budget}`).value = '';
     return newBudget;
   }
 
@@ -44,15 +43,17 @@ export default class Profile extends Component {
     let carbBudget = this.setUserBudgets('carbBudget');
     let proteinBudget = this.setUserBudgets('proteinBudget');
 
-    this.context.setUser({
+    this.context.setUser()
+    let updatedUser = {
       ...this.context.user,
       calorieBudget,
       fatBudget,
       carbBudget,
       proteinBudget
-    })
-
-    AuthApiService.patchUser(this.context.user);
+    }
+    AuthApiService.patchUser(updatedUser)
+      .then(this.context.setUser(updatedUser))
+    
   }
 
   render() { 
@@ -61,7 +62,7 @@ export default class Profile extends Component {
         <h2>Hello, {this.context.user.name}!</h2>
         Dark Mode
         <label className="switch">
-          <input type="checkbox" id="modeToggle" onClick={this.handleModeToggle} />
+          <input type="checkbox" id="modeToggle" onClick={this.handleModeToggle} checked = {this.context.user.isDark}/>
           <span className="slider round"></span>
         </label>
         <section>

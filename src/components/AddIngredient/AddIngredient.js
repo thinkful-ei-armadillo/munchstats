@@ -3,8 +3,8 @@ import Button from '../Button/Button';
 import MealsApiService from '../../services/meals-api-service';
 import ProxyApiService from '../../services/proxy-api-service';
 import UserContext from '../../contexts/UserContext';
-import PropTypes from 'prop-types';
 import Loading from '../Loading/Loading';
+import Error from '../Error/Error';
 
 export default class AddIngredient extends Component {
 
@@ -23,6 +23,7 @@ export default class AddIngredient extends Component {
   getNutrientInfo = (e) => {
     e.preventDefault();
     this.context.loadingTrue();
+    this.context.clearError();
     let { quantity, measurements } = e.target;
     measurements = measurements.value.split(',');
 
@@ -63,11 +64,16 @@ export default class AddIngredient extends Component {
         this.context.setIngredientWithNutritionStats(ingredient);
         (this.props.handleModal());
         this.context.loadingFalse();
+      })
+      .catch(e => {
+        this.context.setError(e);
+        this.context.loadingFalse();
       });
   }
 
   getMealInfo() {
     this.context.loadingTrue();
+    this.context.clearError();
     return MealsApiService.getMealById(this.props.meal_id)
       .then(res => {
         if (res.length === 0) {
@@ -81,8 +87,8 @@ export default class AddIngredient extends Component {
           }
         }
       })
-      .catch(err => {
-        console.log(err);
+      .catch(e => {
+        this.context.setError(e);
         this.context.loadingFalse();
       });
   }
@@ -93,15 +99,18 @@ export default class AddIngredient extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.context.loadingTrue();
+    this.context.clearError();
     this.setState({ results: [], chosenIngredient: '' });
     let encodedInput = encodeURI(this.state.ingredientInput);
+    this.context.loadingTrue();
+    console.log(encodedInput);
     ProxyApiService.getIngredientsFromSearch(encodedInput)
       .then(results => {
         this.setState({ results });
         this.context.loadingFalse();
       })
-      .catch(err => {console.log(err);
+      .catch(e => {
+        this.context.setError(e);
         this.context.loadingFalse();
       });
   }
@@ -148,9 +157,7 @@ export default class AddIngredient extends Component {
             className='mealForm'
             onSubmit={this.handleSubmit}
           >
-            {/* <div role='alert'>
-                {error && <p>{error}</p>}
-              </div> */}
+            <Error />
             <label htmlFor='ingredient-input'>
               Ingredient
             </label>

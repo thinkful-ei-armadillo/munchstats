@@ -7,44 +7,53 @@ import RegistrationRoute from '../../routes/RegistrationRoute/RegistrationRoute'
 import LoginRoute from '../../routes/LoginRoute/LoginRoute';
 import DashboardRoute from '../../routes/DashboardRoute/DashboardRoute';
 import NotFoundRoute from '../../routes/NotFoundRoute/NotFoundRoute';
-import ProfileRoute from '../../routes/ProfileRoute/ProfileRoute'
+import ProfileRoute from '../../routes/ProfileRoute/ProfileRoute';
 import LogHomeRoute from '../../routes/LogHomeRoute/LogHomeRoute';
 import LogMealRoute from '../../routes/LogMealRoute/LogMealRoute';
 import LogSnackRoute from '../../routes/LogSnackRoute/LogSnackRoute';
 import MealDetailsRoute from '../../routes/MealDetailsRoute/MealDetailsRoute';
 import MealsRoute from '../../routes/MealsRoute/MealsRoute';
+import AboutRoute from '../../routes/AboutRoute/AboutRoute';
+import AuthApiService from '../../services/auth-api-service';
+import UserContext from '../../contexts/UserContext';
 import './App.css';
 import Loading from '../Loading/Loading';
 import ChartRoute from '../../routes/ChartRoute/ChartRoute';
-
-import './Light.css'
-
-if (false) {
-  require('./Dark.css');
-}
+import './ColorStyles.css';
 
 export default class App extends Component {
   state = {
     hasError: false,
+    error: ''
   };
+
+  static contextType = UserContext;
 
   static getDerivedStateFromError(error) {
     console.error(error);
     return {
-      hasError: true
+      hasError: true,
     };
   }
 
-  render() {
-    const { hasError } = this.state;
+  static contextType = UserContext;
 
+  componentDidMount() {
+    // document.documentElement.setAttribute('theme', 'light');
+    AuthApiService.getUserBudgets()
+      .then(res => {
+        this.context.setUser({
+          ...this.context.user,
+          ...res.user[0]
+        });
+      });
+  }
+
+  render() {
     return (
       <div className='App'>
         <Header />
         <main>
-          {hasError && (
-            <p>There was an error! Oh no!</p>
-          )}
           <Switch>
             <PrivateRoute
               exact
@@ -86,6 +95,10 @@ export default class App extends Component {
             <PublicOnlyRoute
               path={'/login'}
               component={LoginRoute}
+            />
+            <PublicOnlyRoute
+              path={'/about'}
+              component={AboutRoute}
             />
             <Route 
               path={'/loading'}
