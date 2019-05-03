@@ -35,7 +35,7 @@ export default class LogHome extends Component {
         <div key={key} className="event">
           <div className="eventTitle">
             <h3>{event.name}</h3>
-            <p onClick={() => this.clickDelete(event)}><i className="fas fa-trash"></i></p>
+            <p onClick={() => this.clickDelete(event)}><i className="fas fa-trash trash"></i></p>
           </div>
           <div className="eventTime">
             <p>{event.tag}</p>

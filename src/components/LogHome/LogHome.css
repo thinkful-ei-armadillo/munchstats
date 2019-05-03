@@ -2,8 +2,13 @@
   border: 1px black solid;
   border-radius: 5px;
   padding: 10px;
-  background: #c5f3dd63;
+  background: linear-gradient(to right, whitesmoke 91%, #0E4749 0%);
   margin-bottom: 10px;
+  box-shadow: 1px 1px 3px;
+}
+
+.trash {
+  color:whitesmoke;
 }
 
 .eventTitle{
