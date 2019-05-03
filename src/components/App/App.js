@@ -38,6 +38,7 @@ export default class App extends Component {
   static contextType = UserContext;
 
   componentDidMount() {
+    document.documentElement.setAttribute('theme', 'light');
     AuthApiService.getUserBudgets()
       .then(res => {
         this.context.setUser({
