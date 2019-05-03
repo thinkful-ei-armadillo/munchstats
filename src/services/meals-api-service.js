@@ -63,16 +63,16 @@ const MealsApiService = {
       );
   },
 
-    updateMeal(meal) {
-      return fetch(`${config.API_ENDPOINT}/meal`, {
-        method: 'PATCH',
-        body: JSON.stringify(meal),
-        headers: {
-          'content-Type': 'application/json',
-          'authorization': `bearer ${TokenService.getAuthToken()}`
-        }
-      })
-    }
-}
+  updateMeal(meal) {
+    return fetch(`${config.API_ENDPOINT}/meal`, {
+      method: 'PATCH',
+      body: JSON.stringify(meal),
+      headers: {
+        'content-Type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`
+      }
+    });
+  }
+};
 
 export default MealsApiService;

@@ -45,14 +45,16 @@ class RegistrationRoute extends Component {
 
   render() {
     return (
-      <section>
+      <section className='registrationPage'>
         <p id = 'tagline'>
           Create meals, eat them, stay healthy        
         </p>
         <h2>Sign up</h2>
         <RegistrationForm onRegistrationSuccess={this.handleRegistrationSuccess} />
-        <p>Want to test out the app before registering? <Link to='/' onClick={this.handleTestLoginClick}>Login as a test user</Link></p>
-        <p>Want to learn more about Munch Stats? Check out our <Link to='/about'>About Me</Link> page!</p>
+        <section className='registrationPageLinks'>
+          <p>Want to test out the app before registering? <Link to='/' onClick={this.handleTestLoginClick}>Login as a test user</Link></p>
+          <p>Want to learn more about Munch Stats? Check out our <Link to='/about'>About Me</Link> page!</p>
+        </section>
       </section>
     );
   }

@@ -1,46 +1,59 @@
 import React, { Component } from 'react';
 import Button from '../Button/Button';
 import UserContext from '../../contexts/UserContext';
+import AuthApiService from '../../services/auth-api-service';
 import './Profile.css';
 
 export default class Profile extends Component {
   static contextType = UserContext;
 
-  state = {
+  
 
-  };
+  handleModeToggle = () => {
+    let isDark = !this.context.user.isDark;    
+    this.context.setUser({
+      ...this.context.user,
+      isDark
+    })
 
-  handleModeToggle(){
-    const checkbox = document.getElementById("modeToggle");
-    if(checkbox.checked === true){
-      // require dark mode
+    AuthApiService.patchUserDark(this.context.user);
+  }
+
+  setUserBudgets(budget){
+    let newBudget = null;
+    if(this.context.user[budget] === null || !this.context.user[budget]){
+      newBudget = Number(document.getElementById(`${budget}`).value);
     }
-    else{
-      // require light mode
+    if(this.context.user[budget] !== null && Number(document.getElementById(`${budget}`).value) !== 0){
+      newBudget = Number(document.getElementById(`${budget}`).value);
     }
+    if(this.context.user[budget] !== null && Number(document.getElementById(`${budget}`).value) === 0){
+      newBudget = this.context.user[budget];
+    }
+    if(!this.context.user[budget] && Number(document.getElementById(`${budget}`).value) === 0){
+      newBudget = null;
+    }
+    document.getElementById(`${budget}`).value = '';
+    return newBudget;
   }
 
   submitUserBudgets = () => {
-    let calorieBudget = Number(document.getElementById("calorieBudget").value)
-      ? Number(document.getElementById("calorieBudget").value)
-      : null;
-    let fatBudget = Number(document.getElementById("fatBudget").value)
-      ? Number(document.getElementById("fatBudget").value)
-      : null;
-    let carbBudget = Number(document.getElementById("carbBudget").value)
-      ? Number(document.getElementById("carbBudget").value)
-      : null;
-    let proteinBudget = Number(document.getElementById("proteinBudget").value)
-      ? Number(document.getElementById("proteinBudget").value)
-      : null;
+    let calorieBudget = this.setUserBudgets('calorieBudget');
+    let fatBudget = this.setUserBudgets('fatBudget');
+    let carbBudget = this.setUserBudgets('carbBudget');
+    let proteinBudget = this.setUserBudgets('proteinBudget');
 
-    this.context.setUser({
+    this.context.setUser()
+    let updatedUser = {
       ...this.context.user,
       calorieBudget,
       fatBudget,
       carbBudget,
       proteinBudget
-    })
+    }
+    AuthApiService.patchUser(updatedUser)
+      .then(this.context.setUser(updatedUser))
+    
   }
 
   render() { 
@@ -49,7 +62,7 @@ export default class Profile extends Component {
         <h2>Hello, {this.context.user.name}!</h2>
         Dark Mode
         <label className="switch">
-          <input type="checkbox" id="modeToggle" onClick={this.handleModeToggle} />
+          <input type="checkbox" id="modeToggle" onClick={this.handleModeToggle} checked = {this.context.user.isDark}/>
           <span className="slider round"></span>
         </label>
         <section>
@@ -83,6 +96,6 @@ export default class Profile extends Component {
           <Button type="button" onClick={this.submitUserBudgets}>Submit</Button>
         </form>
       </>
-      );
+    );
   }
 }

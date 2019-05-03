@@ -79,8 +79,7 @@ export class UserProvider extends Component {
   }
 
   setError = error => {
-    console.error(error);
-    this.setState({ error });
+    this.setState({ error: error.error });
   }
 
   clearError = () => {
@@ -89,7 +88,6 @@ export class UserProvider extends Component {
 
   setUser = user => {
     this.setState({ user });
-    console.log(user);
   }
 
   setMeals = meals => {
@@ -112,6 +110,13 @@ export class UserProvider extends Component {
     TokenService.queueCallbackBeforeExpiry(() => {
       this.fetchRefreshToken();
     });
+    AuthApiService.getUserBudgets()
+      .then(res => {
+        this.setUser({
+          ...this.state.user,
+          ...res.user[0]
+        })
+      })
   }
 
   processLogout = () => {

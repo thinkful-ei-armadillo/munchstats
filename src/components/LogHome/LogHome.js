@@ -20,11 +20,16 @@ export default class LogHome extends Component {
 
   clickDelete(event) {
     this.context.loadingTrue();
+    this.context.clearError();
     EventsApiService.deleteEvent(event)
       .then(() => EventsApiService.getTodaysEvents())
       .then(sortedEvents => {
         this.context.setTodayEvents(sortedEvents);
-        this.context.loadingFalse();});
+        this.context.loadingFalse();})
+      .catch(e => {
+        this.context.setError(e);
+        this.context.loadingFalse();
+      });
   }
 
   generateReport = () => {

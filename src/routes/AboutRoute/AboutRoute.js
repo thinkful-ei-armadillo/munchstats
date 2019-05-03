@@ -3,6 +3,7 @@ import Button from '../../components/Button/Button';
 import AuthApiService from '../../services/auth-api-service';
 import EventsApiService from '../../services/events-api-service';
 import UserContext from '../../contexts/UserContext';
+import './AboutRoute.css';
 
 
 class AboutRoute extends Component {
@@ -61,7 +62,7 @@ class AboutRoute extends Component {
                     <Button type='submit'>Test Login</Button>
                 </form>
                 <footer>
-                    Development Teams: <a href='https://github.com/michaelbramble'>Michael Bramble</a>, <a href='https://github.com/geordo9'>Geordie Connell</a>, <a href='https://github.com/DavidHaugen'>David Haugen</a>, <a href='https://github.com/bobnearents'>Bob Nearents</a>.
+                    Development Team: <a href='https://github.com/michaelbramble'>Michael Bramble</a>, <a href='https://github.com/geordo9'>Geordie Connell</a>, <a href='https://github.com/DavidHaugen'>David Haugen</a>, <a href='https://github.com/bobnearents'>Bob Nearents</a>.
                 </footer>
             </section>
         )
