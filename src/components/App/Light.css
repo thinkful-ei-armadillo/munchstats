@@ -1,0 +1,89 @@
+
+/* main body background color, also used in header text */
+.backgroundColor1{
+  background: #EFE7DA
+}
+
+/* primarily used in header */
+.backgroundColor2{
+  background: #0E4749
+}
+
+/* used in buttons */
+.backgroundColor3{
+  background-color: #087E8B
+}
+
+/* used as card background color */
+.backgroundColor4{
+  background-color: #c5f3dd63
+}
+
+/* meal/nutrient card background */
+.backgroundColor5{
+  background: whitesmoke;
+}
+
+/* main text color in body */
+.textColor1{
+  color: #152a23
+}
+
+/* header text color */
+.textColor2{
+  color: #EFE7DA;
+}
+
+/* animated loading bars color */
+
+.lds-facebook div {
+  background: #120E0B;
+}
+
+/* main border color (primarily used on event cards) */
+
+.border1{
+  border: 1px black solid
+}
+
+/* border color for calendar divs */
+
+.rdtDays tfoot tr td{
+  border: 1px black solid;
+}
+
+/* gradient underline used on mealDetails component, specifically on each ingredient in the meal */
+.gradientUnderline1{
+  border-bottom:1px solid;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(90deg, whitesmoke, black, whitesmoke);
+}
+
+/* buttons and links: */
+
+button, .button{
+  background-color: #087E8B;
+  color: #eeeeee;
+}
+
+.button:visited {
+  color: #eeeeee;
+}
+
+button a {
+  color:#eeeeee;
+  text-decoration: none;
+}
+
+button a:visited {
+  color: #eeeeee;  
+}
+
+a:visited {
+  color: #152a23;
+}
+
+html{
+  background: #EFE7DA;
+  color: #152a23;
+}

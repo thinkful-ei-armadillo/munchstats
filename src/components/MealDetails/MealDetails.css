@@ -21,72 +21,6 @@
   cursor: pointer;
 }
 
-/* .mealContainer form {
-  display: flex;
-  flex-direction: column;
-} */
-
-/* .statsContainer {
-  display: flex;
-  height:100vh;
-  justify-content: flex-start;
-}
-
-.currentMealStats h4, .finalIngredientsContainer h4 {
-  text-align: center;
-  font-size: 1.5em;
-  margin: 5px;
-}
-
-
-.finalIngredients {
-  height:80%;
-  padding: 5%;
-  overflow: auto;
-  text-align: center;
-}
-
-.finalIngredients div {
-  margin:10px;
-}
-
-.finalIngredientsContainer, .currentMealStats {
-  height:50%;
-  width: 100%;
-}
-
-
-
-.results {
-  margin:15px 0;
-  padding:5px;
-  text-align: center;
-}
-
-.results div {
-  margin:7px;
-  cursor: pointer;
-}
-
-
-
-.measureForm p {
-  font-size:1.3em;
-  margin:15px;
-  text-align: center;
-  font-weight: bold;
-}
-
-.measureForm {
-  align-items: center;
-}
-
-.measureForm input, .measureForm select, .measureForm button {
-  width:200px;
-  
-} */
-
-
 .mealContainer {
   display: flex;
   flex-wrap:wrap;
@@ -97,15 +31,12 @@
 .panel {
   margin: 50px;
   height:40vh;
-  background: whitesmoke;
   border-radius: 20px;
   box-shadow: 1px 1px 10px;
   overflow:auto;
 }
 
 .panelHeader {
-  background: #0E4749;
-  color: #EFE7DA;
   border-top-right-radius: inherit;
   border-top-left-radius: inherit;
   padding: 10px;
@@ -115,9 +46,6 @@
   display:flex;
   justify-content: space-between;
   margin:15px;
-  border-bottom:1px solid;
-  border-image-source: linear-gradient(90deg, whitesmoke, black, whitesmoke);
-  border-image-slice: 1;
   padding-bottom:10px;
 }
 
