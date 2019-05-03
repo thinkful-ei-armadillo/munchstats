@@ -10,8 +10,8 @@ chartRef = React.createRef();
 
 componentDidMount() {
     this.context.clearError();
-
-    let chartData = [0];
+    let chartData = [0, 0];
+    chartData[1] = this.context.user.calorieBudget;
     for(let i = 0; i < this.context.todayEvents.length; i++) {
         chartData[0] += this.context.todayEvents[i].calories;
     }
@@ -20,21 +20,17 @@ componentDidMount() {
     new Chart(myChartRef, {
         type: 'horizontalBar',
         data: {
-            labels: ['Calories'],
+            labels: ['Calories', 'Calorie Goal'],
             datasets: [{
                 label: "Today's Calories",
                 data: chartData,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.5)',
-                    // 'rgba(54, 162, 235, 0.2)',
-                    // 'rgba(255, 206, 86, 0.2)',
-                    // 'rgba(75, 192, 192, 0.2)'
+                    'rgba(255, 99, 132, 0.5)'
                 ],
                 borderColor: [
                     'rgba(255, 99, 132, 1)',
-                    // 'rgba(54, 162, 235, 1)',
-                    // 'rgba(255, 206, 86, 1)',
-                    // 'rgba(75, 192, 192, 1)'
+                    'rgba(255, 99, 132, 1)'
                 ],
                 borderWidth: 1
             }]
