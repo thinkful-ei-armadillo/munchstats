@@ -88,7 +88,6 @@ export class UserProvider extends Component {
 
   setUser = user => {
     this.setState({ user });
-    console.log(user);
   }
 
   setMeals = meals => {
@@ -111,6 +110,13 @@ export class UserProvider extends Component {
     TokenService.queueCallbackBeforeExpiry(() => {
       this.fetchRefreshToken();
     });
+    AuthApiService.getUserBudgets()
+      .then(res => {
+        this.setUser({
+          ...this.state.user,
+          ...res.user[0]
+        })
+      })
   }
 
   processLogout = () => {

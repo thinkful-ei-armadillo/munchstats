@@ -13,6 +13,7 @@ import LogMealRoute from '../../routes/LogMealRoute/LogMealRoute';
 import LogSnackRoute from '../../routes/LogSnackRoute/LogSnackRoute';
 import MealDetailsRoute from '../../routes/MealDetailsRoute/MealDetailsRoute';
 import MealsRoute from '../../routes/MealsRoute/MealsRoute';
+import AuthApiService from '../../services/auth-api-service';
 import UserContext from '../../contexts/UserContext';
 import './App.css';
 import Loading from '../Loading/Loading';
@@ -23,6 +24,8 @@ import './Light.css';
 if (false) {
   require('./Dark.css');
 }
+
+
 
 export default class App extends Component {
   state = {
@@ -38,6 +41,18 @@ export default class App extends Component {
     return {
       hasError: true,
     };
+  }
+
+  static contextType = UserContext;
+
+  componentDidMount() {
+    AuthApiService.getUserBudgets()
+      .then(res => {
+        this.context.setUser({
+          ...this.context.user,
+          ...res.user[0]
+        })
+      })
   }
 
   render() {
