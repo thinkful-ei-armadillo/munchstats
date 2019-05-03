@@ -7,17 +7,18 @@ import RegistrationRoute from '../../routes/RegistrationRoute/RegistrationRoute'
 import LoginRoute from '../../routes/LoginRoute/LoginRoute';
 import DashboardRoute from '../../routes/DashboardRoute/DashboardRoute';
 import NotFoundRoute from '../../routes/NotFoundRoute/NotFoundRoute';
-import ProfileRoute from '../../routes/ProfileRoute/ProfileRoute'
+import ProfileRoute from '../../routes/ProfileRoute/ProfileRoute';
 import LogHomeRoute from '../../routes/LogHomeRoute/LogHomeRoute';
 import LogMealRoute from '../../routes/LogMealRoute/LogMealRoute';
 import LogSnackRoute from '../../routes/LogSnackRoute/LogSnackRoute';
 import MealDetailsRoute from '../../routes/MealDetailsRoute/MealDetailsRoute';
 import MealsRoute from '../../routes/MealsRoute/MealsRoute';
+import UserContext from '../../contexts/UserContext';
 import './App.css';
 import Loading from '../Loading/Loading';
 import ChartRoute from '../../routes/ChartRoute/ChartRoute';
 
-import './Light.css'
+import './Light.css';
 
 if (false) {
   require('./Dark.css');
@@ -26,25 +27,25 @@ if (false) {
 export default class App extends Component {
   state = {
     hasError: false,
+    error: '',
+    stylepath: './Light.css'
   };
+
+  static contextType = UserContext;
 
   static getDerivedStateFromError(error) {
     console.error(error);
     return {
-      hasError: true
+      hasError: true,
     };
   }
 
   render() {
-    const { hasError } = this.state;
-
     return (
       <div className='App'>
+        {/* <link rel="stylesheet" type="text/css" href='/src/components/App/Light.css' /> */}
         <Header />
         <main>
-          {hasError && (
-            <p>There was an error! Oh no!</p>
-          )}
           <Switch>
             <PrivateRoute
               exact

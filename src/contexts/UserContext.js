@@ -79,8 +79,7 @@ export class UserProvider extends Component {
   }
 
   setError = error => {
-    console.error(error);
-    this.setState({ error });
+    this.setState({ error: error.error });
   }
 
   clearError = () => {
