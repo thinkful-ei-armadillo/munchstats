@@ -55,6 +55,14 @@ class RegistrationForm extends Component {
         }});
   }
 
+  lightTheme = () => {
+    document.documentElement.setAttribute('theme', 'light');
+  }
+
+  darkTheme = () => {
+    document.documentElement.setAttribute('theme', 'dark');
+  }
+
   render() {
 
     if(this.context.loading){

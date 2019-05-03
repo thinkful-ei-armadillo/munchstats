@@ -1,0 +1,167 @@
+/* color themes referenced by classes: */
+
+html[theme='light']{
+  --backgroundColor1: #EFE7DA;
+  --backgroundColor2: #0E4749;
+  --backgroundColor3: #087E8B;
+  --backgroundColor4: #c5f3dd63;
+  --backgroundColor5: whitesmoke;
+  --textColor1: #152a23;
+  --textColor2: #EFE7DA;
+  --errorText: red;
+  --loading: #120E0B;
+  --border1: black;
+  --gradientUnderline: linear-gradient(90deg, whitesmoke, black, whitesmoke);
+  --buttonText: #eeeeee;
+}
+
+html[theme='dark']{
+  --backgroundColor1: #0A0908;
+  --backgroundColor2: #0A0908;
+  --backgroundColor3: ;
+  --backgroundColor4: ;
+  --backgroundColor5: ;
+  --textColor1: ;
+  --textColor2: ;
+  --errorText: ;
+  --loading: ;
+  --border1: ;
+  --gradientUnderline: ;
+  --buttonText: ;
+}
+
+/* To add a new theme, name your theme and specify all colors below: */
+
+/* html[theme='']{
+  --backgroundColor1: ;
+  --backgroundColor2: ;
+  --backgroundColor3: ;
+  --backgroundColor4: ;
+  --backgroundColor5: ;
+  --textColor1: ;
+  --textColor2: ;
+  --errorText: ;
+  --loading: ;
+  --border1: ;
+  --gradientUnderline: ;
+  --buttonText: ;
+} */
+
+
+/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
+/* classes: */
+
+/* main body background color, also used in header text */
+.backgroundColor1{
+  background: var(--backgroundColor1);
+  /* background: #EFE7DA */
+}
+
+/* primarily used in header */
+.backgroundColor2{
+  background: var(--backgroundColor2);
+  /* background: #0E4749 */
+}
+
+/* used in buttons */
+.backgroundColor3{
+  background-color: var(--backgroundColor3);
+  /* background-color: #087E8B */
+}
+
+/* used as card background color */
+.backgroundColor4{
+  background-color: var(--backgroundColor4);
+  /* background-color: #c5f3dd63 */
+}
+
+/* meal/nutrient card background */
+.backgroundColor5{
+  background-color: var(--backgroundColor5);
+  /* background: whitesmoke; */
+}
+
+/* main text color in body */
+.textColor1{
+  color: var(--textColor1);
+  /* color: #152a23 */
+}
+
+/* header text color */
+.textColor2{
+  color: var(--textColor2);
+  /* color: #EFE7DA; */
+}
+
+.errorText{
+  color: var(--errorText);
+  /* color: red */
+}
+
+/* animated loading bars color */
+
+.lds-facebook div {
+  background: var(--loading);
+  /* background: #120E0B; */
+}
+
+/* main border color (primarily used on event cards) */
+
+.border1{
+  border-color: var(--border1);
+  /* border-color: black */
+  border: 1px solid;
+}
+
+/* border color for calendar divs */
+
+.rdtDays tfoot tr td{
+  border-color: var(--border1);
+  /* border-color: black */
+  border: 1px solid;
+}
+
+/* gradient underline used on mealDetails component, specifically on each ingredient in the meal */
+.gradientUnderline1{
+  border-bottom:1px solid;
+  border-image-slice: 1;
+  border-image-source: var(--gradientUnderline);
+  /* border-image-source: linear-gradient(90deg, whitesmoke, black, whitesmoke); */
+}
+
+/* buttons and links: */
+
+button, .button{
+  background-color: var(--backgroundColor3);
+  color: var(--buttonText)
+    /* background-color: #087E8B; */
+  /* color: #eeeeee; */
+}
+
+.button:visited {
+  color: var(--buttonText);
+  /* color: #eeeeee; */
+}
+
+button a {
+  color: var(--buttonText);
+  /* color:#eeeeee; */
+  text-decoration: none;
+}
+
+button a:visited {
+  color: var(--buttonText);
+  /* color: #eeeeee;   */
+}
+
+a:visited {
+  color: var(--textColor1);
+  /* color: #152a23; */
+}
+
+html{
+  background: var(--backgroundColor1);
+  color: var(--textColor1);
+  /* background: #EFE7DA;*/
+  /* color: #152a23; */
+}

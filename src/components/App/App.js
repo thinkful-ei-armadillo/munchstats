@@ -18,20 +18,12 @@ import UserContext from '../../contexts/UserContext';
 import './App.css';
 import Loading from '../Loading/Loading';
 import ChartRoute from '../../routes/ChartRoute/ChartRoute';
-
-import './Light.css';
-
-if (false) {
-  require('./Dark.css');
-}
-
-
+import './ColorStyles.css';
 
 export default class App extends Component {
   state = {
     hasError: false,
-    error: '',
-    stylepath: './Light.css'
+    error: ''
   };
 
   static contextType = UserContext;
@@ -51,14 +43,13 @@ export default class App extends Component {
         this.context.setUser({
           ...this.context.user,
           ...res.user[0]
-        })
-      })
+        });
+      });
   }
 
   render() {
     return (
       <div className='App'>
-        {/* <link rel="stylesheet" type="text/css" href='/src/components/App/Light.css' /> */}
         <Header />
         <main>
           <Switch>
