@@ -106,7 +106,12 @@ export class UserProvider extends Component {
     this.setUser({
       id: jwtPayload.user_id,
       name: jwtPayload.name,
-      username: jwtPayload.sub
+      username: jwtPayload.sub,
+      isDark: jwtPayload.isDark,
+      calorieBudget: jwtPayload.calorieBudget,
+      fatBudget: jwtPayload.fatBudget,
+      carbBudget: jwtPayload.calorieBudget,
+      proteinBudget: jwtPayload.proteinBudget
     });
     IdleService.regiserIdleTimerResets();
     TokenService.queueCallbackBeforeExpiry(() => {
