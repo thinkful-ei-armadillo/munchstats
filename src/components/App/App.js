@@ -13,6 +13,7 @@ import LogMealRoute from '../../routes/LogMealRoute/LogMealRoute';
 import LogSnackRoute from '../../routes/LogSnackRoute/LogSnackRoute';
 import MealDetailsRoute from '../../routes/MealDetailsRoute/MealDetailsRoute';
 import MealsRoute from '../../routes/MealsRoute/MealsRoute';
+import AboutRoute from '../../routes/AboutRoute/AboutRoute';
 import './App.css';
 import Loading from '../Loading/Loading';
 import ChartRoute from '../../routes/ChartRoute/ChartRoute';
@@ -86,6 +87,10 @@ export default class App extends Component {
             <PublicOnlyRoute
               path={'/login'}
               component={LoginRoute}
+            />
+            <PublicOnlyRoute
+              path={'/about'}
+              component={AboutRoute}
             />
             <Route 
               path={'/loading'}
