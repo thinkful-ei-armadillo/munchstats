@@ -34,6 +34,10 @@
   color: #EFE7DA;
 }
 
+.errorText{
+  color: red
+}
+
 /* animated loading bars color */
 
 .lds-facebook div {

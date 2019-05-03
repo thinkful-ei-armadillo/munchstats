@@ -5,6 +5,8 @@ import IngredientsApiService from '../../services/ingredients-api-service';
 import AddIngredient from '../AddIngredient/AddIngredient';
 import UserContext from '../../contexts/UserContext';
 import ReactModal from 'react-modal';
+import Loading from '../../components/Loading/Loading';
+import Error from '../../components/Error/Error';
 
 export default class Meals extends Component {
   state = {
@@ -26,6 +28,8 @@ export default class Meals extends Component {
   }
 
   getMealInfo() {
+    this.context.loadingTrue();
+    this.context.clearError();
     return MealsApiService.getMealById(this.props.meal_id)
       .then(res => {
         if (res.length === 0) {
@@ -34,20 +38,33 @@ export default class Meals extends Component {
           // hacky fix to avoid react trying to set state on unmounted component
           if (res.length !== 0) {
             this.setState({ mealInfo: res[0] });
+            this.context.loadingFalse();
           }
         }
       })
-      .catch(err => console.log(err));
+      .catch(e => {
+        this.context.setError(e);
+        this.context.loadingFalse(); 
+      });  
   }
 
   getMealIngredients() {
+    this.context.loadingTrue();
+    this.context.clearError();
     return IngredientsApiService.getIngredientsForMeal(this.props.meal_id)
-      .then(res => this.setState({ mealIngredients: res.ingredients }))
-      .catch(err => console.log(err));
-  }
+      .then(res => {
+        this.setState({ mealIngredients: res.ingredients });
+        this.loadingFalse();
+      })
+      .catch(e => {
+        this.context.setError(e);
+        this.context.loadingFalse(); 
+      });  }
 
   updateMeal(res) {
-    //check if ingredient exists in context before calling this function
+    this.context.loadingTrue();
+    this.context.clearError();
+
     let results = {
       ingredient: {
         meal_id: Number(this.props.meal_id), 
@@ -77,7 +94,10 @@ export default class Meals extends Component {
           .then(() => {
             this.getMealInfo();
             this.getMealIngredients();
-
+          })
+          .catch(e => {
+            this.context.setError(e);
+            this.context.loadingFalse(); 
           });
       });
 
@@ -106,6 +126,9 @@ export default class Meals extends Component {
   }
 
   handleClickDelete = (ingredient) => {
+    this.context.loadingTrue();
+    this.context.clearError();
+    
     IngredientsApiService.deleteIngredient(ingredient.id)
       .then(() => {
         // subtract calorie/fat/carb/protein counts to meal totals
@@ -126,7 +149,10 @@ export default class Meals extends Component {
         this.getMealInfo();
         this.getMealIngredients();
       })
-      .catch(err => console.log(err));
+      .catch(e => {
+        this.context.setError(e);
+        this.context.loadingFalse(); 
+      });
   }
 
   handleModal = () => {
@@ -146,9 +172,13 @@ export default class Meals extends Component {
       this.updateMeal(this.context.ingredient);
     }
 
-    return (
+    if(!this.state.showModal && this.context.loading){
+      return <div className="center"><Loading/></div>;
+    } else {
+
+      return (
       <>
-        
+        <Error />   
         <h3 className='mealName'>{this.state.mealInfo ? this.state.mealInfo.name : ''}</h3>
 
         <div className='mealContainer'>
@@ -190,6 +220,6 @@ export default class Meals extends Component {
           
         </div>
       </>
-    );
-  }
+      );
+    }}
 }
