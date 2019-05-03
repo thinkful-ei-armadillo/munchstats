@@ -13,6 +13,7 @@ import LogMealRoute from '../../routes/LogMealRoute/LogMealRoute';
 import LogSnackRoute from '../../routes/LogSnackRoute/LogSnackRoute';
 import MealDetailsRoute from '../../routes/MealDetailsRoute/MealDetailsRoute';
 import MealsRoute from '../../routes/MealsRoute/MealsRoute';
+import AboutRoute from '../../routes/AboutRoute/AboutRoute';
 import AuthApiService from '../../services/auth-api-service';
 import UserContext from '../../contexts/UserContext';
 import './App.css';
@@ -94,6 +95,10 @@ export default class App extends Component {
             <PublicOnlyRoute
               path={'/login'}
               component={LoginRoute}
+            />
+            <PublicOnlyRoute
+              path={'/about'}
+              component={AboutRoute}
             />
             <Route 
               path={'/loading'}
