@@ -7,7 +7,6 @@ import UserContext from '../../contexts/UserContext';
 
 class AboutRoute extends Component {
     static defaultProps = {
-        location: {},
         history: {
         push: () => { }
         }
@@ -16,9 +15,8 @@ class AboutRoute extends Component {
     static contextType = UserContext;
 
     handleLoginSuccess = () => {
-        const { location, history } = this.props;
-        const destination = (location.state || {}).from || '/';
-        history.push(destination);
+        const { history } = this.props;
+        history.push('/');
     }
 
     handleSubmit = ev => {
