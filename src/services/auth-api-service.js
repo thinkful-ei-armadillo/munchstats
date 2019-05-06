@@ -33,7 +33,6 @@ const AuthApiService = {
   },
 
   patchUser(user){
-    console.log(user)
     return fetch(`${config.API_ENDPOINT}/user`, {
       method: 'PATCH',
       headers: {
