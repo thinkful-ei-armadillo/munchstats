@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RegistrationForm /> renders the UI as expected 1`] = `
+<form
+  className="RegistrationForm"
+  onSubmit={[Function]}
+>
+  <div
+    role="alert"
+  />
+  <div>
+    <label
+      className="Label"
+      htmlFor="registration-name-input"
+    >
+      Name
+      <span
+        className="Required"
+      >
+        *
+      </span>
+    </label>
+    <br />
+    <input
+      className="Input"
+      id="registration-name-input"
+      name="name"
+      required={true}
+      type="text"
+    />
+  </div>
+  <br />
+  <div>
+    <label
+      className="Label"
+      htmlFor="registration-username-input"
+    >
+      Choose a Username
+      <span
+        className="Required"
+      >
+        *
+      </span>
+    </label>
+    <br />
+    <input
+      className="Input"
+      id="registration-username-input"
+      name="username"
+      required={true}
+      type="text"
+    />
+  </div>
+  <br />
+  <div>
+    <label
+      className="Label"
+      htmlFor="registration-password-input"
+    >
+      Choose a Password
+      <span
+        className="Required"
+      >
+        *
+      </span>
+    </label>
+    <br />
+    <input
+      className="Input"
+      id="registration-password-input"
+      name="password"
+      required={true}
+      type="password"
+    />
+  </div>
+  <br />
+  <button
+    className="Button"
+    type="submit"
+  >
+    Sign Up
+  </button>
+  <footer>
+    <p>
+      Already have an account? 
+      <a
+        href="/login"
+        onClick={[Function]}
+      >
+        Log In!
+      </a>
+    </p>
+  </footer>
+</form>
+`;

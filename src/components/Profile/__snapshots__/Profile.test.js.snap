@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Profile /> renders the UI as expected 1`] = `
+Array [
+  <h2>
+    Hello, 
+    !
+  </h2>,
+  "Dark Mode",
+  <label
+    className="switch"
+  >
+    <input
+      id="modeToggle"
+      onClick={[Function]}
+      type="checkbox"
+    />
+    <span
+      className="slider round"
+    />
+  </label>,
+  <section>
+    Current Budgets
+    <br />
+    Calories: 
+    <br />
+    Fat: 
+    <br />
+    Carbs: 
+    <br />
+    Protein: 
+  </section>,
+  <form
+    className="userBudgets"
+  >
+    <label>
+      Calorie Budget: 
+      <input
+        id="calorieBudget"
+        type="text"
+      />
+    </label>
+    <br />
+    <label>
+      Fat Budget: 
+      <input
+        id="fatBudget"
+        type="text"
+      />
+    </label>
+    <br />
+    <label>
+      Carb Budget: 
+      <input
+        id="carbBudget"
+        type="text"
+      />
+    </label>
+    <br />
+    <label>
+      Protein Budget: 
+      <input
+        id="proteinBudget"
+        type="text"
+      />
+    </label>
+    <br />
+    <button
+      className="Button"
+      onClick={[Function]}
+      type="button"
+    >
+      Submit
+    </button>
+  </form>,
+]
+`;

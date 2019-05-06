@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Meals /> renders the UI as expected 1`] = `
+<div>
+  <form
+    className="mealCreationForm"
+    onSubmit={[Function]}
+  >
+    <label
+      htmlFor="mealInput"
+    >
+      New Meal Name
+    </label>
+    <br />
+    <input
+      autoComplete="off"
+      id="mealInput"
+      maxLength="60"
+      name="mealInput"
+      onChange={[Function]}
+      required={true}
+      value=""
+    />
+    <br />
+    <button
+      className="Button"
+      type="submit"
+    >
+      Add Meal
+    </button>
+  </form>
+  <section
+    className="mealsContainer"
+  />
+</div>
+`;

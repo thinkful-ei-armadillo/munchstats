@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MealDetails /> renders the UI as expected 1`] = `
+Array [
+  <h3
+    className="mealName"
+  />,
+  <div
+    className="mealContainer"
+  >
+    <section
+      className="finalIngredientsContainer"
+    >
+      <div
+        className="panel backgroundColor5"
+      >
+        <div
+          className="panelHeader backgroundColor2 textColor2"
+        >
+          <h3>
+            Meal Ingredients
+          </h3>
+          <p
+            className="modalOpener"
+            onClick={[Function]}
+          >
+            click here to add ingredient
+          </p>
+        </div>
+        <div
+          className="finalIngredients"
+        >
+          Nothing so far!
+        </div>
+      </div>
+    </section>
+    <section
+      className="currentMealStats"
+    >
+      <div
+        className="panel backgroundColor5"
+      >
+        <h3
+          className="panelHeader backgroundColor2 textColor2"
+        >
+          Meal Nutrition Information
+        </h3>
+        <div
+          className="nutritionInfo"
+        >
+          <p>
+            calories: 
+            NaN
+          </p>
+          <p>
+             fat: 
+            NaN
+             
+          </p>
+          <p>
+            carbs: 
+            NaN
+             
+          </p>
+          <p>
+            protein: 
+            NaN
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>,
+]
+`;
