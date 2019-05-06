@@ -1,0 +1,20 @@
+.aboutPage {
+    text-align: center;
+}
+
+.aboutPage h3 {
+    padding-top: 10px;
+}
+
+.aboutPage footer {
+    padding: 10px;
+    font-style: italic;
+}
+
+.aboutList {
+    padding: 0;
+}
+
+.aboutListItems {
+    font-weight: 800;
+}

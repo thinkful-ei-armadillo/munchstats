@@ -1,6 +1,6 @@
 /* color themes referenced by classes: */
 
-html[theme='light']{
+html{
   --backgroundColor1: #EFE7DA;
   --backgroundColor2: #0E4749;
   --backgroundColor3: #087E8B;
