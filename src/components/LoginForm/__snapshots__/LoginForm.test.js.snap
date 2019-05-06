@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LoginForm /> renders the UI as expected 1`] = `
+<form
+  className="LoginForm"
+  onSubmit={[Function]}
+>
+  <div
+    role="alert"
+  />
+  <div>
+    <label
+      className="Label"
+      htmlFor="login-username-input"
+    >
+      Username
+    </label>
+    <br />
+    <input
+      className="Input"
+      id="login-username-input"
+      name="username"
+      required={true}
+      type="text"
+    />
+  </div>
+  <br />
+  <div>
+    <label
+      className="Label"
+      htmlFor="login-password-input"
+    >
+      Password
+    </label>
+    <br />
+    <input
+      className="Input"
+      id="login-password-input"
+      name="password"
+      required={true}
+      type="password"
+    />
+  </div>
+  <br />
+  <button
+    className="Button"
+    type="submit"
+  >
+    Log In
+  </button>
+  <footer>
+    <p>
+      Don't have an account? 
+      <a
+        href="/register"
+        onClick={[Function]}
+        style={
+          Object {
+            "textDecoration": "none",
+          }
+        }
+      >
+        Sign Up!
+      </a>
+    </p>
+  </footer>
+</form>
+`;
