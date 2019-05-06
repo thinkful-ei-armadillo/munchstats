@@ -1,0 +1,178 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App /> renders the UI as expected 1`] = `
+<div
+  className="App"
+>
+  <header
+    className="backgroundColor2 textColor2"
+  >
+    <h1>
+      <a
+        href="/"
+        onClick={[Function]}
+        style={
+          Object {
+            "textDecoration": "none",
+          }
+        }
+      >
+        Munch Stats
+      </a>
+    </h1>
+    <nav>
+      <a
+        href="/login"
+        onClick={[Function]}
+        style={
+          Object {
+            "textDecoration": "none",
+          }
+        }
+      >
+        Log In
+      </a>
+       | 
+      <a
+        href="/register"
+        onClick={[Function]}
+        style={
+          Object {
+            "textDecoration": "none",
+          }
+        }
+      >
+        Sign Up
+      </a>
+    </nav>
+  </header>
+  <main>
+    <section
+      className="registrationPage"
+    >
+      <p
+        id="tagline"
+      >
+        Create meals, eat them, stay healthy
+      </p>
+      <h2>
+        Sign up
+      </h2>
+      <form
+        className="RegistrationForm"
+        onSubmit={[Function]}
+      >
+        <div
+          role="alert"
+        />
+        <div>
+          <label
+            className="Label"
+            htmlFor="registration-name-input"
+          >
+            Name
+            <span
+              className="Required"
+            >
+              *
+            </span>
+          </label>
+          <br />
+          <input
+            className="Input"
+            id="registration-name-input"
+            name="name"
+            required={true}
+            type="text"
+          />
+        </div>
+        <br />
+        <div>
+          <label
+            className="Label"
+            htmlFor="registration-username-input"
+          >
+            Choose a Username
+            <span
+              className="Required"
+            >
+              *
+            </span>
+          </label>
+          <br />
+          <input
+            className="Input"
+            id="registration-username-input"
+            name="username"
+            required={true}
+            type="text"
+          />
+        </div>
+        <br />
+        <div>
+          <label
+            className="Label"
+            htmlFor="registration-password-input"
+          >
+            Choose a Password
+            <span
+              className="Required"
+            >
+              *
+            </span>
+          </label>
+          <br />
+          <input
+            className="Input"
+            id="registration-password-input"
+            name="password"
+            required={true}
+            type="password"
+          />
+        </div>
+        <br />
+        <button
+          className="Button"
+          type="submit"
+        >
+          Sign Up
+        </button>
+        <footer>
+          <p>
+            Already have an account? 
+            <a
+              href="/login"
+              onClick={[Function]}
+            >
+              Log In!
+            </a>
+          </p>
+        </footer>
+      </form>
+      <section
+        className="registrationPageLinks"
+      >
+        <p>
+          Want to test out the app before registering? 
+          <a
+            href="/"
+            onClick={[Function]}
+          >
+            Login as a test user
+          </a>
+        </p>
+        <p>
+          Want to learn more about Munch Stats? Check out our 
+          <a
+            href="/about"
+            onClick={[Function]}
+          >
+            About Me
+          </a>
+           page!
+        </p>
+      </section>
+    </section>
+  </main>
+</div>
+`;

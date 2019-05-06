@@ -17,7 +17,6 @@ class RegistrationForm extends Component {
   static contextType = UserContext;
 
   componentDidMount() {
-    this.firstInput.current.focus();
   }
 
   firstInput = React.createRef();

@@ -1,16 +1,16 @@
 import React from 'react';
-import App from './App';
+import Button from './Button';
 import {MemoryRouter} from 'react-router-dom';
 import {mount} from 'enzyme';
 import renderer from 'react-test-renderer';
 
-describe('<App />', () => {
+describe('<Button />', () => {
   it('Renders without crashing', () => {
-    mount(<MemoryRouter><App /></MemoryRouter>);
+    mount(<MemoryRouter><Button /></MemoryRouter>);
   });
   it('renders the UI as expected', () => {
     const tree = renderer
-      .create(<MemoryRouter><App/></MemoryRouter>)
+      .create(<MemoryRouter><Button/></MemoryRouter>)
       .toJSON();
     expect(tree).toMatchSnapshot();  
   });
