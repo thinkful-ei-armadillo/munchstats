@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header /> renders the UI as expected 1`] = `
+<header
+  className="backgroundColor2 textColor2"
+>
+  <h1>
+    <a
+      href="/"
+      onClick={[Function]}
+      style={
+        Object {
+          "textDecoration": "none",
+        }
+      }
+    >
+      Munch Stats
+    </a>
+  </h1>
+  <nav>
+    <a
+      href="/login"
+      onClick={[Function]}
+      style={
+        Object {
+          "textDecoration": "none",
+        }
+      }
+    >
+      Log In
+    </a>
+     | 
+    <a
+      href="/register"
+      onClick={[Function]}
+      style={
+        Object {
+          "textDecoration": "none",
+        }
+      }
+    >
+      Sign Up
+    </a>
+  </nav>
+</header>
+`;

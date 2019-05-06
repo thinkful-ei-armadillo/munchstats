@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LogHome /> renders the UI as expected 1`] = `
+<section
+  className="dashboard"
+>
+  <div
+    className="linkContainer"
+  >
+    <a
+      className="button"
+      href="/logmeal"
+      onClick={[Function]}
+    >
+      Log a meal that you've created
+    </a>
+    <a
+      className="button"
+      href="/logsnack"
+      onClick={[Function]}
+    >
+      Log a single item snack
+    </a>
+  </div>
+  <h2
+    className="eventsHeading"
+  >
+    Today's activity:
+  </h2>
+</section>
+`;

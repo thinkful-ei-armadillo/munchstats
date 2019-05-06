@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AddIngredient /> renders the UI as expected 1`] = `
+Array [
+  <form
+    className="mealForm"
+    onSubmit={[Function]}
+  >
+    <label
+      htmlFor="ingredient-input"
+    >
+      Ingredient
+    </label>
+    <input
+      id="ingredient-input"
+      name="ingredient-input"
+      onChange={[Function]}
+      required={true}
+      value=""
+    />
+    <button
+      className="Button"
+      type="submit"
+    >
+      Search ingredients
+    </button>
+  </form>,
+  <section
+    className="results"
+  />,
+]
+`;

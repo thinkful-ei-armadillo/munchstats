@@ -5,7 +5,7 @@ import AuthApiService from '../../services/auth-api-service';
 import UserContext from '../../contexts/UserContext';
 import Button from '../Button/Button';
 import Loading from '../Loading/Loading';
-import EventsApiService from '../../services/events-api-service'
+import EventsApiService from '../../services/events-api-service';
 import './LoginForm.css';
 
 class LoginForm extends Component {
