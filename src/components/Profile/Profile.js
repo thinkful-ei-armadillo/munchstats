@@ -60,8 +60,8 @@ export default class Profile extends Component {
     return (
       <>
         <h2>Hello, {this.context.user.name}!</h2>
-        Dark Mode
         <label className="switch">
+          Dark Mode
           <input type="checkbox" id="modeToggle" onClick={this.handleModeToggle} checked = {this.context.user.isDark}/>
           <span className="slider round"></span>
         </label>
