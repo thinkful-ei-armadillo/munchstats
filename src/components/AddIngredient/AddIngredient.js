@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Button from '../Button/Button';
-import MealsApiService from '../../services/meals-api-service';
 import ProxyApiService from '../../services/proxy-api-service';
+// import MealsApiService from '../../services/meals-api-service';
 import UserContext from '../../contexts/UserContext';
 import Loading from '../Loading/Loading';
 import Error from '../Error/Error';
@@ -10,6 +10,7 @@ export default class AddIngredient extends Component {
 
   state = {
     ingredientInput: '',
+    ingredientQuantity: '',
     results: [],
     chosenIngredient: '',
     mealInfo: {},
@@ -51,7 +52,7 @@ export default class AddIngredient extends Component {
           chosenIngredient: '',
           ingredientInput: ''
         });
-
+        
         let ingredient = {
           name: res.name,
           total_calorie: Math.round(res.total_calorie),
@@ -62,36 +63,39 @@ export default class AddIngredient extends Component {
           unit: res.unit
         };
         this.context.setIngredientWithNutritionStats(ingredient);
-        (this.props.handleModal());
         this.context.loadingFalse();
+        this.props.handleModal();
       })
+      // .then(() => {
+      //   this.getMealInfo();
+      // })
       .catch(e => {
         this.context.setError(e);
         this.context.loadingFalse();
       });
   }
 
-  getMealInfo() {
-    this.context.loadingTrue();
-    this.context.clearError();
-    return MealsApiService.getMealById(this.props.meal_id)
-      .then(res => {
-        if (res.length === 0) {
-          this.props.history.push('/nothinghere');
-          this.context.loadingFalse();
-        } else {
-          // hacky fix to avoid react trying to set state on unmounted component
-          if (res.length !== 0) {
-            this.setState({ mealInfo: res[0] });
-            this.context.loadingFalse();
-          }
-        }
-      })
-      .catch(e => {
-        this.context.setError(e);
-        this.context.loadingFalse();
-      });
-  }
+  // getMealInfo() {
+  //   this.context.loadingTrue();
+  //   this.context.clearError();
+  //   return MealsApiService.getMealById(this.props.meal_id)
+  //     .then(res => {
+  //       if (res.length === 0) {
+  //         this.props.history.push('/nothinghere');
+  //         this.context.loadingFalse();
+  //       } else {
+  //         // hacky fix to avoid react trying to set state on unmounted component
+  //         if (res.length !== 0) {
+  //           this.setState({ mealInfo: res[0] });
+  //           this.context.loadingFalse();
+  //         }
+  //       }
+  //     })
+  //     .catch(e => {
+  //       this.context.setError(e);
+  //       this.context.loadingFalse();
+  //     });
+  // }
 
   handleInput = (e) => {
     this.setState({ ingredientInput: e.target.value });
@@ -99,11 +103,11 @@ export default class AddIngredient extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.context.clearError();
-    this.setState({ results: [], chosenIngredient: '' });
-    let encodedInput = encodeURI(this.state.ingredientInput);
     this.context.loadingTrue();
-    console.log(encodedInput);
+    this.context.clearError();
+    this.setState({ingredientQuantity: '' });
+    this.setState({ results: [], chosenIngredient: ''});
+    let encodedInput = encodeURI(this.state.ingredientInput);
     ProxyApiService.getIngredientsFromSearch(encodedInput)
       .then(results => {
         this.setState({ results });
@@ -115,12 +119,16 @@ export default class AddIngredient extends Component {
       });
   }
 
+  handleQuantityInput = (e) => {
+    this.setState({ ingredientQuantity: e.target.value });
+  }
+
   generateMeasureForm = () => {
     return (
       <form autoComplete="off" className='measureForm' onSubmit={e => this.getNutrientInfo(e)}>
         <p>{this.state.chosenIngredient.name}</p>
         <label htmlFor='quantity'>How much do you want to add?</label>
-        <input type='number' name='quantity' min='0' step='.01' />
+        <input type='number' name='quantity' min='0' step='.01' value={this.state.ingredientQuantity} onChange={(e) => this.handleQuantityInput(e)} required/>
         <select name='measurements'>
           {this.state.chosenIngredient.measures.map((measure, index) => {
             return <option key={index} value={`${measure.uri},${measure.label}`} name={measure.label} >{measure.label}</option>;
@@ -173,8 +181,6 @@ export default class AddIngredient extends Component {
               Search ingredients
             </Button>
           </form>
-
-          
 
           <section className="results">
             {(this.state.results.length >= 1) && <h4>Pick one from below</h4>}

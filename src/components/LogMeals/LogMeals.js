@@ -8,6 +8,7 @@ import TokenService from '../../services/token-service';
 import Loading from '../Loading/Loading';
 import './logMeals.css';
 import Error from '../../components/Error/Error';
+import Back from '../../components/Back/Back';
 const moment = require('moment');
 
 export default class LogMeals extends Component {
@@ -99,6 +100,7 @@ export default class LogMeals extends Component {
     } else {
       return (
         <div>
+          <Back history={this.props.history} path={'/log'} />
           <Error />
           <div className="flex mealLogContainer">
             <section>

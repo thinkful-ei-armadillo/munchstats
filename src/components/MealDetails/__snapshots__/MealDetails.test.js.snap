@@ -2,6 +2,18 @@
 
 exports[`<MealDetails /> renders the UI as expected 1`] = `
 Array [
+  <section
+    className="goBack"
+  >
+    <span
+      className="back_button"
+      onClick={[Function]}
+    >
+      <i
+        className="fas fa-chevron-left"
+      />
+    </span>
+  </section>,
   <h3
     className="mealName"
   />,

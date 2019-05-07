@@ -6,6 +6,7 @@ import config from '../../config';
 import TokenService from '../../services/token-service';
 import './LogSnack.css';
 import Error from '../Error/Error';
+import Back from '../../components/Back/Back';
 const moment = require('moment');
 
 export default class LogSnack extends Component {
@@ -50,6 +51,7 @@ export default class LogSnack extends Component {
     if (this.context.ingredient.name) {
       return (
         <div>
+          <Back history={this.props.history} path={'/log'} />
           <Error />
           <div className="mealLogContainer">
             <h3>when did you eat the {this.context.ingredient.name}?</h3>
@@ -61,10 +63,13 @@ export default class LogSnack extends Component {
     }
 
     return (
-      <div className="mealLogContainer">
-        <h3>Log a Single Item Snack!</h3>
-        <AddIngredient />
-      </div>
+      <>
+        <Back history={this.props.history} path={'/log'} />
+        <div className="mealLogContainer">
+          <h3>Log a Single Item Snack!</h3>
+          <AddIngredient />
+        </div>
+      </>
     );
   }
 }

@@ -6,6 +6,7 @@ import AddIngredient from '../AddIngredient/AddIngredient';
 import UserContext from '../../contexts/UserContext';
 import ReactModal from 'react-modal';
 import Loading from '../../components/Loading/Loading';
+import Back from '../../components/Back/Back';
 import Error from '../../components/Error/Error';
 
 export default class Meals extends Component {
@@ -161,6 +162,30 @@ export default class Meals extends Component {
     });
   }
 
+  generateModal = () => {
+    if(this.state.showModal){
+      return (
+        <ReactModal
+          isOpen={this.state.showModal}
+          onRequestClose={this.handleModal}
+          contentLabel="Add Ingredient"
+          className='modal'
+        > 
+          <div className = 'modalAddIngredient panel backgroundColor5'>
+            <h3 className = 'panelHeader backgroundColor2 textColor2'>Search For an Ingredient</h3>
+            <AddIngredient handleModal={this.handleModal} />
+          </div>
+          <i onClick={this.handleModal} className="fas fa-times modalCloser"></i>
+        </ReactModal>
+      );
+    } else {
+      return (
+        <>
+        </>
+      );
+    }
+  }
+
   
   componentWillUnmount() {
     this.context.clearIngredient();
@@ -178,6 +203,7 @@ export default class Meals extends Component {
 
       return (
       <>
+        <Back history={this.props.history} path={'/meals'} />
         <Error />   
         <h3 className='mealName'>{this.state.mealInfo ? this.state.mealInfo.name : ''}</h3>
 
@@ -196,18 +222,7 @@ export default class Meals extends Component {
               </div>
               <div className="finalIngredients">
                 {(this.state.mealIngredients[0]) ? this.generateFinalIngredients() : 'Nothing so far!'}
-                <ReactModal
-                  isOpen={this.state.showModal}
-                  onRequestClose={this.handleModal}
-                  contentLabel="Minimal Modal Example"
-                  className='modal'
-                > 
-                  <div className = 'modalAddIngredient panel backgroundColor5'>
-                    <h3 className = 'panelHeader backgroundColor2 textColor2'>Search For an Ingredient</h3>
-                    <AddIngredient handleModal={this.handleModal} />
-                  </div>
-                  <i onClick={this.handleModal} className="fas fa-times modalCloser"></i>
-                </ReactModal>
+                {this.generateModal()}
               </div>
             </div>
           </section>

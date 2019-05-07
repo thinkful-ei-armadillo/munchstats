@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import './Meals.css';
 import Loading from '../Loading/Loading';
 import Error from '../Error/Error';
+import Back from '../Back/Back';
 
 export default class Meals extends Component {
   static contextType = UserContext;
@@ -82,23 +83,26 @@ export default class Meals extends Component {
 
   genUserMeals(meals) {
     return (
-      <ul className='MealsPage__meals'>
-        {meals.map(meal =>
-          <li key={meal.id} className='MealsPage__meals backgroundColor4 border1'>
-            <span className = 'mealPageMealName'>{meal.name}</span> 
-            <br />
-            <Link
-              to={`/meals/${meal.id}`}
-              style={{textDecoration: 'none'}}>
-              <Button type="button" className='editMeal'>
-                Edit Meal
-              </Button>
-            </Link>
-            <br />
-            <Button onClick={() => this.handleClickDelete(meal)}>Delete Meal</Button>
-          </li>
-        )}
-      </ul>
+      <>
+        <Back history={this.props.history} path={'/'} />
+        <ul className='MealsPage__meals'>
+          {meals.map(meal =>
+            <li key={meal.id} className='MealsPage__meals backgroundColor4 border1'>
+              <span className = 'mealPageMealName'>{meal.name}</span> 
+              <br />
+              <Link
+                to={`/meals/${meal.id}`}
+                style={{textDecoration: 'none'}}>
+                <Button type="button" className='editMeal'>
+                  Edit Meal
+                </Button>
+              </Link>
+              <br />
+              <Button onClick={() => this.handleClickDelete(meal)}>Delete Meal</Button>
+            </li>
+          )}
+        </ul>
+      </>
     );
   }
   

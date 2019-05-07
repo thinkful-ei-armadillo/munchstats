@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import UserContext from '../../contexts/UserContext';
 import EventsApiService from '../../services/events-api-service';
 import Loading from '../Loading/Loading';
+import Back from '../../components/Back/Back';
 import './LogHome.css';
 
 export default class LogHome extends Component {
@@ -66,18 +67,21 @@ export default class LogHome extends Component {
       );
     } else {
       return (
-        <section className="dashboard">
-          <div className="linkContainer">
-            <Link to='/logmeal' className="button">
-          Log a meal that you've created
-            </Link>
-            <Link to='/logsnack' className="button">
-          Log a single item snack
-            </Link>
-          </div>
-          <h2 className="eventsHeading">Today's activity:</h2>
-          {this.generateReport()}
-        </section>
+        <>
+          <Back history={this.props.history} path={'/'} />
+          <section className="dashboard">
+            <div className="linkContainer">
+              <Link to='/logmeal' className="button">
+            Log a meal that you've created
+              </Link>
+              <Link to='/logsnack' className="button">
+            Log a single item snack
+              </Link>
+            </div>
+            <h2 className="eventsHeading">Today's activity:</h2>
+            {this.generateReport()}
+          </section>
+        </>
       );
     }}
 }
