@@ -83,7 +83,6 @@ export default class Profile extends Component {
       <>
         <Back history={this.props.history} path={'/'} />
         <h2>Hello, {this.context.user.name}!</h2>
-        Dark Mode
         {this.renderCheckbox()}
         <section>
           Current Budgets
