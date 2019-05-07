@@ -69,6 +69,7 @@ export default class Profile extends Component {
   renderCheckbox = () => {
     if(this.context.user.isDark !== undefined){
       return (<label className="switch">
+        Dark mode
         <input type="checkbox" id="modeToggle" onChange={this.handleModeToggle} checked = {this.context.user.isDark}/>
         <span className="slider round"></span>
       </label>);

@@ -35,11 +35,15 @@ export default class LogMeals extends Component {
 
   genUserMeals(meals) {
     return (
-      <select id="mealSelect" onChange = {() => this.setMeal()}>
-        {meals.map((meal, key) =>
-          <option value={meal.id} key={key}>{meal.name}</option>
-        )}
-      </select>
+      <label>
+        Select Meal
+        <br />
+        <select id="mealSelect" onChange = {() => this.setMeal()}>
+          {meals.map((meal, key) =>
+            <option value={meal.id} key={key}>{meal.name}</option>
+          )}
+        </select>
+      </label>
     );
   }
 
@@ -102,15 +106,24 @@ export default class LogMeals extends Component {
             <section>
               {this.context.meals.meal ? this.genUserMeals(this.context.meals.meal) : null}
             </section>
+            <br />
             <section id="userTag">
-              <select id="mealTag">
-                <option value="breakfast">Breakfast</option>
-                <option value="brunch">Brunch</option>
-                <option value="lunch">Lunch</option>
-                <option value="dinner">Dinner</option>
-              </select>
+              <label>
+                Select Tag
+                <br />
+                <select id="mealTag">
+                  <option value="breakfast">Breakfast</option>
+                  <option value="brunch">Brunch</option>
+                  <option value="lunch">Lunch</option>
+                  <option value="dinner">Dinner</option>
+                </select>
+              </label>
             </section>
-            <Datetime defaultValue={moment()} locale={'true'}/>
+            <br />
+            <label>
+              Select Date & Time
+              <Datetime defaultValue={moment()} locale={'true'}/>
+            </label>
             <Button onClick={() => this.handleAddLog()}>Add</Button>
           </div>
         </div>
