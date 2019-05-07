@@ -1,37 +1,51 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<LogSnack /> renders the UI as expected 1`] = `
-<div
-  className="mealLogContainer"
->
-  <h3>
-    Log a Single Item Snack!
-  </h3>
-  <form
-    className="mealForm"
-    onSubmit={[Function]}
-  >
-    <label
-      htmlFor="ingredient-input"
-    >
-      Ingredient
-    </label>
-    <input
-      id="ingredient-input"
-      name="ingredient-input"
-      onChange={[Function]}
-      required={true}
-      value=""
-    />
-    <button
-      className="Button"
-      type="submit"
-    >
-      Search ingredients
-    </button>
-  </form>
+Array [
   <section
-    className="results"
-  />
-</div>
+    className="goBack"
+  >
+    <span
+      className="back_button"
+      onClick={[Function]}
+    >
+      <i
+        className="fas fa-chevron-left"
+      />
+    </span>
+  </section>,
+  <div
+    className="mealLogContainer"
+  >
+    <h3>
+      Log a Single Item Snack!
+    </h3>
+    <form
+      className="mealForm"
+      onSubmit={[Function]}
+    >
+      <label
+        htmlFor="ingredient-input"
+      >
+        Ingredient
+      </label>
+      <input
+        id="ingredient-input"
+        name="ingredient-input"
+        onChange={[Function]}
+        required={true}
+        value=""
+      />
+      <button
+        className="Button"
+        type="submit"
+      >
+        Search ingredients
+      </button>
+    </form>
+    <section
+      className="results"
+    />
+  </div>,
+]
 `;

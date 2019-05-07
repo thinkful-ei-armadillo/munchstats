@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import TokenService from '../../services/token-service';
 import UserContext from '../../contexts/UserContext';
-import { withRouter } from 'react-router';
 import './Header.css';
 
-class Header extends Component {
+export default class Header extends Component {
   static contextType = UserContext;
 
   handleLogoutClick = () => {
@@ -50,22 +49,8 @@ class Header extends Component {
     );
   }
 
-  handleGoBackClicked = () => {
-    this.props.history.goBack();
-  }
-
   render() {
-
-    let backArrow = <section className='goBack'>
-      <span onClick={() => this.handleGoBackClicked()} className='back_button'><i className="fas fa-chevron-left"></i></span>
-    </section>;
-
-    return (<>
-      {(this.props.location.pathname !== '/')
-        && (this.props.location.pathname !== '/reports')
-        && (this.props.location.pathname !== '/login') 
-        && (this.props.location.pathname !== '/register') 
-        && backArrow}
+    return (
       <header className="backgroundColor2 textColor2">
         <h1>
           <Link
@@ -78,9 +63,7 @@ class Header extends Component {
           ? this.renderLogoutLink()
           : this.renderLoginLink()}
       </header>
-    </>
     );
   }
 }
 
-export default withRouter(Header);

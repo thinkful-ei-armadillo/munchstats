@@ -6,7 +6,7 @@ class LogHomeRoute extends Component {
 
   render() {
     return (
-      <LogHome />
+      <LogHome history={this.props.history}/>
     );
   }
 }
