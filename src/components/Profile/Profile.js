@@ -2,11 +2,21 @@ import React, { Component } from 'react';
 import Button from '../Button/Button';
 import UserContext from '../../contexts/UserContext';
 import AuthApiService from '../../services/auth-api-service';
+import Back from '../../components/Back/Back';
 import './Profile.css';
 
 export default class Profile extends Component {
   static contextType = UserContext;
 
+  componentDidMount(){
+    AuthApiService.getUserBudgets()
+      .then(res => {
+        this.context.setUser({
+          ...this.context.user,
+          ...res.user[0]
+        });
+      });
+  }
   
 
   handleModeToggle = () => {
@@ -14,7 +24,7 @@ export default class Profile extends Component {
     this.context.setUser({
       ...this.context.user,
       isDark
-    })
+    });
 
     AuthApiService.patchUserDark(this.context.user);
   }
@@ -43,28 +53,37 @@ export default class Profile extends Component {
     let carbBudget = this.setUserBudgets('carbBudget');
     let proteinBudget = this.setUserBudgets('proteinBudget');
 
-    this.context.setUser()
+    this.context.setUser();
     let updatedUser = {
       ...this.context.user,
       calorieBudget,
       fatBudget,
       carbBudget,
       proteinBudget
-    }
+    };
     AuthApiService.patchUser(updatedUser)
-      .then(this.context.setUser(updatedUser))
+      .then(this.context.setUser(updatedUser));
     
   }
 
-  render() { 
+  renderCheckbox = () => {
+    if(this.context.user.isDark !== undefined){
+      return (<label className="switch">
+        <input type="checkbox" id="modeToggle" onChange={this.handleModeToggle} checked = {this.context.user.isDark}/>
+        <span className="slider round"></span>
+      </label>);
+    } else return (
+      <></>
+    );
+  }
+
+  render() {
     return (
       <>
+        <Back history={this.props.history} path={'/'} />
         <h2>Hello, {this.context.user.name}!</h2>
         Dark Mode
-        <label className="switch">
-          <input type="checkbox" id="modeToggle" onClick={this.handleModeToggle} checked = {this.context.user.isDark}/>
-          <span className="slider round"></span>
-        </label>
+        {this.renderCheckbox()}
         <section>
           Current Budgets
           <br />

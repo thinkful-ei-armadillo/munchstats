@@ -45,7 +45,7 @@ const AuthApiService = {
         (!res.ok)
           ? res.json().then(e => Promise.reject(e))
           : res.json()
-        );
+      );
   },
 
   patchUserDark(user){
@@ -61,7 +61,7 @@ const AuthApiService = {
         (!res.ok)
           ? res.json().then(e => Promise.reject(e))
           : res.json()
-        );
+      );
   },
 
   postLogin({ username, password }) {
@@ -92,6 +92,6 @@ const AuthApiService = {
           : res.json()
       );
   }
-}
+};
 
 export default AuthApiService;
