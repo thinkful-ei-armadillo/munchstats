@@ -46,9 +46,9 @@ class RegistrationRoute extends Component {
     return (
       <section className='registrationPage'>
         <p id = 'tagline'>
-          Create meals, eat them, stay healthy        
+          Create Meals, Eat Them, Stay Healthy        
         </p>
-        <h2>Sign up</h2>
+        <h2>Sign Up</h2>
         <RegistrationForm onRegistrationSuccess={this.handleRegistrationSuccess} />
       </section>
     );

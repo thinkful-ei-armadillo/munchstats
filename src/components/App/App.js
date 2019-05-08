@@ -21,8 +21,6 @@ import Loading from '../Loading/Loading';
 import ChartRoute from '../../routes/ChartRoute/ChartRoute';
 import './ColorStyles.css';
 
-
-
 export default class App extends Component {
   state = {
     hasError: false,
@@ -41,7 +39,6 @@ export default class App extends Component {
   static contextType = UserContext;
 
   componentDidMount() {
-    // document.documentElement.setAttribute('theme', 'light');
     AuthApiService.getUserBudgets()
       .then(res => {
         this.context.setUser({

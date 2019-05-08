@@ -107,7 +107,6 @@ export default class Meals extends Component {
                     <i className="fas fa-pen"></i>
                   </Button>
                 </Link>
-                
               </div>
             </li>
           )}
@@ -119,14 +118,14 @@ export default class Meals extends Component {
   render() {
     if(this.context.loading){
       return <div className="center"><Loading/></div>;
-    } else {
-      
+    }
+    else {
       return (
         <div>
           <Error />
           <div className  = 'mealsHeader'>
-            <h2>Your list of meals</h2>
-            <p className='modalOpener' onClick={this.handleModal}>add a new meal</p>
+            <h2>Your Meals</h2>
+            <p className='modalOpener' onClick={this.handleModal}>Add Meal</p>
           </div>
           <ReactModal
             isOpen={this.state.showModal}
@@ -160,6 +159,7 @@ export default class Meals extends Component {
             {this.context.meals.meal ? this.genUserMeals(this.context.meals.meal) : null}
           </section>
         </div>
-      );}
+      );
+    }
   }
 }
