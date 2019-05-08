@@ -58,7 +58,7 @@ componentDidMount() {
 render() {
   return (
     <div className="calorieChart">
-      <canvas id="myChart" ref={this.chartRef} />
+      <canvas id="myChart" className="shadow" ref={this.chartRef} />
     </div>
   );
 }
