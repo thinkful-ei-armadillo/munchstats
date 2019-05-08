@@ -66,7 +66,7 @@ export default class Profile extends Component {
     };
     AuthApiService.patchUser(updatedUser)
       .then(this.context.setUser(updatedUser));
-    this.setState({isEditing: false})
+    this.setState({isEditing: false});
   }
 
   renderCheckbox = () => {
@@ -88,33 +88,26 @@ export default class Profile extends Component {
         <div className="formContainer">
           <form>
             <div className="formField">
-              <label className="inputLabel backgroundColor6 border3 textColor1" >
-                Calorie Budget: <input type="text" id="calorieBudget" className="inputField border3 backgroundColor4" defaultValue={this.context.user.calorieBudget} />
-              </label>
+              <label htmlFor='calorieBudget' className="inputLabel backgroundColor6 border3 textColor1" >Calorie Budget:</label>                
+              <input type="text" id="calorieBudget" className="inputField border3 backgroundColor4" defaultValue={this.context.user.calorieBudget} />
             </div>
-            <br />
             <div className="formField">
-              <label className="inputLabel backgroundColor6 border3 textColor1" >
-                Fat Budget: <input type="text" id="fatBudget" className="inputField border3 backgroundColor4" defaultValue={this.context.user.fatBudget} />
-              </label>
+              <label htmlFor='fatBudget' className="inputLabel backgroundColor6 border3 textColor1" >Fat Budget:</label>
+              <input type="text" id="fatBudget" className="inputField border3 backgroundColor4" defaultValue={this.context.user.fatBudget} />
             </div>
-            <br />
             <div className="formField">
-              <label className="inputLabel backgroundColor6 border3 textColor1" >
-                Carb Budget: <input type="text" id="carbBudget" className="inputField border3 backgroundColor4" defaultValue={this.context.user.carbBudget} />
-              </label>
+              <label htmlFor='carbBudget' className="inputLabel backgroundColor6 border3 textColor1" >Carb Budget:</label>
+              <input type="text" id="carbBudget" className="inputField border3 backgroundColor4" defaultValue={this.context.user.carbBudget} />
             </div>
-            <br />
             <div className="formField">
-              <label className="inputLabel backgroundColor6 border3 textColor1" >
-                Protein Budget: <input type="text" id="proteinBudget" className="inputField border3 backgroundColor4" defaultValue={this.context.user.proteinBudget} />
-              </label>
+              <label htmlFor='proteinBudget' className="inputLabel backgroundColor6 border3 textColor1" >Protein Budget:</label>
+              <input type="text" id="proteinBudget" className="inputField border3 backgroundColor4" defaultValue={this.context.user.proteinBudget} />
             </div>
             <br />
             <Button type="button" onClick={this.submitUserBudgets}>Submit</Button>
           </form>
         </div>
-      ) 
+      ); 
     }
   }
 
