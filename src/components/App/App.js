@@ -21,8 +21,6 @@ import Loading from '../Loading/Loading';
 import ChartRoute from '../../routes/ChartRoute/ChartRoute';
 import './ColorStyles.css';
 
-
-
 export default class App extends Component {
   state = {
     hasError: false,

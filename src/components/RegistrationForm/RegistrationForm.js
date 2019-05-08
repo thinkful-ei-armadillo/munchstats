@@ -16,9 +16,6 @@ class RegistrationForm extends Component {
 
   static contextType = UserContext;
 
-  componentDidMount() {
-  }
-
   firstInput = React.createRef();
 
   handleSubmit = ev => {
@@ -51,7 +48,8 @@ class RegistrationForm extends Component {
               this.setState({ error: res.error});
               this.context.loadingFalse();
             });
-        }});
+        }
+      });
   }
 
   lightTheme = () => {
@@ -63,12 +61,10 @@ class RegistrationForm extends Component {
   }
 
   render() {
-
     if(this.context.loading){
       return <div className="center"><Loading /></div>;
-    } else {
-
-
+    }
+    else {
       const { error } = this.state;
       return (
         <form
@@ -125,7 +121,8 @@ class RegistrationForm extends Component {
           </footer>
         </form>
       );
-    }}
+    }
+  }
 }
 
 export default RegistrationForm;
