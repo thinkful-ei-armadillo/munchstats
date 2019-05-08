@@ -88,19 +88,19 @@ export default class Profile extends Component {
         <div className="formContainer">
           <form>
             <div className="formField">
-              <label htmlFor='calorieBudget' className="inputLabel backgroundColor6 border3 textColor1" >Calorie Budget:</label>                
+              <label htmlFor='calorieBudget' className="inputLabel backgroundColor6 border3 textColor1" >Calorie Budget</label>                
               <input type="text" id="calorieBudget" className="inputField border3 backgroundColor4" defaultValue={this.context.user.calorieBudget} />
             </div>
             <div className="formField">
-              <label htmlFor='fatBudget' className="inputLabel backgroundColor6 border3 textColor1" >Fat Budget:</label>
+              <label htmlFor='fatBudget' className="inputLabel backgroundColor6 border3 textColor1" >Fat Budget</label>
               <input type="text" id="fatBudget" className="inputField border3 backgroundColor4" defaultValue={this.context.user.fatBudget} />
             </div>
             <div className="formField">
-              <label htmlFor='carbBudget' className="inputLabel backgroundColor6 border3 textColor1" >Carb Budget:</label>
+              <label htmlFor='carbBudget' className="inputLabel backgroundColor6 border3 textColor1" >Carb Budget</label>
               <input type="text" id="carbBudget" className="inputField border3 backgroundColor4" defaultValue={this.context.user.carbBudget} />
             </div>
             <div className="formField">
-              <label htmlFor='proteinBudget' className="inputLabel backgroundColor6 border3 textColor1" >Protein Budget:</label>
+              <label htmlFor='proteinBudget' className="inputLabel backgroundColor6 border3 textColor1" >Protein Budget</label>
               <input type="text" id="proteinBudget" className="inputField border3 backgroundColor4" defaultValue={this.context.user.proteinBudget} />
             </div>
             <br />
