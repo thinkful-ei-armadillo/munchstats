@@ -39,13 +39,16 @@ export default class App extends Component {
   static contextType = UserContext;
 
   componentDidMount() {
-    AuthApiService.getUserBudgets()
-      .then(res => {
-        this.context.setUser({
-          ...this.context.user,
-          ...res.user[0]
+    // document.documentElement.setAttribute('theme', 'light');
+    if(!this.context.user.idle && this.context.user.id){
+      AuthApiService.getUserBudgets()
+        .then(res => {
+          this.context.setUser({
+            ...this.context.user,
+            ...res.user[0]
+          });
         });
-      });
+    }
   }
 
   render() {
