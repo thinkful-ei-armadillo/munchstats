@@ -45,6 +45,7 @@ class RegistrationRoute extends Component {
   render() {
     return (
       <section className='registrationPage'>
+        <h1>Munch Stats</h1>
         <p id = 'tagline'>
           Create Meals, Eat Them, Stay Healthy        
         </p>
