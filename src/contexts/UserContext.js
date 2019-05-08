@@ -112,10 +112,17 @@ export class UserProvider extends Component {
     });
     AuthApiService.getUserBudgets()
       .then(res => {
+        if(res.user[0].isDark){
+          document.documentElement.setAttribute('theme', 'dark');
+        }
+        else {
+          document.documentElement.setAttribute('theme', 'light');
+        } 
         this.setUser({
           ...this.state.user,
           ...res.user[0]
         })
+        console.log(this.state.user)
       })
   }
 

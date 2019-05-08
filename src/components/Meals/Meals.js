@@ -96,7 +96,7 @@ export default class Meals extends Component {
         <Back history={this.props.history} path={'/'} />
         <ul className='MealsPage__meals'>
           {meals.map(meal =>
-            <li key={meal.id} className='MealsPage_meals_li backgroundColor4'>
+            <li key={meal.id} className='MealsPage_meals_li backgroundColor4 textColor3 shadow'>
               <h3 className = 'mealPageMealName'>{meal.name}</h3> 
               <div className = "mealNav backgroundColor2">
                 <Button onClick={() => this.handleClickDelete(meal)}><i className="fas fa-trash" /></Button>
@@ -132,12 +132,12 @@ export default class Meals extends Component {
             isOpen={this.state.showModal}
             onRequestClose={this.handleModal}
             contentLabel="Add Meal"
-            className='modal mealModal'>
+            className='modal panel mealModal backgroundColor1 shadow'>
             <form
               className='mealCreationForm'
               onSubmit={this.handleSubmit}>
         
-              <label htmlFor='mealInput'>
+              <label  className = 'panelHeader backgroundColor3' htmlFor='mealInput'>
               New Meal Name
               </label>
               <br />

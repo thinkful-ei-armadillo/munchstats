@@ -38,7 +38,7 @@ export default class LogHome extends Component {
       const slicedDate = event.date.toString().slice(0,event.date.length-1);
       let date = moment(slicedDate).format('h:mm a');
       return(
-        <div key={key} className="event backgroundColor4 border1">
+        <div key={key} className="event backgroundColor4 border1 shadow">
           <div className="eventTitle">
             <h3>{event.name}</h3>
             <p onClick={() => this.clickDelete(event)}><i className="fas fa-trash trash"></i></p>

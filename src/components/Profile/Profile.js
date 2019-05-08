@@ -25,7 +25,12 @@ export default class Profile extends Component {
       ...this.context.user,
       isDark
     });
-
+    if(isDark) {
+      document.documentElement.setAttribute('theme', 'dark');
+    }
+    else {
+      document.documentElement.setAttribute('theme', 'light');
+    }
     AuthApiService.patchUserDark(this.context.user);
   }
 

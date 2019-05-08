@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import TokenService from '../../services/token-service';
 import UserContext from '../../contexts/UserContext';
 import './Header.css';
-import logo from '../../images/logo_light_m.png'
+import logo from '../../images/logo_m.png'
 
 export default class Header extends Component {
   static contextType = UserContext;
@@ -52,7 +52,7 @@ export default class Header extends Component {
 
   render() {
     return (
-      <header className="backgroundColor2 textColor2">
+      <header className="backgroundColor2 textColor2 shadow">
         <h1>
           <Link
             to='/'

@@ -3,31 +3,35 @@
 html{
   --backgroundColor1: #EFE7DA;
   --backgroundColor2: #0E4749;
-  --backgroundColor3: #087E8B;
+  --backgroundColor3: #3e6b6d;
   --backgroundColor4: whitesmoke;
   --backgroundColor5: whitesmoke;
   --textColor1: #152a23;
   --textColor2: #EFE7DA;
+  --textColor3: black;
   --errorText: red;
   --loading: #120E0B;
   --border1: black;
   --gradientUnderline: linear-gradient(90deg, whitesmoke, black, whitesmoke);
   --buttonText: #eeeeee;
+  --shadowColor:grey;
 }
 
 html[theme='dark']{
-  --backgroundColor1: #0A0908;
-  --backgroundColor2: #0A0908;
-  --backgroundColor3: ;
-  --backgroundColor4: ;
-  --backgroundColor5: ;
-  --textColor1: ;
-  --textColor2: ;
-  --errorText: ;
-  --loading: ;
-  --border1: ;
-  --gradientUnderline: ;
-  --buttonText: ;
+  --backgroundColor1: #201E1E;
+  --backgroundColor2: #424242;
+  --backgroundColor3: #093133;
+  --backgroundColor4: #bdcdc6;
+  --backgroundColor5: #424242;
+  --textColor1:#EFE7DA ;
+  --textColor2: #EFE7DA;
+  --textColor3:#202020;
+  --errorText: #EFE7DA;
+  --loading:#EFE7DA ;
+  --border1:black ;
+  --gradientUnderline: linear-gradient(90deg, #bdcdc6, black, #bdcdc6);
+  --buttonText:#EFE7DA ;
+  --shadowColor:black;
 }
 
 /* To add a new theme, name your theme and specify all colors below: */
@@ -55,6 +59,10 @@ html[theme='dark']{
 .backgroundColor1{
   background: var(--backgroundColor1);
   /* background: #EFE7DA */
+}
+
+.shadow {
+  box-shadow:3px 3px 6px var(--shadowColor);
 }
 
 /* primarily used in header */
@@ -91,6 +99,10 @@ html[theme='dark']{
 .textColor2{
   color: var(--textColor2);
   /* color: #EFE7DA; */
+}
+
+.textColor3 {
+  color: var(--textColor3);
 }
 
 .errorText{

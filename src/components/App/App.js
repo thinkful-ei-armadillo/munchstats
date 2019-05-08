@@ -41,14 +41,22 @@ export default class App extends Component {
   static contextType = UserContext;
 
   componentDidMount() {
-    // document.documentElement.setAttribute('theme', 'light');
+  
     AuthApiService.getUserBudgets()
       .then(res => {
+        console.log(res.user[0])
         this.context.setUser({
           ...this.context.user,
           ...res.user[0]
         });
+        if (res.user[0].isDark) {
+          document.documentElement.setAttribute('theme', 'dark');
+        }
+        else {
+          document.documentElement.setAttribute('theme', 'light');
+        } 
       });
+
   }
 
   render() {
