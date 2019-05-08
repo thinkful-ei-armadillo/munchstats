@@ -13,12 +13,17 @@ header a:visited {
   color:#EFE7DA;
 }
 
-header h1{
-  margin: 0;
+header img {
+  position:absolute;
+  top:-45px;
+  left:-70px;
+  margin:0;
+  padding:0;
+  height:230px;
 }
 
-header a:hover{
-  color: #000000;
+header h1{
+  margin: 0;
 }
 
 .goBack span {

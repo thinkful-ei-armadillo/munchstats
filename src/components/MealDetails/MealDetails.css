@@ -1,6 +1,6 @@
 .mealName {
   text-align: center;
-  font-size: 2em;
+  font-size: 2.5em;
   margin:30px 50px;
 }
 
@@ -29,11 +29,10 @@
 }
 
 .panel {
-  margin: 50px;
-  height:40vh;
+  margin: 0 25px;
+  min-height:350px;
   border-radius: 20px;
   box-shadow: 1px 1px 10px;
-  overflow:auto;
 }
 
 .panelHeader {
@@ -58,7 +57,6 @@
   width:50%;
   min-width:250px;
   text-align: center;
-  height:60vh;
 }
 
 .mealContainer h3 {
@@ -69,7 +67,6 @@
   display:flex;
   flex-flow: wrap;
   align-content: space-evenly;
-  height: 70%;
   text-align: center;
 }
 
@@ -84,13 +81,12 @@
 
 .modalAddIngredient {
   height:80vh;
-  width:40%;
+  width:80%;
   margin:50px auto;
 }
 
 .modalAddIngredient .panelHeader {
   height:8vh;
-  padding-top:18px; 
 }
 
 .ReactModal__Content, .ReactModal__Content--after-open, .modal{
@@ -104,7 +100,5 @@
   .mealContainer section {
     width:90%;
   }
-  .panel {
-    margin:0;
-  }
+  
 }

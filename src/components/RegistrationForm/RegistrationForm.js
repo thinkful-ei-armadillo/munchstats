@@ -119,7 +119,9 @@ class RegistrationForm extends Component {
           Sign Up
           </Button>
           <footer>
-            <p>Already have an account? <Link to='/login'>Log In!</Link></p>
+            <p>Already have an account? <Link to='/login' style={{textDecoration: 'underline'}}>Log In!</Link></p>
+            <p>Want to test out the app before registering? <Link to='/' onClick={this.handleTestLoginClick} style={{textDecoration: 'underline'}}>Log in as a test user.</Link></p>
+            <p>Want to learn more about Munch Stats? Check out the <Link to='/about' style={{textDecoration: 'underline'}}>About Me</Link> page!</p>
           </footer>
         </form>
       );

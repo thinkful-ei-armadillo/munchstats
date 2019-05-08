@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import RegistrationForm from '../../components/RegistrationForm/RegistrationForm';
-import { Link } from 'react-router-dom';
 import UserContext from '../../contexts/UserContext';
 import AuthApiService from '../../services/auth-api-service';
 import EventsApiService from '../../services/events-api-service';
@@ -51,10 +50,6 @@ class RegistrationRoute extends Component {
         </p>
         <h2>Sign up</h2>
         <RegistrationForm onRegistrationSuccess={this.handleRegistrationSuccess} />
-        <section className='registrationPageLinks'>
-          <p>Want to test out the app before registering? <Link to='/' onClick={this.handleTestLoginClick}>Log in as a test user</Link></p>
-          <p>Want to learn more about Munch Stats? Check out our <Link to='/about'>about page!</Link></p>
-        </section>
       </section>
     );
   }
