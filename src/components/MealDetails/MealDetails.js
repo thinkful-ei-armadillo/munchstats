@@ -169,9 +169,9 @@ export default class Meals extends Component {
           isOpen={this.state.showModal}
           onRequestClose={this.handleModal}
           contentLabel="Add Ingredient"
-          className='modal'
+          className='modal modalAddIngredient'
         > 
-          <div className = 'modalAddIngredient panel backgroundColor5'>
+          <div className = 'panel backgroundColor5'>
             <h3 className = 'panelHeader backgroundColor2 textColor2'>Search For an Ingredient</h3>
             <AddIngredient handleModal={this.handleModal} />
           </div>
@@ -218,7 +218,7 @@ export default class Meals extends Component {
             <div className = 'panel backgroundColor5'>
               <div className = 'panelHeader backgroundColor2 textColor2'>
                 <h3>Meal Ingredients</h3>
-                <p className = 'modalOpener' onClick={this.handleModal}>click here to add ingredient</p>
+                <p className = 'modalOpener' onClick={this.handleModal}>add ingredient</p>
               </div>
               <div className="finalIngredients">
                 {(this.state.mealIngredients[0]) ? this.generateFinalIngredients() : 'Nothing so far!'}
