@@ -8,6 +8,10 @@ import './Profile.css';
 export default class Profile extends Component {
   static contextType = UserContext;
 
+  state = {
+    isEditing: false
+  };
+
   componentDidMount(){
     AuthApiService.getUserBudgets()
       .then(res => {
@@ -62,7 +66,7 @@ export default class Profile extends Component {
     };
     AuthApiService.patchUser(updatedUser)
       .then(this.context.setUser(updatedUser));
-    
+    this.setState({isEditing: false})
   }
 
   renderCheckbox = () => {
@@ -77,14 +81,56 @@ export default class Profile extends Component {
     );
   }
 
+  // CHECK THIS TO MAKE SURE IT DIDNT BREAK
+  genEditForm(){
+    if(this.state.isEditing === true){
+      return(
+        <div className="formContainer">
+          <form>
+            <div className="formField">
+              <label className="inputLabel backgroundColor6 border3 textColor1" >
+                Calorie Budget: <input type="text" id="calorieBudget" className="inputField border3 backgroundColor4" defaultValue={this.context.user.calorieBudget} />
+              </label>
+            </div>
+            <br />
+            <div className="formField">
+              <label className="inputLabel backgroundColor6 border3 textColor1" >
+                Fat Budget: <input type="text" id="fatBudget" className="inputField border3 backgroundColor4" defaultValue={this.context.user.fatBudget} />
+              </label>
+            </div>
+            <br />
+            <div className="formField">
+              <label className="inputLabel backgroundColor6 border3 textColor1" >
+                Carb Budget: <input type="text" id="carbBudget" className="inputField border3 backgroundColor4" defaultValue={this.context.user.carbBudget} />
+              </label>
+            </div>
+            <br />
+            <div className="formField">
+              <label className="inputLabel backgroundColor6 border3 textColor1" >
+                Protein Budget: <input type="text" id="proteinBudget" className="inputField border3 backgroundColor4" defaultValue={this.context.user.proteinBudget} />
+              </label>
+            </div>
+            <br />
+            <Button type="button" onClick={this.submitUserBudgets}>Submit</Button>
+          </form>
+        </div>
+      ) 
+    }
+  }
+
+  toggleEdit = () => {
+    this.setState({isEditing: true});
+    this.genEditForm();
+  }
+
   render() {
     return (
       <>
         <Back history={this.props.history} path={'/'} />
         <h2>Hello, {this.context.user.name}!</h2>
         {this.renderCheckbox()}
-        <section>
-          Current Budgets
+        <section className="currBudgets">
+          <b>Current Budgets</b>
           <br />
           Calories: {this.context.user.calorieBudget}
           <br />
@@ -94,25 +140,8 @@ export default class Profile extends Component {
           <br />
           Protein: {this.context.user.proteinBudget}
         </section>
-        <form className="userBudgets">
-          <label>
-            Calorie Budget: <input type="text" id="calorieBudget" />
-          </label>
-          <br />
-          <label>
-            Fat Budget: <input type="text" id="fatBudget" />
-          </label>
-          <br />
-          <label>
-            Carb Budget: <input type="text" id="carbBudget" />
-          </label>
-          <br />
-          <label>
-            Protein Budget: <input type="text" id="proteinBudget" />
-          </label>
-          <br />
-          <Button type="button" onClick={this.submitUserBudgets}>Submit</Button>
-        </form>
+        {(this.state.isEditing) ? null : <Button type="button" onClick={this.toggleEdit}>Edit Budgets</Button>}
+        {this.genEditForm()}
       </>
     );
   }

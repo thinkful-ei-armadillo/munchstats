@@ -15,17 +15,20 @@ class AboutRoute extends Component {
 
     static contextType = UserContext;
 
+    // sends the user to the dashboard when they've successfully logged in as the test user
     handleLoginSuccess = () => {
         const { history } = this.props;
         history.push('/');
     }
 
+    // handling the submission of the button to log in as the test user
     handleSubmit = ev => {
         ev.preventDefault();
         this.context.loadingTrue();
 
         this.setState({ error: null });
 
+        // sends a log in post request to the API with the test user's info set
         AuthApiService.postLogin({
         username: 'test',
         password: 'pass'
