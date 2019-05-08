@@ -45,10 +45,11 @@ class RegistrationRoute extends Component {
   render() {
     return (
       <section className='registrationPage'>
+        <h1>Munch Stats</h1>
         <p id = 'tagline'>
-          Create meals, eat them, stay healthy        
+          Create Meals, Eat Them, Stay Healthy        
         </p>
-        <h2>Sign up</h2>
+        <h2>Sign Up</h2>
         <RegistrationForm onRegistrationSuccess={this.handleRegistrationSuccess} />
       </section>
     );

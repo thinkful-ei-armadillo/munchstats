@@ -101,7 +101,6 @@ export default class Meals extends Component {
             this.context.loadingFalse(); 
           });
       });
-
   }
 
   renderMealStats() {
@@ -178,7 +177,8 @@ export default class Meals extends Component {
           <i onClick={this.handleModal} className="fas fa-times modalCloser"></i>
         </ReactModal>
       );
-    } else {
+    }
+    else {
       return (
         <>
         </>
@@ -199,7 +199,8 @@ export default class Meals extends Component {
 
     if(!this.state.showModal && this.context.loading){
       return <div className="center"><Loading/></div>;
-    } else {
+    }
+    else {
 
       return (
       <>
@@ -207,18 +208,12 @@ export default class Meals extends Component {
         <Error />   
         <h3 className='mealName'>{this.state.mealInfo ? this.state.mealInfo.name : ''}</h3>
 
-        <div className='mealContainer'>
-          
-          {/* <div className='addIngredientContainer'>
-            <h3>Add an ingredient to your meal</h3>
-            <AddIngredient/>
-          </div> */}
-          
+        <div className='mealContainer'>          
           <section className='finalIngredientsContainer'>
             <div className = 'panel backgroundColor5'>
               <div className = 'panelHeader backgroundColor2 textColor2'>
                 <h3>Meal Ingredients</h3>
-                <p className = 'modalOpener' onClick={this.handleModal}>add ingredient</p>
+                <p className = 'modalOpener' onClick={this.handleModal}>Add Ingredient</p>
               </div>
               <div className="finalIngredients">
                 {(this.state.mealIngredients[0]) ? this.generateFinalIngredients() : 'Nothing so far!'}
@@ -226,15 +221,14 @@ export default class Meals extends Component {
               </div>
             </div>
           </section>
-
           <section className='currentMealStats'>
             <div className = 'panel backgroundColor5'>
               {this.renderMealStats()}
             </div>
           </section>
-          
         </div>
       </>
       );
-    }}
+    }
+  }
 }

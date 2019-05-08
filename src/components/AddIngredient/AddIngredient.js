@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Button from '../Button/Button';
 import ProxyApiService from '../../services/proxy-api-service';
-// import MealsApiService from '../../services/meals-api-service';
 import UserContext from '../../contexts/UserContext';
 import Loading from '../Loading/Loading';
 import Error from '../Error/Error';
@@ -16,8 +15,6 @@ export default class AddIngredient extends Component {
     mealInfo: {},
     mealIngredients: []
   };
-
-
 
   static contextType = UserContext;
 
@@ -45,6 +42,7 @@ export default class AddIngredient extends Component {
       label,
       quantity: Number(quantity.value)
     };
+
     ProxyApiService.getStatsforServing(body)
       .then(res => {
         //send ingredient to items table in database
@@ -62,40 +60,16 @@ export default class AddIngredient extends Component {
           amount: Number(quantity.value),
           unit: res.unit
         };
+
         this.context.setIngredientWithNutritionStats(ingredient);
         this.context.loadingFalse();
         this.props.handleModal();
       })
-      // .then(() => {
-      //   this.getMealInfo();
-      // })
       .catch(e => {
         this.context.setError(e);
         this.context.loadingFalse();
       });
   }
-
-  // getMealInfo() {
-  //   this.context.loadingTrue();
-  //   this.context.clearError();
-  //   return MealsApiService.getMealById(this.props.meal_id)
-  //     .then(res => {
-  //       if (res.length === 0) {
-  //         this.props.history.push('/nothinghere');
-  //         this.context.loadingFalse();
-  //       } else {
-  //         // hacky fix to avoid react trying to set state on unmounted component
-  //         if (res.length !== 0) {
-  //           this.setState({ mealInfo: res[0] });
-  //           this.context.loadingFalse();
-  //         }
-  //       }
-  //     })
-  //     .catch(e => {
-  //       this.context.setError(e);
-  //       this.context.loadingFalse();
-  //     });
-  // }
 
   handleInput = (e) => {
     this.setState({ ingredientInput: e.target.value });
@@ -128,22 +102,26 @@ export default class AddIngredient extends Component {
       <form autoComplete="off" className='measureForm' onSubmit={e => this.getNutrientInfo(e)}>
         <p>{this.state.chosenIngredient.name}</p>
         <label htmlFor='quantity'>How much do you want to add?</label>
+        <br />
         <input type='number' name='quantity' min='0' step='.01' value={this.state.ingredientQuantity} onChange={(e) => this.handleQuantityInput(e)} required/>
         <select name='measurements'>
           {this.state.chosenIngredient.measures.map((measure, index) => {
             return <option key={index} value={`${measure.uri},${measure.label}`} name={measure.label} >{measure.label}</option>;
           })}
         </select>
-        <button type='submit'>Submit</button>
+        <br />
+        <Button type='submit'>Submit</Button>
       </form>
     );
   }
 
   generateResults = () => {
     return this.state.results.map((item, key) => {
-      return <div id='results' key={key} onClick={() => this.handleClickIngredient(item)}>
-        <span>{item.name}</span>
-      </div>;
+      return (
+        <div id='results' key={key} onClick={() => this.handleClickIngredient(item)}>
+          <span>{item.name}</span>
+        </div>
+      );
     });
   }
 
@@ -156,38 +134,34 @@ export default class AddIngredient extends Component {
 
   render() {
     if (!this.state.chosenIngredient) {
-
       if(this.context.loading){
         return (<div className="center"><Loading /></div>);
-      } else {return (
-        <>
-          <form
-            className='mealForm'
-            onSubmit={this.handleSubmit}
-          >
-            <Error />
-            <label htmlFor='ingredient-input'>
-              Ingredient
-            </label>
-            <input
-              ref={this.firstInput}
-              id='ingredient-input'
-              name='ingredient-input'
-              value={this.state.ingredientInput}
-              onChange={this.handleInput}
-              required
-            />
-            <Button type='submit'>
-              Search ingredients
-            </Button>
-          </form>
+      }
+      else {
+        return (
+          <>
+            <form
+              className='mealForm'
+              onSubmit={this.handleSubmit}
+            >
+              <Error />
+              <label htmlFor='ingredient-input'>
+                Ingredient: <input ref={this.firstInput} id='ingredient-input' name='ingredient-input' value={this.state.ingredientInput} onChange={this.handleInput} required />
+              </label>
+              <br />
+              <Button type='submit'>
+                Search Ingredients
+              </Button>
+            </form>
 
-          <section className="results">
-            {(this.state.results.length >= 1) && <h4>Pick one from below</h4>}
-            {(this.state.results.length >= 1) && this.generateResults()}
-          </section>
-        </>  
-      );}
+            <section className="results">
+              {(this.state.results.length >= 1) && <h4>Pick One:</h4>}
+              <br />
+              {(this.state.results.length >= 1) && this.generateResults()}
+            </section>
+          </>  
+        );
+      }
     }
     else {
       return (

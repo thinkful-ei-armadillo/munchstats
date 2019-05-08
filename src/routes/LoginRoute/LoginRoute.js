@@ -18,7 +18,8 @@ class LoginRoute extends Component {
   render() {
     return (
       <section>
-        <h2>Login</h2>
+        <h1>Munch Stats</h1>
+        <h2>Log In</h2>
         <LoginForm
           onLoginSuccess={this.handleLoginSuccess}
         />

@@ -16,7 +16,7 @@ export default class LogMeals extends Component {
 
   state = {
     meal: {}
-  }
+  };
 
   componentDidMount(){
     this.context.loadingTrue();
@@ -97,7 +97,8 @@ export default class LogMeals extends Component {
           <Loading />
         </div>
       );
-    } else {
+    }
+    else {
       return (
         <div>
           <Back history={this.props.history} path={'/log'} />
@@ -128,5 +129,6 @@ export default class LogMeals extends Component {
           </div>
         </div>
       );
-    }}
+    }
+  }
 }

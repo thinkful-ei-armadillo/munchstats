@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
+import Button from '../../components/Button/Button';
 
 class NotFoundRoute extends Component {
   render() {
@@ -7,7 +8,7 @@ class NotFoundRoute extends Component {
       <section className="textCenter">
         <h2>Oops, this page doesn't exist. Now we're in a pickle.</h2>
         <Link to='/'>        
-          <button>Get me outa here!</button>
+          <Button>Get me outta here!</Button>
         </Link>
       </section>
     );
