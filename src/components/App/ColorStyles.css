@@ -3,14 +3,17 @@
 html{
   --backgroundColor1: #EFE7DA;
   --backgroundColor2: #0E4749;
-  --backgroundColor3: #087E8B;
+  --backgroundColor3: #3e6b6d;
   --backgroundColor4: whitesmoke;
   --backgroundColor5: whitesmoke;
+  --backgroundColor6: #bdcdc6;
   --textColor1: #152a23;
   --textColor2: #EFE7DA;
   --errorText: red;
   --loading: #120E0B;
   --border1: black;
+  --border2: #3e6b6d;
+  --border3: #bdcdc6;
   --gradientUnderline: linear-gradient(90deg, whitesmoke, black, whitesmoke);
   --buttonText: #eeeeee;
 }
@@ -26,6 +29,7 @@ html[theme='dark']{
   --errorText: ;
   --loading: ;
   --border1: ;
+  --border2: ;
   --gradientUnderline: ;
   --buttonText: ;
 }
@@ -81,6 +85,10 @@ html[theme='dark']{
   /* background: whitesmoke; */
 }
 
+.backgroundColor6{
+  background-color: var(--backgroundColor6);
+}
+
 /* main text color in body */
 .textColor1{
   color: var(--textColor1);
@@ -111,6 +119,14 @@ html[theme='dark']{
   border-color: var(--border1);
   /* border-color: black */
   border: 1px solid;
+}
+
+.border2{
+  border-color: var(--border2)
+}
+
+.border3{
+  border-color: var(--border3);
 }
 
 /* border color for calendar divs */
