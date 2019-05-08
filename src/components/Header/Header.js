@@ -57,7 +57,7 @@ export default class Header extends Component {
           <Link
             to='/'
             style={{textDecoration: 'none'}}>
-            <img src={logo} className='logoTest' />
+            <img src={logo} className='logoTest' alt="Munch Stats"/>
           </Link>
         </h1>
         {TokenService.hasAuthToken()
