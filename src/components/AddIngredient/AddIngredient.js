@@ -153,15 +153,17 @@ export default class AddIngredient extends Component {
       }
       else {
         return (
-          <>
+          <div className="formContainer">
             <form
               className='mealForm'
               onSubmit={this.handleSubmit}
             >
               <Error />
-              <label htmlFor='ingredient-input'>
-                Ingredient: <input ref={this.firstInput} id='ingredient-input' name='ingredient-input' value={this.state.ingredientInput} onChange={this.handleInput} required />
-              </label>
+              <div className='formField'>
+                <label htmlFor='ingredient-input' className="inputLabel backgroundColor6 border3 textColor1">
+                Ingredient: </label>
+                <input ref={this.firstInput} id='ingredient-input' className="inputField border3 backgroundColor4" name='ingredient-input' value={this.state.ingredientInput} onChange={this.handleInput} required />
+              </ div>
               <br />
               <Button type='submit'>
                 Search Ingredients
@@ -174,7 +176,7 @@ export default class AddIngredient extends Component {
               <br />
               {(this.state.results.length >= 1) && this.generateResults()}
             </section>
-          </>  
+          </ div>  
         );
       }
     }

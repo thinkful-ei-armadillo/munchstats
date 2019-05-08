@@ -54,45 +54,45 @@ class LoginForm extends Component {
     else {
       const { error } = this.state;
       return (
-        <form
-          className='LoginForm'
-          onSubmit={this.handleSubmit}>
-          <div role='alert'>
-            {error && <p>{error}</p>}
-          </div>
-          <div>
-            <Label htmlFor='login-username-input'>
-            Username
-            </Label>
-            <br />
-            <Input
-              ref={this.firstInput}
-              id='login-username-input'
-              name='username'
-              required
-            />
-          </div>
-          <br />
-          <div>
-            <Label htmlFor='login-password-input'>
-            Password
-            </Label>
-            <br />
-            <Input
-              id='login-password-input'
-              name='password'
-              type='password'
-              required
-            />
-          </div>
-          <br />
-          <Button type='submit'>
-          Log In
-          </Button>
-          <footer>
-            <p>Don't have an account? <Link to='/register' style={{textDecoration: 'underline'}}>Sign Up!</Link></p>
-          </footer>
-        </form>
+        <div className="formContainer">
+          <form
+            className='inputForm'
+            onSubmit={this.handleSubmit}>
+            <div role='alert'>
+              {error && <p>{error}</p>}
+            </div>
+            <div className='formField'>
+              <Label htmlFor='login-username-input' className="inputLabel backgroundColor6 border3 textColor1">
+                Username
+              </Label>
+              <Input
+                ref={this.firstInput}
+                id='login-username-input'
+                name='username'
+                className="inputField border3 backgroundColor4"
+                required
+              />
+            </div>
+            <div className='formField'>
+              <Label htmlFor='login-password-input'  className="inputLabel backgroundColor6 border3 textColor1">
+                Password
+              </Label>
+              <Input
+                id='login-password-input'
+                name='password'
+                type='password'
+                className="inputField border3 backgroundColor4"
+                required
+              />
+            </div>
+            <Button type='submit'>
+              Log In
+            </Button>
+            <footer>
+              <p>Don't have an account? <Link to='/register' style={{textDecoration: 'underline'}}>Sign Up!</Link></p>
+            </footer>
+          </form>
+        </div>
       );
     }
   }
