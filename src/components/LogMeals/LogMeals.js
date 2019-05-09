@@ -123,7 +123,7 @@ export default class LogMeals extends Component {
             <br />
             <label>
               Select Date & Time
-              <Datetime defaultValue={moment()} locale={'true'}/>
+              <Datetime defaultValue={moment()} locale={'true'} inputProps={{ readOnly: true }}/>
             </label>
             <Button onClick={() => this.handleAddLog()}>Add</Button>
           </div>

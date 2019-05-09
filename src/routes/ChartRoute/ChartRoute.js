@@ -26,7 +26,7 @@ class ChartRoute extends Component {
       datePicker: !this.state.datePicker,
       end:null,
       start:null
-    })
+    });
   }
 
   handleSubmitStart = (event) => {
@@ -34,7 +34,7 @@ class ChartRoute extends Component {
     let datetime = document.getElementsByClassName('form-control')[0].value;
     this.setState({
       start:datetime
-    })
+    });
   }
 
   handleSubmitEnd = (event) => {
@@ -43,24 +43,24 @@ class ChartRoute extends Component {
     this.setState({
       end:datetime,
       datePicker:false
-    })
+    });
   }
 
   renderDatePickerStart() {
     return <form onSubmit = {e => this.handleSubmitStart(e)} className = 'chartDatePicker shadow backgroundColor5'>
-        <h3>Pick a Start Date</h3>
-        <p onClick = {this.handleClick}>cancel</p>
-        <Datetime defaultValue={moment()} name = 'date' id = 'date' locale={'true'}/>
-        <Button type ='submit'>Next</Button>
-      </form>
+      <h3>Pick a Start Date</h3>
+      <p onClick = {this.handleClick}>cancel</p>
+      <Datetime defaultValue={moment()} name = 'date' id = 'date' locale={'true'} inputProps={{ readOnly: true }}/>
+      <Button type ='submit'>Next</Button>
+    </form>;
   }
   renderDatePickerEnd() {
     return <form onSubmit = {e => this.handleSubmitEnd(e)} className = 'chartDatePicker shadow backgroundColor5'>
-        <h3>Pick an End Date</h3>
-        <p onClick = {this.handleClick}>cancel</p>
-      <Datetime defaultValue={moment()} name = 'date' id = 'date' locale={'true'}/>
-        <Button type ='submit'>Submit</Button>
-      </form>
+      <h3>Pick an End Date</h3>
+      <p onClick = {this.handleClick}>cancel</p>
+      <Datetime defaultValue={moment()} name = 'date' id = 'date' locale={'true'} inputProps={{ readOnly: true }}/>
+      <Button type ='submit'>Submit</Button>
+    </form>;
   }
 
   getRange = () => {
@@ -69,24 +69,24 @@ class ChartRoute extends Component {
         let days=[];
         res.map(event => {
           if (!(days.includes(event.date.substring(0,10)))){
-            days.push(event.date.substring(0, 10))
+            days.push(event.date.substring(0, 10));
           }
-        })
+        });
         this.setState({
           chartData: res,
           days: days.length,
           title: `Nutrition Info for ${days.length} days`
-        })
-      })
+        });
+      });
     this.setState({
       end:null,
       start:null
-    })
+    });
   }
 
   render() {
     if(this.state.end && this.state.start) {
-      this.getRange()
+      this.getRange();
     }
 
     return (
