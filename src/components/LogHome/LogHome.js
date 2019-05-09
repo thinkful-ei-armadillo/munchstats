@@ -38,7 +38,7 @@ export default class LogHome extends Component {
       const slicedDate = event.date.toString().slice(0,event.date.length-1);
       let date = moment(slicedDate).format('h:mm a');
       return(
-        <div key={key} className="event backgroundColor4 border1 shadow">
+        <div key={key} className="event backgroundColor4 shadow">
           <div className="eventTitle">
             <h3>{event.name}</h3>
             <p onClick={() => this.clickDelete(event)}><i className="fas fa-trash trash"></i></p>
@@ -69,7 +69,6 @@ export default class LogHome extends Component {
     else {
       return (
         <>
-          <Back history={this.props.history} path={'/'} />
           <section className="dashboard">
             <div className="linkContainer">
               <Link to='/logmeal' className="button">

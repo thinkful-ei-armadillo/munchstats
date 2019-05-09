@@ -1,9 +1,10 @@
 .event{
   margin:0 auto 10px;
-  width:350px;
+  width: 90%;
+  max-width: 350px;
   border-radius: 5px;
   padding: 10px;
-  background: linear-gradient(to right, whitesmoke 91%, #0E4749 0%);
+  background: linear-gradient(to right, var(--backgroundColor4) 90%, var(--backgroundColor2) 28px);
   box-shadow: 1px 1px 3px;
 }
 

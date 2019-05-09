@@ -1,5 +1,19 @@
+.registrationPage {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
 .registrationPage p {
     padding: 5px;
+}
+
+.registrationPage footer {
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+
+.registrationPage footer p {
+    padding-bottom: 15px;
 }
 
 .registrationPageLinks{

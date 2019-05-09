@@ -90,7 +90,7 @@ export default class Profile extends Component {
   genEditForm(){
     if(this.state.isEditing === true){
       return(
-        <div className="formContainer">
+        <div className="formContainer" id="budgetForm">
           <form>
             <div className="formField">
               <label htmlFor='calorieBudget' className="inputLabel backgroundColor6 border3 textColor1" >Calorie Budget</label>                
@@ -124,7 +124,7 @@ export default class Profile extends Component {
   render() {
     return (
       <>
-        <Back history={this.props.history} path={'/'} />
+        <Back history={this.props.history} />
         <h2>Hello, {this.context.user.name}!</h2>
         {this.renderCheckbox()}
         <section className="currBudgets">

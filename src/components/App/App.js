@@ -56,7 +56,6 @@ export default class App extends Component {
       });
     EventsApiService.getTodaysEvents()
       .then(sortedEvents => this.context.setTodayEvents(sortedEvents));
-
   }
 
   render() {

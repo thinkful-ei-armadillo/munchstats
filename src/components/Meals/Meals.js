@@ -93,7 +93,6 @@ export default class Meals extends Component {
   genUserMeals(meals) {
     return (
       <>
-        <Back history={this.props.history} path={'/'} />
         <ul className='MealsPage__meals'>
           {meals.map(meal =>
             <li key={meal.id} className='MealsPage_meals_li backgroundColor5 textColor3 shadow'>

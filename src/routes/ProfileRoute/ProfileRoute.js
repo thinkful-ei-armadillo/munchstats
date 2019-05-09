@@ -4,7 +4,7 @@ import Profile from '../../components/Profile/Profile';
 class ProfileRoute extends Component {
   render() {
     return (
-      <section>
+      <section className='profilePage'>
         <Profile history = {this.props.history} />
       </section>
     );
