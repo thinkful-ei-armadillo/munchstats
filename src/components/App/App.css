@@ -3,8 +3,11 @@
   margin:0;
   padding: 0;
   transition: background-color 500ms, box-shadow 500ms;
+  font-family: 'Open Sans', sans-serif;
 }
-@import url('https://fonts.googleapis.com/css?family=Nova+Mono');
+
+@import url('https://fonts.googleapis.com/css?family=Nova+Mono|Open+Sans');
+
 h1 {
   font-family: 'Nova Mono', monospace;
   text-align: center;
