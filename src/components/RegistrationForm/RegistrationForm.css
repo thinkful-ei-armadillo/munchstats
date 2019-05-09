@@ -7,6 +7,15 @@
     padding: 5px;
 }
 
+.registrationPage footer {
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+
+.registrationPage footer p {
+    padding-bottom: 15px;
+}
+
 .registrationPageLinks{
     text-align: center;
 }
