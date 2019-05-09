@@ -92,7 +92,6 @@ class ChartRoute extends Component {
 
     return (
       <>
-        <Back history={this.props.history} path={'/'} />
         <section className="chartsPage">          
           {this.state.datePicker && !this.state.start && this.renderDatePickerStart()}
           {this.state.datePicker && this.state.start && this.renderDatePickerEnd()}

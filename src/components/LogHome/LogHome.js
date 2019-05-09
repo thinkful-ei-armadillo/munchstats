@@ -69,7 +69,6 @@ export default class LogHome extends Component {
     else {
       return (
         <>
-          <Back history={this.props.history} path={'/'} />
           <section className="dashboard">
             <div className="linkContainer">
               <Link to='/logmeal' className="button">

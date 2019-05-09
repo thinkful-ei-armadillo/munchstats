@@ -124,7 +124,7 @@ export default class Profile extends Component {
   render() {
     return (
       <>
-        <Back history={this.props.history} path={'/'} />
+        <Back history={this.props.history} />
         <h2>Hello, {this.context.user.name}!</h2>
         {this.renderCheckbox()}
         <section className="currBudgets">
