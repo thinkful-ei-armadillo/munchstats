@@ -1,15 +1,15 @@
 /* color themes referenced by classes: */
 
 html{
-  --backgroundColor1: #EFE7DA;
   --backgroundColor2: #0E4749;
   --backgroundColor3: #3e6b6d;
+  --backgroundColor6: #bdcdc6;
+  --backgroundColor1: #EFE7DA;
   --backgroundColor4: whitesmoke;
   --backgroundColor5: whitesmoke;
-  --backgroundColor6: #bdcdc6;
+  --textColor3: black;
   --textColor1: #152a23;
   --textColor2: #EFE7DA;
-  --textColor3: black;
   --errorText: red;
   --loading: #120E0B;
   --border1: black;
@@ -21,18 +21,20 @@ html{
 }
 
 html[theme='dark']{
-  --backgroundColor1: #201E1E;
   --backgroundColor2: #424242;
   --backgroundColor3: #bdcdc6;
+  --backgroundColor6: #bdcdc6;
+  --backgroundColor1: #201E1E;
   --backgroundColor4: #bdcdc6;
   --backgroundColor5: #424242;
-  --backgroundColor6: #bdcdc6;
+  --textColor3:#202020;
   --textColor1:#EFE7DA ;
   --textColor2: #EFE7DA;
-  --textColor3:#202020;
   --errorText: #EFE7DA;
   --loading:#EFE7DA ;
   --border1:black ;
+  --border2: #3e6b6d;
+  --border3: #bdcdc6;
   --gradientUnderline: linear-gradient(90deg, #bdcdc6, black, #bdcdc6);
   --buttonText:black ;
   --shadowColor:black;
