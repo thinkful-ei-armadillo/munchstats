@@ -71,6 +71,7 @@ class ChartRoute extends Component {
           if (!(days.includes(event.date.substring(0,10)))){
             days.push(event.date.substring(0, 10));
           }
+          return event;
         });
         this.setState({
           chartData: res,
