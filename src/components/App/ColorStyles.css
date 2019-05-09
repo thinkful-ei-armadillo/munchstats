@@ -21,6 +21,27 @@ html{
 }
 
 html[theme='dark']{
+  --backgroundColor2: #996300;
+  --backgroundColor3: #ddd8d8;
+  --backgroundColor6: #64706b;
+  --backgroundColor1: #201e1e;
+  --backgroundColor4: #202020;
+  --backgroundColor5: #1f1c1c;
+  --textColor3:#EFE7DA;
+  --textColor1:#202020 ;
+  --textColor2: #202020;
+  --errorText: #FF0000;
+  --loading:#EFE7DA;
+  --border1:#EFE7DA;
+  --border2: #3e6b6d;
+  --border3: #120E0B;
+  --gradientUnderline: linear-gradient(90deg, #bdcdc6, black, #bdcdc6);
+  --buttonText:black ;
+  --shadowColor:black;
+}
+
+
+/* html[theme='dark']{
   --backgroundColor2: #424242;
   --backgroundColor3: #bdcdc6;
   --backgroundColor6: #bdcdc6;
@@ -38,7 +59,7 @@ html[theme='dark']{
   --gradientUnderline: linear-gradient(90deg, #bdcdc6, black, #bdcdc6);
   --buttonText:black ;
   --shadowColor:black;
-}
+} */
 
 /* To add a new theme, name your theme and specify all colors below: */
 

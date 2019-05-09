@@ -49,17 +49,17 @@ class ChartRoute extends Component {
   renderDatePickerStart() {
     return <form onSubmit = {e => this.handleSubmitStart(e)} className = 'chartDatePicker shadow backgroundColor5'>
       <h3>Pick a Start Date</h3>
-      <p onClick = {this.handleClick}>cancel</p>
       <Datetime defaultValue={moment()} name = 'date' id = 'date' locale={'true'} inputProps={{ readOnly: true }}/>
       <Button type ='submit'>Next</Button>
+      <p onClick = {this.handleClick} style={{cursor: 'pointer', 'margin-top': '5px'}}>Cancel</p>
     </form>;
   }
   renderDatePickerEnd() {
     return <form onSubmit = {e => this.handleSubmitEnd(e)} className = 'chartDatePicker shadow backgroundColor5'>
       <h3>Pick an End Date</h3>
-      <p onClick = {this.handleClick}>cancel</p>
       <Datetime defaultValue={moment()} name = 'date' id = 'date' locale={'true'} inputProps={{ readOnly: true }}/>
       <Button type ='submit'>Submit</Button>
+      <p onClick = {this.handleClick} style={{cursor: 'pointer', 'margin-top': '5px'}}>Cancel</p>
     </form>;
   }
 
@@ -95,7 +95,7 @@ class ChartRoute extends Component {
         <section className="chartsPage">          
           {this.state.datePicker && !this.state.start && this.renderDatePickerStart()}
           {this.state.datePicker && this.state.start && this.renderDatePickerEnd()}
-          {!this.state.datePicker && <p className = 'center' onClick = {this.handleClick}>pick a date range</p>}
+          {!this.state.datePicker && <button className = 'center' onClick = {this.handleClick}>pick a date range</button>}
           <h2>{this.state.title}:</h2>
           <h3>Calories:</h3>
           <CalorieChart1 days = {this.state.days} chartData = {this.state.chartData}/>
