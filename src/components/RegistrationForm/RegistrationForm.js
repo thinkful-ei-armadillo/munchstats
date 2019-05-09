@@ -88,7 +88,7 @@ class RegistrationForm extends Component {
             </div>
             <div className='formField'>
               <Label htmlFor='registration-username-input' className="inputLabel backgroundColor6 border3 textColor1">
-            Choose a Username<Required />
+            Username<Required />
               </Label>
               <Input
                 id='registration-username-input'
@@ -99,7 +99,7 @@ class RegistrationForm extends Component {
             </div>
             <div className='formField'>
               <Label htmlFor='registration-password-input' className="inputLabel backgroundColor6 border3 textColor1">
-            Choose a Password<Required />
+            Password<Required />
               </Label>
               <Input
                 id='registration-password-input'

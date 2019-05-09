@@ -64,3 +64,10 @@ input:checked + .slider:before {
 .currBudgets{
   text-align: center;
 }
+/* centers the edit button */
+.profilePage {
+  text-align: center;
+}
+#budgetForm {
+  padding-top:20px;
+}
