@@ -65,7 +65,6 @@ export default class Meals extends Component {
   updateMeal(res) {
     this.context.loadingTrue();
     this.context.clearError();
-
     let results = {
       ingredient: {
         meal_id: Number(this.props.meal_id), 
@@ -74,7 +73,7 @@ export default class Meals extends Component {
         total_fat: Math.round(res.total_fat),
         total_carbs: Math.round(res.total_carbs),
         total_protein: Math.round(res.total_protein),
-        amount: Number(res.quantity),
+        amount: Number(res.amount),
         unit: res.unit
       }
     };

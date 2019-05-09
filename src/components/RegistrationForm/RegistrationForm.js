@@ -67,59 +67,58 @@ class RegistrationForm extends Component {
     else {
       const { error } = this.state;
       return (
-        <form
-          className="RegistrationForm"
-          onSubmit={this.handleSubmit}>
-          <div role='alert'>
-            {error && <p>{error}</p>}
-          </div>
-          <div>
-            <Label htmlFor='registration-name-input'>
+        <div className="formContainer">
+          <form
+            className="RegistrationForm"
+            onSubmit={this.handleSubmit}>
+            <div role='alert'>
+              {error && <p>{error}</p>}
+            </div>
+            <div className='formField'>
+              <Label htmlFor='registration-name-input' className="inputLabel backgroundColor6 border3 textColor1">
             Name<Required />
-            </Label>
-            <br />
-            <Input
-              ref={this.firstInput}
-              id='registration-name-input'
-              name='name'
-              required
-            />
-          </div>
-          <br />
-          <div>
-            <Label htmlFor='registration-username-input'>
+              </Label>
+              <Input
+                ref={this.firstInput}
+                id='registration-name-input'
+                name='name'
+                className="inputField border3 backgroundColor4"
+                required
+              />
+            </div>
+            <div className='formField'>
+              <Label htmlFor='registration-username-input' className="inputLabel backgroundColor6 border3 textColor1">
             Choose a Username<Required />
-            </Label>
-            <br />
-            <Input
-              id='registration-username-input'
-              name='username'
-              required
-            />
-          </div>
-          <br />
-          <div>
-            <Label htmlFor='registration-password-input'>
+              </Label>
+              <Input
+                id='registration-username-input'
+                name='username'
+                className="inputField border3 backgroundColor4"
+                required
+              />
+            </div>
+            <div className='formField'>
+              <Label htmlFor='registration-password-input' className="inputLabel backgroundColor6 border3 textColor1">
             Choose a Password<Required />
-            </Label>
-            <br />
-            <Input
-              id='registration-password-input'
-              name='password'
-              type='password'
-              required
-            />
-          </div>
-          <br />
-          <Button type='submit'>
+              </Label>
+              <Input
+                id='registration-password-input'
+                name='password'
+                type='password'
+                className="inputField border3 backgroundColor4"
+                required
+              />
+            </div>
+            <Button type='submit'>
           Sign Up
-          </Button>
-          <footer>
-            <p>Already have an account? <Link to='/login' style={{textDecoration: 'underline'}}>Log In!</Link></p>
-            <p>Want to test out the app before registering? <Link to='/' onClick={this.handleTestLoginClick} style={{textDecoration: 'underline'}}>Log in as a test user.</Link></p>
-            <p>Want to learn more about Munch Stats? Check out the <Link to='/about' style={{textDecoration: 'underline'}}>About Me</Link> page!</p>
-          </footer>
-        </form>
+            </Button>
+            <footer>
+              <p>Already have an account? <Link to='/login' style={{textDecoration: 'underline'}}>Log In!</Link></p>
+              <p>Want to test out the app before registering? <Link to='/' onClick={this.handleTestLoginClick} style={{textDecoration: 'underline'}}>Log in as a test user.</Link></p>
+              <p>Want to learn more about Munch Stats? Check out the <Link to='/about' style={{textDecoration: 'underline'}}>About page!</Link></p>
+            </footer>
+          </form>
+        </div>
       );
     }
   }

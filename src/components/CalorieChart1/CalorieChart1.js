@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { HorizontalBar } from 'react-chartjs-2';
 import UserContext from '../../contexts/UserContext';
-import EventsApiService from '../../services/events-api-service';
-import moment from 'moment';
 
 export default class CalorieChart extends Component {
 

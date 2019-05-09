@@ -68,3 +68,42 @@ button{
   justify-content: center;
   align-items: center;
 }
+
+.ingredientResult{
+  cursor: pointer;
+}
+
+.formField{
+  padding: 0;
+  align-content: left;
+  text-align: left;
+  display: flex;
+  justify-content: left;
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+.inputLabel{
+  border: 1px solid;
+  margin: 0;
+  padding: 3px;
+  border: 2px solid;
+  border-right: 1px solid;
+  border-radius: 2px 0 0 2px;
+  width: 40%
+}
+
+.inputField{
+  border: none;
+  margin: 0;
+  padding: 3px;
+  border: 2px solid;
+  border-left: 1px solid;
+  border-radius: 0 2px 2px 0;
+  width: 60%;
+}
+
+.formContainer{
+  display: flex;
+  justify-content: center;
+}

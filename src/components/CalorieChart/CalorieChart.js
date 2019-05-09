@@ -10,13 +10,17 @@ chartRef = React.createRef();
 
 componentDidMount() {
   this.context.clearError();
+  // create the array that we will use for the chart
   let chartData = [0, 0];
+  // populates the first index in the array with the user's calorie budget
   chartData[1] = this.context.user.calorieBudget;
+  // populates the second index with the total calories from each event via for loop
   for(let i = 0; i < this.context.todayEvents.length; i++) {
     chartData[0] += this.context.todayEvents[i].calories;
   }
   const myChartRef = this.chartRef.current.getContext('2d');
 
+  // creating the chart
   new Chart(myChartRef, {
     type: 'horizontalBar',
     data: {
@@ -25,6 +29,7 @@ componentDidMount() {
         label: 'Today\'s Calories',
         data: chartData,
         backgroundColor: [
+          // both set to red
           'rgba(255, 99, 132, 0.5)',
           'rgba(255, 99, 132, 0.5)'
         ],
@@ -37,6 +42,7 @@ componentDidMount() {
     },
     options: {
       legend: {
+        // hides the legend input since we use headers to label the chart
         display: false
       },
       scales: {
@@ -47,6 +53,7 @@ componentDidMount() {
           }
         }],
         yAxes: [{
+          // setting the bar's thickness and creating a max case
           barThickness: 80,
           maxBarThickness: 100,
           ticks: {

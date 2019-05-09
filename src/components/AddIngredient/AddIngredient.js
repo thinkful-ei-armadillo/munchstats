@@ -13,7 +13,8 @@ export default class AddIngredient extends Component {
     results: [],
     chosenIngredient: '',
     mealInfo: {},
-    mealIngredients: []
+    mealIngredients: [],
+    hasResults: null
   };
 
   static contextType = UserContext;
@@ -84,8 +85,14 @@ export default class AddIngredient extends Component {
     let encodedInput = encodeURI(this.state.ingredientInput);
     ProxyApiService.getIngredientsFromSearch(encodedInput)
       .then(results => {
-        this.setState({ results });
-        this.context.loadingFalse();
+        console.log('results', results);
+        if(results.length === 0){
+          this.setState({hasResults: false});
+          this.context.loadingFalse();
+        } else {
+          this.setState({ results, hasResults: true });
+          this.context.loadingFalse();
+        }
       })
       .catch(e => {
         this.context.setError(e);
@@ -98,27 +105,34 @@ export default class AddIngredient extends Component {
   }
 
   generateMeasureForm = () => {
-    return (
-      <form autoComplete="off" className='measureForm' onSubmit={e => this.getNutrientInfo(e)}>
-        <p>{this.state.chosenIngredient.name}</p>
-        <label htmlFor='quantity'>How much do you want to add?</label>
-        <br />
-        <input type='number' name='quantity' min='0' step='.01' value={this.state.ingredientQuantity} onChange={(e) => this.handleQuantityInput(e)} required/>
-        <select name='measurements'>
-          {this.state.chosenIngredient.measures.map((measure, index) => {
-            return <option key={index} value={`${measure.uri},${measure.label}`} name={measure.label} >{measure.label}</option>;
-          })}
-        </select>
-        <br />
-        <Button type='submit'>Submit</Button>
-      </form>
-    );
-  }
+    if(this.context.loading){
+      return (
+        <div className='center'>
+          <Loading />
+        </div>
+      );
+    } else {
+      return (
+        <form autoComplete="off" className='measureForm' onSubmit={e => this.getNutrientInfo(e)}>
+          <p>{this.state.chosenIngredient.name}</p>
+          <label htmlFor='quantity'>How much do you want to add?</label>
+          <br />
+          <input type='number' name='quantity' min='0' step='.01' value={this.state.ingredientQuantity} onChange={(e) => this.handleQuantityInput(e)} required/>
+          <select name='measurements'>
+            {this.state.chosenIngredient.measures.map((measure, index) => {
+              return <option key={index} value={`${measure.uri},${measure.label}`} name={measure.label} >{measure.label}</option>;
+            })}
+          </select>
+          <br />
+          <Button type='submit'>Submit</Button>
+        </form>
+      );
+    }}
 
   generateResults = () => {
     return this.state.results.map((item, key) => {
       return (
-        <div id='results' key={key} onClick={() => this.handleClickIngredient(item)}>
+        <div className='ingredientResult' key={key} onClick={() => this.handleClickIngredient(item)}>
           <span>{item.name}</span>
         </div>
       );
@@ -139,27 +153,30 @@ export default class AddIngredient extends Component {
       }
       else {
         return (
-          <>
+          <div className="formContainer">
             <form
               className='mealForm'
               onSubmit={this.handleSubmit}
             >
               <Error />
-              <label htmlFor='ingredient-input'>
-                Ingredient: <input ref={this.firstInput} id='ingredient-input' name='ingredient-input' value={this.state.ingredientInput} onChange={this.handleInput} required />
-              </label>
+              <div className='formField'>
+                <label htmlFor='ingredient-input' className="inputLabel backgroundColor6 border3 textColor1">
+                Ingredient: </label>
+                <input ref={this.firstInput} id='ingredient-input' className="inputField border3 backgroundColor4" name='ingredient-input' value={this.state.ingredientInput} onChange={this.handleInput} required />
+              </ div>
               <br />
               <Button type='submit'>
                 Search Ingredients
               </Button>
             </form>
+            {(this.state.hasResults === false) && <div className='center' style={{cursor: 'default'}}><h4> No Results </h4></div>}
 
             <section className="results">
               {(this.state.results.length >= 1) && <h4>Pick One:</h4>}
               <br />
               {(this.state.results.length >= 1) && this.generateResults()}
             </section>
-          </>  
+          </ div>  
         );
       }
     }
