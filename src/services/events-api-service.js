@@ -44,6 +44,24 @@ const EventsApiService = {
       .catch(err => console.log(err));
   },
 
+  getDateRangeEvents(start, end){
+    return fetch(`${config.API_ENDPOINT}/events/date`, {
+      method: 'POST',
+      body: JSON.stringify({
+        start,
+        end
+      }),
+      headers: {
+        'Authorization': `Bearer ${TokenService.getAuthToken()}`,
+        'content-Type': 'application/json',
+      }
+    })
+      .then(res => res.json())
+      .then(res => this.sortEvents(res))
+      .catch(err => console.log(err));
+
+  },
+
   deleteEvent(event){
     return fetch(`${config.API_ENDPOINT}/events`, {
       method: 'DELETE',

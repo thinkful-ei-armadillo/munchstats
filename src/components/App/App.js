@@ -15,13 +15,12 @@ import MealDetailsRoute from '../../routes/MealDetailsRoute/MealDetailsRoute';
 import MealsRoute from '../../routes/MealsRoute/MealsRoute';
 import AboutRoute from '../../routes/AboutRoute/AboutRoute';
 import AuthApiService from '../../services/auth-api-service';
+import EventsApiService from '../../services/events-api-service';
 import UserContext from '../../contexts/UserContext';
 import './App.css';
 import Loading from '../Loading/Loading';
 import ChartRoute from '../../routes/ChartRoute/ChartRoute';
 import './ColorStyles.css';
-
-
 
 export default class App extends Component {
   state = {
@@ -44,7 +43,6 @@ export default class App extends Component {
   
     AuthApiService.getUserBudgets()
       .then(res => {
-        console.log(res.user[0])
         this.context.setUser({
           ...this.context.user,
           ...res.user[0]
@@ -56,6 +54,8 @@ export default class App extends Component {
           document.documentElement.setAttribute('theme', 'light');
         } 
       });
+    EventsApiService.getTodaysEvents()
+      .then(sortedEvents => this.context.setTodayEvents(sortedEvents));
 
   }
 

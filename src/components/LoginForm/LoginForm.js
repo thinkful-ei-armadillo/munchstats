@@ -46,15 +46,12 @@ class LoginForm extends Component {
       });
   };
 
-  componentDidMount() {
-  }
-
   render() {
 
     if(this.context.loading){
       return <div className="center"><Loading /></div>;
-    } else {
-
+    }
+    else {
       const { error } = this.state;
       return (
         <form
@@ -93,11 +90,12 @@ class LoginForm extends Component {
           Log In
           </Button>
           <footer>
-            <p>Don't have an account? <Link to='/register' style={{textDecoration: 'none'}}>Sign Up!</Link></p>
+            <p>Don't have an account? <Link to='/register' style={{textDecoration: 'underline'}}>Sign Up!</Link></p>
           </footer>
         </form>
       );
-    }}
+    }
+  }
 }
 
 export default LoginForm;

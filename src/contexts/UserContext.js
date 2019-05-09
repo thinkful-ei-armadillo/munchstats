@@ -122,7 +122,6 @@ export class UserProvider extends Component {
           ...this.state.user,
           ...res.user[0]
         })
-        console.log(this.state.user)
       })
   }
 

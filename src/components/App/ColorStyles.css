@@ -20,7 +20,7 @@ html{
 html[theme='dark']{
   --backgroundColor1: #201E1E;
   --backgroundColor2: #424242;
-  --backgroundColor3: #093133;
+  --backgroundColor3: #bdcdc6;
   --backgroundColor4: #bdcdc6;
   --backgroundColor5: #424242;
   --textColor1:#EFE7DA ;
@@ -30,7 +30,7 @@ html[theme='dark']{
   --loading:#EFE7DA ;
   --border1:black ;
   --gradientUnderline: linear-gradient(90deg, #bdcdc6, black, #bdcdc6);
-  --buttonText:#EFE7DA ;
+  --buttonText:black ;
   --shadowColor:black;
 }
 

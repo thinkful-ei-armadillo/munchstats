@@ -1,13 +1,30 @@
 .dashboard{
-  display:flex;
-  flex-direction: column;
+  /* display:flex; */
+  /* flex-direction: column; */
+  /* justify-content: space-around; */
+  text-align: center;
   width:95%;
-  margin:0 auto 0;
-  justify-content: space-around;
-  min-height:50vh;
-  max-width:400px;
+  margin:20px auto;
+}
+
+.chartLink {
+  text-decoration: underline;
+}
+.chartLink:hover {
+  text-decoration: none;
+}
+.dashboardButton {
+  margin:10px 30px 0;
+  width:200px;
+  border-radius: 5px;
 }
 
 .dashboard a{
   font-style: italic;
+}
+
+@media screen and (max-width: 550px) {
+    .dashboardButton {
+      width:80%;
+    }
 }

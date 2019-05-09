@@ -10,7 +10,7 @@ import './LogHome.css';
 export default class LogHome extends Component {
   state = {
     todayLog: []
-  }
+  };
 
   static contextType = UserContext;
 
@@ -44,14 +44,14 @@ export default class LogHome extends Component {
             <p onClick={() => this.clickDelete(event)}><i className="fas fa-trash trash"></i></p>
           </div>
           <div className="eventTime">
-            <p>{event.tag}</p>
             <p>{date}</p>
+            <p>Meal Type: <i>{event.tag}</i></p>
           </div>
           <div className="eventNutrients">
-            <p style={{fontWeight: 700}}>calories: {event.calories}</p>
-            <p>carbs: {event.carbs}</p>
-            <p>fat: {event.fat}</p>
-            <p>protein: {event.protein}</p> 
+            <p style={{fontWeight: 700}}>Calories: {event.calories}</p>
+            <p>Carbs: {event.carbs}</p>
+            <p>Fat: {event.fat}</p>
+            <p>Protein: {event.protein}</p> 
           </div>
         </div>
       );
@@ -65,23 +65,25 @@ export default class LogHome extends Component {
           <Loading />
         </div>
       );
-    } else {
+    }
+    else {
       return (
         <>
           <Back history={this.props.history} path={'/'} />
           <section className="dashboard">
             <div className="linkContainer">
               <Link to='/logmeal' className="button">
-            Log a meal that you've created
+                Log a Meal That You've Created
               </Link>
               <Link to='/logsnack' className="button">
-            Log a single item snack
+                Log a Single Item Snack
               </Link>
             </div>
-            <h2 className="eventsHeading">Today's activity:</h2>
+            <h2 className="eventsHeading">Today's Activity:</h2>
             {this.generateReport()}
           </section>
         </>
       );
-    }}
+    }
+  }
 }

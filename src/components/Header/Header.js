@@ -53,13 +53,11 @@ export default class Header extends Component {
   render() {
     return (
       <header className="backgroundColor2 textColor2 shadow">
-        <h1>
-          <Link
-            to='/'
-            style={{textDecoration: 'none'}}>
-            <img src = {logo} className = 'logoTest' />
-          </Link>
-        </h1>
+        <Link
+          to='/'
+          style={{textDecoration: 'none'}}>
+          <img src={logo} className='logoTest' alt="Munch Stats"/>
+        </Link>
         {TokenService.hasAuthToken()
           ? this.renderLogoutLink()
           : this.renderLoginLink()}
@@ -67,4 +65,3 @@ export default class Header extends Component {
     );
   }
 }
-

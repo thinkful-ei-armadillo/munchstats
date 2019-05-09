@@ -4,7 +4,19 @@
   padding: 0;
   transition: background-color 500ms, box-shadow 500ms;
 }
+@import url('https://fonts.googleapis.com/css?family=Nova+Mono');
+h1 {
+  font-family: 'Nova Mono', monospace;
+  text-align: center;
+  font-size: 3.5em;
+  margin:30px;
+}
 
+.rdtCounters { 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
 a{
   text-decoration: none;

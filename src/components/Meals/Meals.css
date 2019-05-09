@@ -86,6 +86,10 @@ h3{
   padding:30px 0 50px;
 }
 
+.mealControl {
+  color:#EFE7DA;
+}
+
 @media only screen and (max-width:500px){
   .MealsPage_meals_li{
     width:80%;
