@@ -5,19 +5,19 @@ html{
   --backgroundColor3: #3e6b6d;
   --backgroundColor6: #bdcdc6;
   --backgroundColor1: #EFE7DA;
-  --backgroundColor4: whitesmoke;
-  --backgroundColor5: whitesmoke;
-  --textColor3: black;
+  --backgroundColor4: #f5f5f5;
+  --backgroundColor5: #f5f5f5;
+  --textColor3: #000000;
   --textColor1: #152a23;
   --textColor2: #EFE7DA;
-  --errorText: red;
+  --errorText: #FF0000;
   --loading: #120E0B;
-  --border1: black;
+  --border1: #000000;
   --border2: #3e6b6d;
   --border3: #bdcdc6;
-  --gradientUnderline: linear-gradient(90deg, whitesmoke, black, whitesmoke);
+  --gradientUnderline: linear-gradient(90deg, #f5f5f5, #000000, #f5f5f5);
   --buttonText: #eeeeee;
-  --shadowColor:grey;
+  --shadowColor:#808080;
 }
 
 html[theme='dark']{
