@@ -10,6 +10,7 @@ export default class Header extends Component {
 
   handleLogoutClick = () => {
     this.context.processLogout();
+    document.documentElement.setAttribute('theme', 'light');
   };
 
   renderLogoutLink() {
