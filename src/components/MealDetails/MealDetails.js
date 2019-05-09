@@ -207,7 +207,7 @@ export default class Meals extends Component {
 
         <div className='mealContainer'>          
           <section className='finalIngredientsContainer'>
-              <div className= 'panel backgroundColor4 shadow textColor3 deatailsPanel'>
+              <div className= 'panel backgroundColor7 shadow textColor1 deatailsPanel'>
                 <div className= 'panelHeader backgroundColor2 textColor2 '>
                 <h3>Meal Ingredients</h3>
                 <p className = 'modalOpener' onClick={this.handleModal}>Add Ingredient</p>
@@ -219,7 +219,7 @@ export default class Meals extends Component {
             </div>
           </section>
           <section className='currentMealStats'>
-              <div className= 'panel deatailsPanel backgroundColor4 shadow textColor3'>
+              <div className= 'panel deatailsPanel backgroundColor7 shadow textColor1'>
               {this.renderMealStats()}
             </div>
           </section>

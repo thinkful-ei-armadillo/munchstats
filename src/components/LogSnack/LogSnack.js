@@ -57,10 +57,10 @@ export default class LogSnack extends Component {
         <div className= {`IngredientFormContainer backgroundColor5 shadow addIngredientMeasureForm`}>
           <Back history={this.props.history} path={'/log'} />
           <Error />
-          <div className="mealLogContainer">
+          <div className = 'logSnackTime'>
             <h3>when did you eat the {this.context.ingredient.name}?</h3>
             <Datetime defaultValue={moment()} closeOnSelect={true} inputProps={{ readOnly: true }}/>
-            <button onClick={() => this.handleAddLog()} >Log Your Snack!</button>
+            <button onClick={() => this.handleAddLog() }className = 'backgroundColor6 textColor3' >Log Your Snack!</button>
           </div>
         </div>
       );

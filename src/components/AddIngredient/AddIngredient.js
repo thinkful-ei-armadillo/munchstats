@@ -118,7 +118,7 @@ export default class AddIngredient extends Component {
       );
     } else {
       return (
-        <form autoComplete="off" className='IngredientFormContainer backgroundColor5 measureForm' onSubmit={e => this.getNutrientInfo(e)}>
+        <form autoComplete="off" className={`IngredientFormContainer ${(this.props.history.location.pathname === '/logsnack') ? 'shadow' : null} backgroundColor5 measureForm`} onSubmit={e => this.getNutrientInfo(e)}>
           <p className = 'ingredientName'>{this.state.chosenIngredient.name}</p>
           <label htmlFor='quantity'>How much do you want to add?</label>
           <br />
@@ -129,7 +129,7 @@ export default class AddIngredient extends Component {
             })}
           </select>
           <br />
-          <Button type='submit'>Submit</Button>
+          <Button className = 'backgroundColor6 textColor3' type='submit'>Submit</Button>
         </form>
       );
     }}
@@ -165,11 +165,11 @@ export default class AddIngredient extends Component {
             >
               <Error />
               <div className='formField' id='addIngredientInput'>
-                <label htmlFor='ingredient-input' className="inputLabel backgroundColor6 border3 textColor1">
+                <label htmlFor='ingredient-input' className="inputLabel backgroundColor6 border3 textColor3">
                 Ingredient: </label>
                 <input ref={this.firstInput} id='ingredient-input' className="inputField border3 backgroundColor4" name='ingredient-input' value={this.state.ingredientInput} onChange={this.handleInput} required />
               </ div>
-              <Button className='addIngredientButton' type='submit'> 
+              <Button className='textColor3 addIngredientButton backgroundColor6' type='submit'> 
                 Search
               </Button>
             </form>
