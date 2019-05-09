@@ -167,12 +167,10 @@ export default class Meals extends Component {
           isOpen={this.state.showModal}
           onRequestClose={this.handleModal}
           contentLabel="Add Ingredient"
-          className='modal modalAddIngredient'
+          className='modal modalAddIngredient panel backgroundColor5 shadow'
         > 
-          <div className = 'panel backgroundColor5'>
             <h3 className = 'panelHeader backgroundColor2 textColor2'>Search For an Ingredient</h3>
             <AddIngredient handleModal={this.handleModal} />
-          </div>
           <i onClick={this.handleModal} className="fas fa-times modalCloser"></i>
         </ReactModal>
       );
@@ -209,7 +207,7 @@ export default class Meals extends Component {
 
         <div className='mealContainer'>          
           <section className='finalIngredientsContainer'>
-            <div className = 'panel backgroundColor5'>
+              <div className= 'panel backgroundColor4 shadow textColor3'>
               <div className = 'panelHeader backgroundColor2 textColor2'>
                 <h3>Meal Ingredients</h3>
                 <p className = 'modalOpener' onClick={this.handleModal}>Add Ingredient</p>
@@ -221,7 +219,7 @@ export default class Meals extends Component {
             </div>
           </section>
           <section className='currentMealStats'>
-            <div className = 'panel backgroundColor5'>
+              <div className= 'panel backgroundColor4 shadow textColor3'>
               {this.renderMealStats()}
             </div>
           </section>

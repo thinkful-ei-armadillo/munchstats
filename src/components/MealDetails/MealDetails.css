@@ -94,9 +94,6 @@
 }
 
 @media only screen and (max-width:500px){
-  .goBack span {
-    top: 135px;
-  }
   .mealContainer section {
     width:90%;
   }

@@ -15,6 +15,7 @@ import MealDetailsRoute from '../../routes/MealDetailsRoute/MealDetailsRoute';
 import MealsRoute from '../../routes/MealsRoute/MealsRoute';
 import AboutRoute from '../../routes/AboutRoute/AboutRoute';
 import AuthApiService from '../../services/auth-api-service';
+import EventsApiService from '../../services/events-api-service';
 import UserContext from '../../contexts/UserContext';
 import './App.css';
 import Loading from '../Loading/Loading';
@@ -39,16 +40,23 @@ export default class App extends Component {
   static contextType = UserContext;
 
   componentDidMount() {
-    // document.documentElement.setAttribute('theme', 'light');
-    if(!this.context.user.idle && this.context.user.id){
-      AuthApiService.getUserBudgets()
-        .then(res => {
-          this.context.setUser({
-            ...this.context.user,
-            ...res.user[0]
-          });
+  
+    AuthApiService.getUserBudgets()
+      .then(res => {
+        this.context.setUser({
+          ...this.context.user,
+          ...res.user[0]
         });
-    }
+        if (res.user[0].isDark) {
+          document.documentElement.setAttribute('theme', 'dark');
+        }
+        else {
+          document.documentElement.setAttribute('theme', 'light');
+        } 
+      });
+    EventsApiService.getTodaysEvents()
+      .then(sortedEvents => this.context.setTodayEvents(sortedEvents));
+
   }
 
   render() {

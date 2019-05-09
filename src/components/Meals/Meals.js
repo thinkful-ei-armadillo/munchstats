@@ -96,15 +96,15 @@ export default class Meals extends Component {
         <Back history={this.props.history} path={'/'} />
         <ul className='MealsPage__meals'>
           {meals.map(meal =>
-            <li key={meal.id} className='MealsPage_meals_li backgroundColor4'>
+            <li key={meal.id} className='MealsPage_meals_li backgroundColor4 textColor3 shadow'>
               <h3 className = 'mealPageMealName'>{meal.name}</h3> 
               <div className = "mealNav backgroundColor2">
-                <Button onClick={() => this.handleClickDelete(meal)}><i className="fas fa-trash" /></Button>
+                <Button onClick={() => this.handleClickDelete(meal)}><i className="fas fa-trash mealControl" /></Button>
                 <Link
                   to={`/meals/${meal.id}`}
                   style={{textDecoration: 'none'}}>
                   <Button type="button" className='editMeal'>
-                    <i className="fas fa-pen"></i>
+                    <i className="fas fa-pen mealControl"></i>
                   </Button>
                 </Link>
               </div>
@@ -131,7 +131,7 @@ export default class Meals extends Component {
             isOpen={this.state.showModal}
             onRequestClose={this.handleModal}
             contentLabel="Add Meal"
-            className='modal mealModal'>
+            className='panel mealModal backgroundColor5 shadow'>
             <form
               className='mealCreationForm'
               onSubmit={this.handleSubmit}>
@@ -154,6 +154,7 @@ export default class Meals extends Component {
               Add Meal
               </Button>
             </form>
+            <i onClick={this.handleModal} className="fas fa-times modalCloser"></i>
           </ReactModal>
           <section className="mealsContainer">
             {this.context.meals.meal ? this.genUserMeals(this.context.meals.meal) : null}

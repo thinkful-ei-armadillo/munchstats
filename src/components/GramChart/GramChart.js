@@ -85,7 +85,7 @@ componentDidMount() {
 render() {
   return (
     <div className="gramChart">
-      <canvas id="gChart" className="shadow" ref={this.chartRef} />
+      <canvas id="gChart" className="shadow backgroundColor5" ref={this.chartRef} />
     </div>
   );
 }

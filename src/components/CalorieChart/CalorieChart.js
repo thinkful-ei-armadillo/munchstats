@@ -48,13 +48,17 @@ componentDidMount() {
       scales: {
         xAxes: [{
           ticks: {
-            beginAtZero: true
+            beginAtZero: true,
+            fontColor:'#eee'
           }
         }],
         yAxes: [{
           // setting the bar's thickness and creating a max case
           barThickness: 80,
-          maxBarThickness: 100
+          maxBarThickness: 100,
+          ticks: {
+            fontColor: '#eee'
+          }
         }]
       }
     }
@@ -65,7 +69,7 @@ componentDidMount() {
 render() {
   return (
     <div className="calorieChart">
-      <canvas id="myChart" className="shadow" ref={this.chartRef} />
+      <canvas id="myChart" className="shadow backgroundColor5" ref={this.chartRef} />
     </div>
   );
 }
