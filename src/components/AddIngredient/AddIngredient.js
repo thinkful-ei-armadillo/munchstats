@@ -4,6 +4,7 @@ import ProxyApiService from '../../services/proxy-api-service';
 import UserContext from '../../contexts/UserContext';
 import Loading from '../Loading/Loading';
 import Error from '../Error/Error';
+import './AddIngredient.css'
 
 export default class AddIngredient extends Component {
 
@@ -76,6 +77,10 @@ export default class AddIngredient extends Component {
     this.setState({ ingredientInput: e.target.value });
   }
 
+  componentDidMount() {
+    console.log(this.props.history.location.pathname)
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
     this.context.loadingTrue();
@@ -113,8 +118,8 @@ export default class AddIngredient extends Component {
       );
     } else {
       return (
-        <form autoComplete="off" className='measureForm' onSubmit={e => this.getNutrientInfo(e)}>
-          <p>{this.state.chosenIngredient.name}</p>
+        <form autoComplete="off" className='IngredientFormContainer backgroundColor5 measureForm' onSubmit={e => this.getNutrientInfo(e)}>
+          <p className = 'ingredientName'>{this.state.chosenIngredient.name}</p>
           <label htmlFor='quantity'>How much do you want to add?</label>
           <br />
           <input type='number' name='quantity' min='0' step='.01' value={this.state.ingredientQuantity} onChange={(e) => this.handleQuantityInput(e)} required/>
@@ -153,20 +158,19 @@ export default class AddIngredient extends Component {
       }
       else {
         return (
-          <div className="formContainer">
+          <div className={`IngredientFormContainer ${(this.props.history.location.pathname === '/logsnack') ? 'shadow' : null}  backgroundColor5`}>
             <form
               className='mealForm'
               onSubmit={this.handleSubmit}
             >
               <Error />
-              <div className='formField'>
+              <div className='formField' id='addIngredientInput'>
                 <label htmlFor='ingredient-input' className="inputLabel backgroundColor6 border3 textColor1">
                 Ingredient: </label>
                 <input ref={this.firstInput} id='ingredient-input' className="inputField border3 backgroundColor4" name='ingredient-input' value={this.state.ingredientInput} onChange={this.handleInput} required />
               </ div>
-              <br />
-              <Button type='submit'>
-                Search Ingredients
+              <Button className='addIngredientButton' type='submit'> 
+                Search
               </Button>
             </form>
             {(this.state.hasResults === false) && <div className='center' style={{cursor: 'default'}}><h4> No Results </h4></div>}

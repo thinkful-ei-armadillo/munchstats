@@ -96,7 +96,7 @@ export default class Meals extends Component {
         <Back history={this.props.history} path={'/'} />
         <ul className='MealsPage__meals'>
           {meals.map(meal =>
-            <li key={meal.id} className='MealsPage_meals_li backgroundColor4 textColor3 shadow'>
+            <li key={meal.id} className='MealsPage_meals_li backgroundColor5 textColor3 shadow'>
               <h3 className = 'mealPageMealName'>{meal.name}</h3> 
               <div className = "mealNav backgroundColor2">
                 <Button onClick={() => this.handleClickDelete(meal)}><i className="fas fa-trash mealControl" /></Button>

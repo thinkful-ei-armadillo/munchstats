@@ -22,13 +22,13 @@ html{
 
 html[theme='dark']{
   --backgroundColor1: #201E1E;
-  --backgroundColor2: #424242;
+  --backgroundColor2: #0a3234;
   --backgroundColor3: #bdcdc6;
-  --backgroundColor4: #bdcdc6;
+  --backgroundColor4: #4c4c4c ;
   --backgroundColor5: #424242;
   --textColor1:#EFE7DA ;
   --textColor2: #EFE7DA;
-  --textColor3:#202020;
+  --textColor3:#EFE7DA;
   --errorText: #EFE7DA;
   --loading:#EFE7DA ;
   --border1:black ;

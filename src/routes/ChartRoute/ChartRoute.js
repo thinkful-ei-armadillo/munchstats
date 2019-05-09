@@ -50,7 +50,7 @@ class ChartRoute extends Component {
     return <form onSubmit = {e => this.handleSubmitStart(e)} className = 'chartDatePicker shadow backgroundColor5'>
         <h3>Pick a Start Date</h3>
         <p onClick = {this.handleClick}>cancel</p>
-        <Datetime defaultValue={moment()} name = 'date' id = 'date' locale={'true'}/>
+        <Datetime defaultValue={moment()} name = 'date' id = 'date' locale={'true'} timeFormat = {false}/>
         <Button type ='submit'>Next</Button>
       </form>
   }
@@ -58,7 +58,7 @@ class ChartRoute extends Component {
     return <form onSubmit = {e => this.handleSubmitEnd(e)} className = 'chartDatePicker shadow backgroundColor5'>
         <h3>Pick an End Date</h3>
         <p onClick = {this.handleClick}>cancel</p>
-      <Datetime defaultValue={moment()} name = 'date' id = 'date' locale={'true'}/>
+      <Datetime closeOnSelect={true} defaultValue={moment()} inputProps={{ readOnly: true }} />
         <Button type ='submit'>Submit</Button>
       </form>
   }

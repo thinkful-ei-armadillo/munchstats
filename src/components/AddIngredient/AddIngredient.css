@@ -1,0 +1,24 @@
+.IngredientFormContainer {
+  padding:30px 50px;
+  margin:20px;
+  border-radius: 10px;
+}
+
+.ingredientName{
+  font-size: 1.5em;
+  margin-bottom:10px;
+  font-weight: bold;
+}
+
+#addIngredientInput {
+  margin: auto;
+  width:100%;
+  max-width: 225px;
+}
+
+.addIngredientButton {
+  max-width: 150px;
+  padding:10px 20px;
+  opacity:.9;
+  box-shadow:1px 1px 1px grey;
+}
