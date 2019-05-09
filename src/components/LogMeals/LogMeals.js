@@ -19,6 +19,7 @@ export default class LogMeals extends Component {
   };
 
   componentDidMount(){
+
     this.context.loadingTrue();
     this.context.clearError();
     MealsApiService.getMeals()
@@ -121,10 +122,9 @@ export default class LogMeals extends Component {
               </label>
             </section>
             <br />
-            <label>
               Select Date & Time
-              <Datetime defaultValue={moment()} locale={'true'} inputProps={{ readOnly: true }}/>
-            </label>
+              <Datetime className='textColor1' closeOnSelect={true} inputProps={{ readOnly: true }} defaultValue ={moment()}/>
+            
             <Button onClick={() => this.handleAddLog()}>Add</Button>
           </div>
         </div>

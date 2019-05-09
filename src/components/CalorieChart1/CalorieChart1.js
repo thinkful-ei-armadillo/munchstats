@@ -40,12 +40,14 @@ render() {
         xAxes: [{
           ticks: {
             beginAtZero: true,
+            fontColor: '#868686'
           }
         }],
         yAxes: [{
           barThickness: 80,
           maxBarThickness: 100,
           ticks: {
+            fontColor:'#868686'
           }
         }]
       }

@@ -1,63 +1,46 @@
 /* color themes referenced by classes: */
 
 html{
+  --backgroundColor1: #EFE7DA;
   --backgroundColor2: #0E4749;
   --backgroundColor3: #3e6b6d;
-  --backgroundColor6: #bdcdc6;
-  --backgroundColor1: #EFE7DA;
   --backgroundColor4: #f5f5f5;
   --backgroundColor5: #f5f5f5;
-  --textColor3: #000000;
+  --backgroundColor6: #3e6b6d;
+  --backgroundColor7: #f5f5f5;
   --textColor1: #152a23;
   --textColor2: #EFE7DA;
+  --textColor3: #EFE7Da;
+  --textColor4: #424242;
   --errorText: #FF0000;
   --loading: #120E0B;
   --border1: #000000;
   --border2: #3e6b6d;
-  --border3: #bdcdc6;
+  --border3: #3e6b6d;
   --gradientUnderline: linear-gradient(90deg, #f5f5f5, #000000, #f5f5f5);
-  --buttonText: #eeeeee;
+  --buttonText: #EFE7Da;
   --shadowColor:#808080;
 }
 
 html[theme='dark']{
-  --backgroundColor2: #996300;
-  --backgroundColor3: #ddd8d8;
-  --backgroundColor6: #64706b;
-  --backgroundColor1: #201e1e;
-  --backgroundColor4: #202020;
-  --backgroundColor5: #1f1c1c;
-  --textColor3:#EFE7DA;
-  --textColor1:#202020 ;
-  --textColor2: #202020;
-  --errorText: #FF0000;
-  --loading:#EFE7DA;
-  --border1:#EFE7DA;
-  --border2: #3e6b6d;
-  --border3: #120E0B;
-  --gradientUnderline: linear-gradient(90deg, #bdcdc6, black, #bdcdc6);
-  --buttonText:black ;
-  --shadowColor:black;
-}
-
-
-/* html[theme='dark']{
-  --backgroundColor2: #424242;
-  --backgroundColor3: #bdcdc6;
-  --backgroundColor6: #bdcdc6;
   --backgroundColor1: #201E1E;
-  --backgroundColor4: #bdcdc6;
+  --backgroundColor2: #0a3234;
+  --backgroundColor3: #424242;
+  --backgroundColor4: #f5f5f5;
   --backgroundColor5: #424242;
-  --textColor3:#202020;
+  --backgroundColor6: #EFE7DA;
+  --backgroundColor7:#424242;   
   --textColor1:#EFE7DA ;
   --textColor2: #EFE7DA;
+  --textColor3:#201e1e;
+  --textColor4: #424242;
   --errorText: #EFE7DA;
   --loading:#EFE7DA ;
   --border1:black ;
   --border2: #3e6b6d;
-  --border3: #bdcdc6;
-  --gradientUnderline: linear-gradient(90deg, #bdcdc6, black, #bdcdc6);
-  --buttonText:black ;
+  --border3: #EFE7DA;
+  --gradientUnderline: linear-gradient(90deg, #424242, #efe7da, #424242);
+  --buttonText:#EFE7DA ;
   --shadowColor:black;
 } */
 
@@ -119,6 +102,9 @@ html[theme='dark']{
 .backgroundColor6{
   background-color: var(--backgroundColor6);
 }
+.backgroundColor7{
+  background-color: var(--backgroundColor7);
+}
 
 /* main text color in body */
 .textColor1{
@@ -134,6 +120,10 @@ html[theme='dark']{
 
 .textColor3 {
   color: var(--textColor3);
+}
+
+.textColor4 {
+  color: var(--textColor4);
 }
 
 .errorText{

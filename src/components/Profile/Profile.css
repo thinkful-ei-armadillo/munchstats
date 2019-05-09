@@ -4,6 +4,14 @@
   display: inline-block;
   width: 60px;
   height: 34px;
+  left: 50px;
+}
+
+.switch p {
+  left: -100px;
+  position: relative;
+  top: 5px;
+  width: 100px;
 }
 
 /* Hide default HTML checkbox */

@@ -4,7 +4,7 @@
   max-width: 350px;
   border-radius: 5px;
   padding: 10px;
-  background: linear-gradient(to right, var(--backgroundColor4) 90%, var(--backgroundColor2) 28px);
+  background: linear-gradient(to right, var(--backgroundColor7) 90%, var(--backgroundColor2) 28px);
   box-shadow: 1px 1px 3px;
 }
 
