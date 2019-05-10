@@ -94,5 +94,10 @@ h3{
   .MealsPage_meals_li{
     width:80%;
   }
+
+  .mealModal {
+    margin-top:70px;
+    width:98%;
+  }
   
 }
