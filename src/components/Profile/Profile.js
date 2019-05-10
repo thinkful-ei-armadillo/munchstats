@@ -55,6 +55,28 @@ export default class Profile extends Component {
     return newBudget;
   }
 
+  resetBudgets = () => {
+    let calorieBudget = null;
+    let fatBudget = null;
+    let carbBudget = null;
+    let proteinBudget = null;
+    
+    let updatedUser = {
+      ...this.context.user,
+      calorieBudget,
+      fatBudget,
+      carbBudget,
+      proteinBudget
+    }
+    AuthApiService.patchUser(updatedUser)
+      .then(this.context.setUser(updatedUser));
+    
+    document.getElementById('calorieBudget').value = '';
+    document.getElementById('fatBudget').value = '';
+    document.getElementById('carbBudget').value = '';
+    document.getElementById('proteinBudget').value = '';
+  }
+
   submitUserBudgets = () => {
     let calorieBudget = this.setUserBudgets('calorieBudget');
     let fatBudget = this.setUserBudgets('fatBudget');
@@ -88,7 +110,6 @@ export default class Profile extends Component {
     );
   }
 
-  // CHECK THIS TO MAKE SURE IT DIDNT BREAK
   genEditForm(){
     if(this.state.isEditing === true){
       return(
@@ -111,6 +132,8 @@ export default class Profile extends Component {
               <input type="text" id="proteinBudget" className="inputField border3 backgroundColor4" defaultValue={this.context.user.proteinBudget} />
             </div>
             <br />
+            <Button type="button" onClick={this.resetBudgets}>Reset</Button>
+            <br/>
             <Button type="button" onClick={this.submitUserBudgets}>Submit</Button>
           </form>
         </div>
