@@ -18,9 +18,12 @@ Array [
     Hello, 
     !
   </h2>,
-  "Dark Mode",
-  <section>
-    Current Budgets
+  <section
+    className="currBudgets"
+  >
+    <b>
+      Current Budgets
+    </b>
     <br />
     Calories: 
     <br />
@@ -30,48 +33,12 @@ Array [
     <br />
     Protein: 
   </section>,
-  <form
-    className="userBudgets"
+  <button
+    className="Button"
+    onClick={[Function]}
+    type="button"
   >
-    <label>
-      Calorie Budget: 
-      <input
-        id="calorieBudget"
-        type="text"
-      />
-    </label>
-    <br />
-    <label>
-      Fat Budget: 
-      <input
-        id="fatBudget"
-        type="text"
-      />
-    </label>
-    <br />
-    <label>
-      Carb Budget: 
-      <input
-        id="carbBudget"
-        type="text"
-      />
-    </label>
-    <br />
-    <label>
-      Protein Budget: 
-      <input
-        id="proteinBudget"
-        type="text"
-      />
-    </label>
-    <br />
-    <button
-      className="Button"
-      onClick={[Function]}
-      type="button"
-    >
-      Submit
-    </button>
-  </form>,
+    Edit Budgets
+  </button>,
 ]
 `;

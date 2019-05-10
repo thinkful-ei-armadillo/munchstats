@@ -20,32 +20,45 @@ Array [
     <h3>
       Log a Single Item Snack!
     </h3>
-    <form
-      className="mealForm"
-      onSubmit={[Function]}
+    <div
+      className="IngredientFormContainer shadow  backgroundColor5"
     >
-      <label
-        htmlFor="ingredient-input"
+      <form
+        className="mealForm"
+        onSubmit={[Function]}
       >
-        Ingredient
-      </label>
-      <input
-        id="ingredient-input"
-        name="ingredient-input"
-        onChange={[Function]}
-        required={true}
-        value=""
-      />
-      <button
-        className="Button"
-        type="submit"
+        <div
+          className="formField"
+          id="addIngredientInput"
+        >
+          <label
+            className="inputLabel backgroundColor6 border3 textColor3"
+            htmlFor="ingredient-input"
+          >
+            Ingredient: 
+          </label>
+          <input
+            className="inputField border3 backgroundColor8"
+            id="ingredient-input"
+            name="ingredient-input"
+            onChange={[Function]}
+            required={true}
+            value=""
+          />
+        </div>
+        <button
+          className="Button textColor3 addIngredientButton backgroundColor6"
+          type="submit"
+        >
+          Search
+        </button>
+      </form>
+      <section
+        className="results"
       >
-        Search ingredients
-      </button>
-    </form>
-    <section
-      className="results"
-    />
+        <br />
+      </section>
+    </div>
   </div>,
 ]
 `;

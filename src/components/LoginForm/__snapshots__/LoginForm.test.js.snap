@@ -1,68 +1,72 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<LoginForm /> renders the UI as expected 1`] = `
-<form
-  className="LoginForm"
-  onSubmit={[Function]}
+<div
+  className="formContainer"
 >
-  <div
-    role="alert"
-  />
-  <div>
-    <label
-      className="Label"
-      htmlFor="login-username-input"
-    >
-      Username
-    </label>
-    <br />
-    <input
-      className="Input"
-      id="login-username-input"
-      name="username"
-      required={true}
-      type="text"
-    />
-  </div>
-  <br />
-  <div>
-    <label
-      className="Label"
-      htmlFor="login-password-input"
-    >
-      Password
-    </label>
-    <br />
-    <input
-      className="Input"
-      id="login-password-input"
-      name="password"
-      required={true}
-      type="password"
-    />
-  </div>
-  <br />
-  <button
-    className="Button"
-    type="submit"
+  <form
+    className="inputForm"
+    onSubmit={[Function]}
   >
-    Log In
-  </button>
-  <footer>
-    <p>
-      Don't have an account? 
-      <a
-        href="/register"
-        onClick={[Function]}
-        style={
-          Object {
-            "textDecoration": "none",
-          }
-        }
+    <div
+      role="alert"
+    />
+    <div
+      className="formField"
+    >
+      <label
+        className="Label inputLabel backgroundColor6 border3 textColor3"
+        htmlFor="login-username-input"
       >
-        Sign Up!
-      </a>
-    </p>
-  </footer>
-</form>
+        Username
+      </label>
+      <input
+        className="Input inputField border3 backgroundColor4"
+        id="login-username-input"
+        name="username"
+        required={true}
+        type="text"
+      />
+    </div>
+    <div
+      className="formField"
+    >
+      <label
+        className="Label inputLabel backgroundColor6 border3 textColor3"
+        htmlFor="login-password-input"
+      >
+        Password
+      </label>
+      <input
+        className="Input inputField border3 backgroundColor4"
+        id="login-password-input"
+        name="password"
+        required={true}
+        type="password"
+      />
+    </div>
+    <button
+      className="Button"
+      type="submit"
+    >
+      Log In
+    </button>
+    <footer>
+      <p>
+        Don't have an account? 
+        <a
+          href="/register"
+          onClick={[Function]}
+          style={
+            Object {
+              "textDecoration": "underline",
+            }
+          }
+        >
+          Sign Up!
+        </a>
+      </p>
+    </footer>
+  </form>
+</div>
 `;
