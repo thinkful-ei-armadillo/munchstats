@@ -22,7 +22,7 @@ render() {
     chartData[1][0] = this.context.user.calorieBudget * ((this.props.days) ? this.props.days : 1);
     for (let i = 0; i < this.props.chartData.length; i++) {
       chartData[0][0] += this.props.chartData[i].calories;
-      }
+    }
   } else {
     if (this.context.todayEvents) {
       chartData[1][0] = this.context.user.calorieBudget;
@@ -37,20 +37,20 @@ render() {
     <div className="calorieChart shadow backgroundColor5">
       <HorizontalBar className = 'textColor2' options = {{
         scales: {
-        xAxes: [{
-          ticks: {
-            beginAtZero: true,
-            fontColor: '#868686'
-          }
-        }],
-        yAxes: [{
-          barThickness: 80,
-          maxBarThickness: 100,
-          ticks: {
-            fontColor:'#868686'
-          }
-        }]
-      }
+          xAxes: [{
+            ticks: {
+              beginAtZero: true,
+              fontColor: '#868686'
+            }
+          }],
+          yAxes: [{
+            barThickness: 80,
+            maxBarThickness: 100,
+            ticks: {
+              fontColor:'#868686'
+            }
+          }]
+        }
       }} data={ {
         labels: ['Calories'],
         datasets: [{
@@ -63,8 +63,8 @@ render() {
             'rgba(255, 206, 86, 1)',
           ],
           borderWidth: 1
-          },
-          {
+        },
+        {
           label: 'Goals',
           data: chartData[1],
           backgroundColor: [
@@ -74,9 +74,9 @@ render() {
             'rgba(0, 180, 175, 1)',
           ],
           borderWidth: 1
-          }
+        }
         ]
-       } } />
+      } } />
       {/* <canvas id="myChart" className="shadow backgroundColor5" ref={this.chartRef} /> */}
     </div>
   );

@@ -19,6 +19,11 @@ class RegistrationForm extends Component {
 
   firstInput = React.createRef();
 
+  handleLoginSuccess = () => {
+    const { history } = this.props;
+    history.push('/');
+  };
+
   handleSubmit = ev => {
     ev.preventDefault();
     this.context.loadingTrue();
@@ -55,26 +60,29 @@ class RegistrationForm extends Component {
 
   handleTestLoginClick = ev => {
     ev.preventDefault();
-        this.context.loadingTrue();
+    this.context.loadingTrue();
 
-        this.setState({ error: null });
+    this.setState({ error: null });
 
-        AuthApiService.postLogin({
-        username: 'test',
-        password: 'pass'
-        })
-        .then(res => {
-            this.context.processLogin(res.authToken);
-            this.props.history.push('/');
-            this.context.loadingFalse();
-            EventsApiService.getTodaysEvents()
-            .then(res => this.context.setTodayEvents(res))
-            .catch(e => this.context.setError(e));
-        })
-        .catch(res => {
-            this.setState({ error: res.error });
-            this.context.loadingFalse();
-        });
+    // sends a log in post request to the API with the test user's info set
+    AuthApiService.postLogin({
+      username: 'test',
+      password: 'pass'
+    })
+      .then(res => {
+        this.context.processLogin(res.authToken);
+        this.context.loadingFalse();
+        EventsApiService.getTodaysEvents()
+          .then(res => {this.context.setTodayEvents(res);
+            this.handleLoginSuccess();
+          })
+          .catch(e => this.context.setError(e));
+      })
+      .catch(res => {
+        console.log(res);
+        this.setState({ error: res.error });
+        this.context.loadingFalse();
+      });
   }
 
   lightTheme = () => {
