@@ -173,7 +173,7 @@ export default class AddIngredient extends Component {
             </form>
             {(this.state.hasResults === false) && <div className='center' style={{cursor: 'default'}}><h4> No Results </h4></div>}
 
-            <section className="results">
+            <section className="results" >
               {(this.state.results.length >= 1) && <h4>Pick One:</h4>}
               <br />
               {(this.state.results.length >= 1) && this.generateResults()}

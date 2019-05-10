@@ -64,7 +64,7 @@ export default class App extends Component {
     return (
       <div className='App'>
         <Header />
-        <main>
+        <main role='main'>
           <Switch>
             <PrivateRoute
               exact

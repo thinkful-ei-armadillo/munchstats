@@ -35,7 +35,7 @@ export default class Header extends Component {
 
   renderLoginLink() {
     return (
-      <nav>
+      <nav role='navigation'>
         <Link
           to='/login'
           style={{textDecoration: 'none'}}>
@@ -53,7 +53,7 @@ export default class Header extends Component {
 
   render() {
     return (
-      <header className="backgroundColor2 textColor2 shadow">
+      <header className="backgroundColor2 textColor2 shadow" role='banner'>
         <Link
           to='/'
           style={{textDecoration: 'none'}}>
