@@ -9,17 +9,7 @@ class DashboardRoute extends Component {
 
   static contextType = UserContext
   render() {
-
-    let chartData = [[0], [0]];
-    if (this.context.todayEvents) {
-      chartData[1][0] = this.context.user.calorieBudget;
-      for (let i = 0; i < this.context.todayEvents.length; i++) {
-        chartData[0][0] += this.context.todayEvents[i].calories;
-      }
-    }
-    if (!chartData[0][0] && !chartData[1][0]) {
-      chartData = null
-    }
+    
     return (
       <section className="dashboard">
         <h2>Dashboard</h2>
@@ -33,12 +23,15 @@ class DashboardRoute extends Component {
               Log a Meal or Snack
           </Button>
         </Link>
-        <CalorieChart1 chartData={chartData} className = 'dashboardChart' />
-        {(chartData && this.context.user.calorieBudget) ? 
+        {(this.context.user.calorieBudget) ? 
+          null : <div className = 'updateBudgets'><h3>No chart data!</h3>Set your nutrition budgets <Link to='/profile'>here</Link></div>
+        }
+        <CalorieChart1 className = 'dashboardChart' />
+        
           <Link className = 'chartLink textColor1' to='/charts'>
               View Your Charts
-          </Link> : null
-        }
+          </Link>
+        
       </section>
     );
   }

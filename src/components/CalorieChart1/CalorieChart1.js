@@ -17,7 +17,7 @@ componentDidMount() {
 }
 
 render() {
-
+  
   let chartData = [[0], [0]];
   if(this.props.chartData){
     chartData[1][0] = this.context.user.calorieBudget * ((this.props.days) ? this.props.days : 1);
@@ -32,14 +32,8 @@ render() {
       }
     }
   }
-  if(!(this.props.chartData) && !(this.context.user.calorieBudget)){
-    return (
-      <div className="calorieChart shadow backgroundColor5">
-        <h3>No data for charts!</h3>
-        <p>You can <Link to='/profile'>set calorie budgets </Link> or <Link to='/log'>log some meal information</Link></p>
-      </div>
-    )
-  }
+ 
+  
   return (
     <div className="calorieChart shadow backgroundColor5">
       <HorizontalBar className = 'textColor2' options = {{

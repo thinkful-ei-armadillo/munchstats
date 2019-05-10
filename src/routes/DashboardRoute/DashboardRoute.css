@@ -7,6 +7,16 @@
   margin:20px auto;
 }
 
+.updateBudgets a:hover{
+  text-decoration: none;
+}
+.updateBudgets a{
+  text-decoration: underline;
+}
+.updateBudgets {
+  margin-top:20px;
+}
+
 .chartLink {
   text-decoration: underline;
 }
