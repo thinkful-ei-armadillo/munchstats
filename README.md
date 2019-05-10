@@ -10,6 +10,7 @@
 
 ### Screenshots
 ![Register](https://i.imgur.com/jTl6s57.png)  
+![Dashboard](https://i.imgur.com/2h9xocv.png)  
 ![Your Meals](https://i.imgur.com/Y4hBz7f.png)  
 ![Meal Page](https://i.imgur.com/XiwuS4E.png)  
 ![Add Ingredient](https://i.imgur.com/zYteyAw.png)  
