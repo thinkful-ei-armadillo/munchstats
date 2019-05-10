@@ -2,33 +2,18 @@
 
 exports[`<Meals /> renders the UI as expected 1`] = `
 <div>
-  <form
-    className="mealCreationForm"
-    onSubmit={[Function]}
+  <div
+    className="mealsHeader"
   >
-    <label
-      htmlFor="mealInput"
-    >
-      New Meal Name
-    </label>
-    <br />
-    <input
-      autoComplete="off"
-      id="mealInput"
-      maxLength="60"
-      name="mealInput"
-      onChange={[Function]}
-      required={true}
-      value=""
-    />
-    <br />
+    <h2>
+      Your Meals
+    </h2>
     <button
-      className="Button"
-      type="submit"
+      onClick={[Function]}
     >
       Add Meal
     </button>
-  </form>
+  </div>
   <section
     className="mealsContainer"
   />

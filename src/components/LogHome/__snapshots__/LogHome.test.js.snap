@@ -1,45 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<LogHome /> renders the UI as expected 1`] = `
-Array [
-  <section
-    className="goBack"
+<section
+  className="dashboard"
+>
+  <div
+    className="linkContainer"
   >
-    <span
-      className="back_button"
+    <a
+      className="button"
+      href="/logmeal"
       onClick={[Function]}
     >
-      <i
-        className="fas fa-chevron-left"
-      />
-    </span>
-  </section>,
-  <section
-    className="dashboard"
+      Log a Meal That You've Created
+    </a>
+    <a
+      className="button"
+      href="/logsnack"
+      onClick={[Function]}
+    >
+      Log a Single Item Snack
+    </a>
+  </div>
+  <h2
+    className="eventsHeading"
   >
-    <div
-      className="linkContainer"
-    >
-      <a
-        className="button"
-        href="/logmeal"
-        onClick={[Function]}
-      >
-        Log a meal that you've created
-      </a>
-      <a
-        className="button"
-        href="/logsnack"
-        onClick={[Function]}
-      >
-        Log a single item snack
-      </a>
-    </div>
-    <h2
-      className="eventsHeading"
-    >
-      Today's activity:
-    </h2>
-  </section>,
-]
+    Today's Activity:
+  </h2>
+</section>
 `;

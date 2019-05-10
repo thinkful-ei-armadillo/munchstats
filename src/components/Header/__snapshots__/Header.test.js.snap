@@ -2,21 +2,23 @@
 
 exports[`<Header /> renders the UI as expected 1`] = `
 <header
-  className="backgroundColor2 textColor2"
+  className="backgroundColor2 textColor2 shadow"
 >
-  <h1>
-    <a
-      href="/"
-      onClick={[Function]}
-      style={
-        Object {
-          "textDecoration": "none",
-        }
+  <a
+    href="/"
+    onClick={[Function]}
+    style={
+      Object {
+        "textDecoration": "none",
       }
-    >
-      Munch Stats
-    </a>
-  </h1>
+    }
+  >
+    <img
+      alt="Munch Stats"
+      className="logoTest"
+      src="logo_m.png"
+    />
+  </a>
   <nav>
     <a
       href="/login"

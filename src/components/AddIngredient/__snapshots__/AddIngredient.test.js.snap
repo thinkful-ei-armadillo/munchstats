@@ -1,32 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<AddIngredient /> renders the UI as expected 1`] = `
-Array [
+<div
+  className="IngredientFormContainer null  backgroundColor5"
+>
   <form
     className="mealForm"
     onSubmit={[Function]}
   >
-    <label
-      htmlFor="ingredient-input"
+    <div
+      className="formField"
+      id="addIngredientInput"
     >
-      Ingredient
-    </label>
-    <input
-      id="ingredient-input"
-      name="ingredient-input"
-      onChange={[Function]}
-      required={true}
-      value=""
-    />
+      <label
+        className="inputLabel backgroundColor6 border3 textColor3"
+        htmlFor="ingredient-input"
+      >
+        Ingredient: 
+      </label>
+      <input
+        className="inputField border3 backgroundColor8"
+        id="ingredient-input"
+        name="ingredient-input"
+        onChange={[Function]}
+        required={true}
+        value=""
+      />
+    </div>
     <button
-      className="Button"
+      className="Button textColor3 addIngredientButton backgroundColor6"
       type="submit"
     >
-      Search ingredients
+      Search
     </button>
-  </form>,
+  </form>
   <section
     className="results"
-  />,
-]
+  >
+    <br />
+  </section>
+</div>
 `;

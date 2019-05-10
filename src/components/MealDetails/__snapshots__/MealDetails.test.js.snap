@@ -24,10 +24,10 @@ Array [
       className="finalIngredientsContainer"
     >
       <div
-        className="panel backgroundColor5"
+        className="panel backgroundColor7 shadow textColor1 deatailsPanel"
       >
         <div
-          className="panelHeader backgroundColor2 textColor2"
+          className="panelHeader backgroundColor2 textColor2 "
         >
           <h3>
             Meal Ingredients
@@ -36,13 +36,21 @@ Array [
             className="modalOpener"
             onClick={[Function]}
           >
-            click here to add ingredient
+            Add Ingredient
           </p>
         </div>
         <div
           className="finalIngredients"
         >
-          Nothing so far!
+          <div
+            style={
+              Object {
+                "marginTop": "100px",
+              }
+            }
+          >
+            Nothing so far!
+          </div>
         </div>
       </div>
     </section>
@@ -50,7 +58,7 @@ Array [
       className="currentMealStats"
     >
       <div
-        className="panel backgroundColor5"
+        className="panel deatailsPanel backgroundColor7 shadow textColor1"
       >
         <h3
           className="panelHeader backgroundColor2 textColor2"
@@ -60,21 +68,29 @@ Array [
         <div
           className="nutritionInfo"
         >
-          <p>
+          <p
+            className="mealNutrientStats"
+          >
             calories: 
             NaN
           </p>
-          <p>
+          <p
+            className="mealNutrientStats"
+          >
              fat: 
             NaN
              
           </p>
-          <p>
+          <p
+            className="mealNutrientStats"
+          >
             carbs: 
             NaN
              
           </p>
-          <p>
+          <p
+            className="mealNutrientStats"
+          >
             protein: 
             NaN
           </p>

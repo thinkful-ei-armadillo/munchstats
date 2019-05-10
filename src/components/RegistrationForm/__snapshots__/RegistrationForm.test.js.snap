@@ -1,95 +1,132 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<RegistrationForm /> renders the UI as expected 1`] = `
-<form
-  className="RegistrationForm"
-  onSubmit={[Function]}
+<div
+  className="formContainer"
 >
-  <div
-    role="alert"
-  />
-  <div>
-    <label
-      className="Label"
-      htmlFor="registration-name-input"
-    >
-      Name
-      <span
-        className="Required"
-      >
-        *
-      </span>
-    </label>
-    <br />
-    <input
-      className="Input"
-      id="registration-name-input"
-      name="name"
-      required={true}
-      type="text"
-    />
-  </div>
-  <br />
-  <div>
-    <label
-      className="Label"
-      htmlFor="registration-username-input"
-    >
-      Choose a Username
-      <span
-        className="Required"
-      >
-        *
-      </span>
-    </label>
-    <br />
-    <input
-      className="Input"
-      id="registration-username-input"
-      name="username"
-      required={true}
-      type="text"
-    />
-  </div>
-  <br />
-  <div>
-    <label
-      className="Label"
-      htmlFor="registration-password-input"
-    >
-      Choose a Password
-      <span
-        className="Required"
-      >
-        *
-      </span>
-    </label>
-    <br />
-    <input
-      className="Input"
-      id="registration-password-input"
-      name="password"
-      required={true}
-      type="password"
-    />
-  </div>
-  <br />
-  <button
-    className="Button"
-    type="submit"
+  <form
+    className="RegistrationForm"
+    onSubmit={[Function]}
   >
-    Sign Up
-  </button>
-  <footer>
-    <p>
-      Already have an account? 
-      <a
-        href="/login"
-        onClick={[Function]}
+    <div
+      role="alert"
+    />
+    <div
+      className="formField"
+    >
+      <label
+        className="Label inputLabel backgroundColor6 border3 textColor3"
+        htmlFor="registration-name-input"
       >
-        Log In!
-      </a>
-    </p>
-  </footer>
-</form>
+        Name
+        <span
+          className="Required"
+        >
+          *
+        </span>
+      </label>
+      <input
+        className="Input inputField border3 backgroundColor4"
+        id="registration-name-input"
+        name="name"
+        required={true}
+        type="text"
+      />
+    </div>
+    <div
+      className="formField"
+    >
+      <label
+        className="Label inputLabel backgroundColor6 border3 textColor3"
+        htmlFor="registration-username-input"
+      >
+        Username
+        <span
+          className="Required"
+        >
+          *
+        </span>
+      </label>
+      <input
+        className="Input inputField border3 backgroundColor4"
+        id="registration-username-input"
+        name="username"
+        required={true}
+        type="text"
+      />
+    </div>
+    <div
+      className="formField"
+    >
+      <label
+        className="Label inputLabel backgroundColor6 border3 textColor3"
+        htmlFor="registration-password-input"
+      >
+        Password
+        <span
+          className="Required"
+        >
+          *
+        </span>
+      </label>
+      <input
+        className="Input inputField border3 backgroundColor4"
+        id="registration-password-input"
+        name="password"
+        required={true}
+        type="password"
+      />
+    </div>
+    <button
+      className="Button"
+      type="submit"
+    >
+      Sign Up
+    </button>
+    <footer>
+      <p>
+        Already have an account? 
+        <a
+          href="/login"
+          onClick={[Function]}
+          style={
+            Object {
+              "textDecoration": "underline",
+            }
+          }
+        >
+          Log In!
+        </a>
+      </p>
+      <p>
+        Want to test out the app before registering? 
+        <a
+          href="/"
+          onClick={[Function]}
+          style={
+            Object {
+              "textDecoration": "underline",
+            }
+          }
+        >
+          Log in as a test user.
+        </a>
+      </p>
+      <p>
+        Want to learn more about Munch Stats? Check out the 
+        <a
+          href="/about"
+          onClick={[Function]}
+          style={
+            Object {
+              "textDecoration": "underline",
+            }
+          }
+        >
+          About page!
+        </a>
+      </p>
+    </footer>
+  </form>
+</div>
 `;
