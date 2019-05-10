@@ -148,8 +148,8 @@ export default class Meals extends Component {
                 maxLength="60"
                 required />
               <br />
-              <Button type='submit'>
-              Add Meal
+              <Button className = 'backgroundColor6 shadow' type='submit'>
+              Add Meal 
               </Button>
             </form>
             <i onClick={this.handleModal} className="fas fa-times modalCloser textColor4"></i>

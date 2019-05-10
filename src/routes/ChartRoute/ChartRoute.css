@@ -32,6 +32,10 @@
     margin: auto;
 }
 
+form .buttonColor{
+    bakground:#3e6b6d;
+}
+
 @media (min-width: 320px) and (max-width: 480px) {
     .calorieChart, .gramChart {
         width: 95%;
