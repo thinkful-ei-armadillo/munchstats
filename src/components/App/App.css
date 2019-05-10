@@ -23,7 +23,7 @@ h1 {
 
 a{
   text-decoration: none;
-  color: #152a23;
+  color: var(--textColor1);
 }
 
 #tagline {
