@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { HorizontalBar } from 'react-chartjs-2';
 import UserContext from '../../contexts/UserContext';
-import { Link } from 'react-router-dom';
 export default class CalorieChart extends Component {
 
 static contextType = UserContext;
