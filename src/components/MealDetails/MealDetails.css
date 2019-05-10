@@ -104,5 +104,8 @@
   .mealContainer section {
     width:90%;
   }
-  
+  .modalAddIngredient {
+    width: 98%;
+    margin-top:60px;
+  }
 }
