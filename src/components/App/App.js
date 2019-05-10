@@ -21,6 +21,7 @@ import './App.css';
 import Loading from '../Loading/Loading';
 import ChartRoute from '../../routes/ChartRoute/ChartRoute';
 import './ColorStyles.css';
+import TokenService from '../../services/token-service';
 
 export default class App extends Component {
   state = {
@@ -40,22 +41,23 @@ export default class App extends Component {
   static contextType = UserContext;
 
   componentDidMount() {
-  
-    AuthApiService.getUserBudgets()
-      .then(res => {
-        this.context.setUser({
-          ...this.context.user,
-          ...res.user[0]
+    if(TokenService.hasAuthToken()){
+      AuthApiService.getUserBudgets()
+        .then(res => {
+          this.context.setUser({
+            ...this.context.user,
+            ...res.user[0]
+          });
+          if (res.user[0].isDark) {
+            document.documentElement.setAttribute('theme', 'dark');
+          }
+          else {
+            document.documentElement.setAttribute('theme', 'light');
+          } 
         });
-        if (res.user[0].isDark) {
-          document.documentElement.setAttribute('theme', 'dark');
-        }
-        else {
-          document.documentElement.setAttribute('theme', 'light');
-        } 
-      });
-    EventsApiService.getTodaysEvents()
-      .then(sortedEvents => this.context.setTodayEvents(sortedEvents));
+      EventsApiService.getTodaysEvents()
+        .then(sortedEvents => this.context.setTodayEvents(sortedEvents));
+    }
   }
 
   render() {
