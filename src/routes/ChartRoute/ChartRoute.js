@@ -48,17 +48,17 @@ class ChartRoute extends Component {
   renderDatePickerStart() {
     return <form onSubmit = {e => this.handleSubmitStart(e)} className = 'chartDatePicker shadow backgroundColor5'>
       <h3>Pick a Start Date</h3>
-      <p onClick = {this.handleClick}>cancel</p>
       <Datetime closeOnSelect={true} defaultValue={moment()} name = 'date' id = 'date' locale={'true'} timeFormat = {false}/>
       <Button type ='submit'>Next</Button>
+      <p onClick = {this.handleClick} style={{cursor: 'pointer', 'margin-top': '10px'}}>cancel</p>
     </form>;
   }
   renderDatePickerEnd() {
     return <form onSubmit = {e => this.handleSubmitEnd(e)} className = 'chartDatePicker shadow backgroundColor5'>
       <h3>Pick an End Date</h3>
-      <p onClick = {this.handleClick}>cancel</p>
       <Datetime closeOnSelect={true} defaultValue={moment()} inputProps={{ readOnly: true }} timeFormat={false} />
       <Button type ='submit'>Submit</Button>
+      <p onClick = {this.handleClick} style={{cursor: 'pointer', 'margin-top': '10px'}}>cancel</p>
     </form>;
   }
 
