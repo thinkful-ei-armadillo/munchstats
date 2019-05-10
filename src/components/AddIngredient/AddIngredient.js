@@ -164,7 +164,7 @@ export default class AddIngredient extends Component {
               <Error />
               <div className='formField' id='addIngredientInput'>
                 <label htmlFor='ingredient-input' className="inputLabel backgroundColor6 border3 textColor3">
-                Ingredient: </label>
+                Ingredient</label>
                 <input ref={this.firstInput} id='ingredient-input' className="inputField border3 backgroundColor8" name='ingredient-input' value={this.state.ingredientInput} onChange={this.handleInput} required />
               </ div>
               <Button className='textColor3 addIngredientButton backgroundColor6' type='submit'> 

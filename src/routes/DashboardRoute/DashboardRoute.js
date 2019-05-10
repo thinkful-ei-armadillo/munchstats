@@ -24,7 +24,7 @@ class DashboardRoute extends Component {
           </Button>
         </Link>
         {(this.context.user.calorieBudget) ? 
-          null : <div className = 'updateBudgets'><h3>No chart data!</h3>Set your nutrition budgets <Link to='/profile'>here</Link></div>
+          null : <div className = 'updateBudgets'><h3>No chart data!</h3>Be sure to <Link to='/profile'>set your nutrition budgets</Link>.</div>
         }
         <CalorieChart1 className = 'dashboardChart' />
         

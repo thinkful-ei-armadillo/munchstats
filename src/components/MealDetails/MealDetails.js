@@ -106,10 +106,10 @@ export default class Meals extends Component {
     return <>
       <h3 className = 'panelHeader backgroundColor2 textColor2'>Meal Nutrition Information</h3>
       <div className='nutritionInfo' >
-        <p className="mealNutrientStats">calories: {Math.round(this.state.mealInfo.total_calorie)}</p>
-        <p className="mealNutrientStats"> fat: {Math.round(this.state.mealInfo.total_fat)} </p>
-        <p className="mealNutrientStats">carbs: {Math.round(this.state.mealInfo.total_carbs)} </p>
-        <p className="mealNutrientStats">protein: {Math.round(this.state.mealInfo.total_protein)}</p>
+        <p className="mealNutrientStats">Calories: {Math.round(this.state.mealInfo.total_calorie)}</p>
+        <p className="mealNutrientStats">Fat: {Math.round(this.state.mealInfo.total_fat)} </p>
+        <p className="mealNutrientStats">Carbs: {Math.round(this.state.mealInfo.total_carbs)} </p>
+        <p className="mealNutrientStats">Protein: {Math.round(this.state.mealInfo.total_protein)}</p>
       </div>
     </>;
   }
