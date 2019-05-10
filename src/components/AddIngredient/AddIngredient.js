@@ -78,7 +78,6 @@ export default class AddIngredient extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.history.location.pathname)
   }
 
   handleSubmit = (e) => {
@@ -90,7 +89,6 @@ export default class AddIngredient extends Component {
     let encodedInput = encodeURI(this.state.ingredientInput);
     ProxyApiService.getIngredientsFromSearch(encodedInput)
       .then(results => {
-        console.log('results', results);
         if(results.length === 0){
           this.setState({hasResults: false});
           this.context.loadingFalse();
@@ -122,8 +120,8 @@ export default class AddIngredient extends Component {
           <p className = 'ingredientName'>{this.state.chosenIngredient.name}</p>
           <label htmlFor='quantity'>How much do you want to add?</label>
           <br />
-          <input type='number' name='quantity' min='0' step='.01' value={this.state.ingredientQuantity} onChange={(e) => this.handleQuantityInput(e)} required/>
-          <select name='measurements'>
+          <input type='number' name='quantity' id='measurementInput' min='0' step='.01' value={this.state.ingredientQuantity} onChange={(e) => this.handleQuantityInput(e)} required/>
+          <select name='measurements' id='measurements'>
             {this.state.chosenIngredient.measures.map((measure, index) => {
               return <option key={index} value={`${measure.uri},${measure.label}`} name={measure.label} >{measure.label}</option>;
             })}
@@ -167,7 +165,7 @@ export default class AddIngredient extends Component {
               <div className='formField' id='addIngredientInput'>
                 <label htmlFor='ingredient-input' className="inputLabel backgroundColor6 border3 textColor3">
                 Ingredient: </label>
-                <input ref={this.firstInput} id='ingredient-input' className="inputField border3 backgroundColor4" name='ingredient-input' value={this.state.ingredientInput} onChange={this.handleInput} required />
+                <input ref={this.firstInput} id='ingredient-input' className="inputField border3 backgroundColor8" name='ingredient-input' value={this.state.ingredientInput} onChange={this.handleInput} required />
               </ div>
               <Button className='textColor3 addIngredientButton backgroundColor6' type='submit'> 
                 Search

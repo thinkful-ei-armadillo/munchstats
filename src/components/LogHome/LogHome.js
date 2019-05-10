@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import UserContext from '../../contexts/UserContext';
 import EventsApiService from '../../services/events-api-service';
 import Loading from '../Loading/Loading';
-import Back from '../../components/Back/Back';
 import './LogHome.css';
 
 export default class LogHome extends Component {

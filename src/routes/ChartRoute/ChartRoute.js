@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import CalorieChart1 from '../../components/CalorieChart1/CalorieChart1';
 import GramChart1 from '../../components/GramChart1/GramChart1';
-import Back from '../../components/Back/Back';
 import './ChartRoute.css';
 import Datetime from 'react-datetime';
 import moment from 'moment';
@@ -48,19 +47,19 @@ class ChartRoute extends Component {
 
   renderDatePickerStart() {
     return <form onSubmit = {e => this.handleSubmitStart(e)} className = 'chartDatePicker shadow backgroundColor5'>
-        <h3>Pick a Start Date</h3>
-        <p onClick = {this.handleClick}>cancel</p>
+      <h3>Pick a Start Date</h3>
+      <p onClick = {this.handleClick}>cancel</p>
       <Datetime closeOnSelect={true} defaultValue={moment()} name = 'date' id = 'date' locale={'true'} timeFormat = {false}/>
-        <Button type ='submit'>Next</Button>
-      </form>
+      <Button type ='submit'>Next</Button>
+    </form>;
   }
   renderDatePickerEnd() {
     return <form onSubmit = {e => this.handleSubmitEnd(e)} className = 'chartDatePicker shadow backgroundColor5'>
-        <h3>Pick an End Date</h3>
-        <p onClick = {this.handleClick}>cancel</p>
+      <h3>Pick an End Date</h3>
+      <p onClick = {this.handleClick}>cancel</p>
       <Datetime closeOnSelect={true} defaultValue={moment()} inputProps={{ readOnly: true }} timeFormat={false} />
-        <Button type ='submit'>Submit</Button>
-      </form>
+      <Button type ='submit'>Submit</Button>
+    </form>;
   }
 
   getRange = () => {

@@ -8,6 +8,7 @@ html{
   --backgroundColor5: #f5f5f5;
   --backgroundColor6: #3e6b6d;
   --backgroundColor7: #f5f5f5;
+  --backgroundColor8: #f5f5f5;
   --textColor1: #152a23;
   --textColor2: #EFE7DA;
   --textColor3: #EFE7Da;
@@ -30,6 +31,7 @@ html[theme='dark']{
   --backgroundColor5: #424242;
   --backgroundColor6: #EFE7DA;
   --backgroundColor7:#424242;   
+  --backgroundColor8: #d4d4d4;
   --textColor1:#EFE7DA ;
   --textColor2: #EFE7DA;
   --textColor3:#201e1e;
@@ -104,6 +106,10 @@ html[theme='dark']{
 }
 .backgroundColor7{
   background-color: var(--backgroundColor7);
+}
+
+.backgroundColor8{
+  background-color: var(--backgroundColor8);
 }
 
 /* main text color in body */

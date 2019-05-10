@@ -105,15 +105,15 @@ export default class LogMeals extends Component {
           <Back history={this.props.history} path={'/log'} />
           <Error />
           <div className="flex mealLogContainer">
-            <section>
+            <section className='flexCenterColumn'>
               {this.context.meals.meal ? this.genUserMeals(this.context.meals.meal) : null}
             </section>
             <br />
-            <section id="userTag">
+            <section id="userTag" className='flexCenterColumn'>
               <label>
                 Select Tag
                 <br />
-                <select id="mealTag">
+                <select id="mealTag" className='flexCenterColumn'>
                   <option value="breakfast">Breakfast</option>
                   <option value="brunch">Brunch</option>
                   <option value="lunch">Lunch</option>
@@ -123,9 +123,9 @@ export default class LogMeals extends Component {
             </section>
             <br />
               Select Date & Time
-              <Datetime className='textColor1' closeOnSelect={true} inputProps={{ readOnly: true }} defaultValue ={moment()}/>
+            <Datetime className='textColor1 autoMarginSides' closeOnSelect={true} inputProps={{ readOnly: true }} defaultValue ={moment()}/>
             
-            <Button onClick={() => this.handleAddLog()}>Add</Button>
+            <Button className='autoMarginSides' onClick={() => this.handleAddLog()}>Add</Button>
           </div>
         </div>
       );

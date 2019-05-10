@@ -7,7 +7,6 @@ import './Meals.css';
 import Loading from '../Loading/Loading';
 import Error from '../Error/Error';
 import ReactModal from 'react-modal';
-import Back from '../Back/Back';
 
 export default class Meals extends Component {
   static contextType = UserContext;
@@ -124,7 +123,7 @@ export default class Meals extends Component {
           <Error />
           <div className  = 'mealsHeader'>
             <h2>Your Meals</h2>
-            <p className='modalOpener' onClick={this.handleModal}>Add Meal</p>
+            <button onClick={this.handleModal}>Add Meal</button>
           </div>
           <ReactModal
             isOpen={this.state.showModal}

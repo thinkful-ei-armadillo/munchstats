@@ -54,7 +54,7 @@ export default class LogSnack extends Component {
     
     if (this.context.ingredient.name) {
       return (
-        <div className= {`IngredientFormContainer backgroundColor5 shadow addIngredientMeasureForm`}>
+        <div className= {'IngredientFormContainer backgroundColor5 shadow addIngredientMeasureForm center'}>
           <Back history={this.props.history} path={'/log'} />
           <Error />
           <div className = 'logSnackTime'>

@@ -62,7 +62,7 @@ class LoginForm extends Component {
               {error && <p>{error}</p>}
             </div>
             <div className='formField'>
-              <Label htmlFor='login-username-input' className="inputLabel backgroundColor6 border3 textColor1">
+              <Label htmlFor='login-username-input' className="inputLabel backgroundColor6 border3 textColor3">
                 Username
               </Label>
               <Input
@@ -74,7 +74,7 @@ class LoginForm extends Component {
               />
             </div>
             <div className='formField'>
-              <Label htmlFor='login-password-input'  className="inputLabel backgroundColor6 border3 textColor1">
+              <Label htmlFor='login-password-input'  className="inputLabel backgroundColor6 border3 textColor3">
                 Password
               </Label>
               <Input

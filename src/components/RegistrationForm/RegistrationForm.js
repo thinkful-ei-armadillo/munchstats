@@ -75,7 +75,7 @@ class RegistrationForm extends Component {
               {error && <p>{error}</p>}
             </div>
             <div className='formField'>
-              <Label htmlFor='registration-name-input' className="inputLabel backgroundColor6 border3 textColor1">
+              <Label htmlFor='registration-name-input' className="inputLabel backgroundColor6 border3 textColor3">
             Name<Required />
               </Label>
               <Input
@@ -87,7 +87,7 @@ class RegistrationForm extends Component {
               />
             </div>
             <div className='formField'>
-              <Label htmlFor='registration-username-input' className="inputLabel backgroundColor6 border3 textColor1">
+              <Label htmlFor='registration-username-input' className="inputLabel backgroundColor6 border3 textColor3">
             Username<Required />
               </Label>
               <Input
@@ -98,7 +98,7 @@ class RegistrationForm extends Component {
               />
             </div>
             <div className='formField'>
-              <Label htmlFor='registration-password-input' className="inputLabel backgroundColor6 border3 textColor1">
+              <Label htmlFor='registration-password-input' className="inputLabel backgroundColor6 border3 textColor3">
             Password<Required />
               </Label>
               <Input

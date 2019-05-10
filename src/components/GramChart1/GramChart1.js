@@ -22,16 +22,15 @@ render() {
       chartData[2][0] += this.props.chartData[i].fat;
       chartData[4][0] += this.props.chartData[i].protein;
     }
-    console.log(this.props.chartData)
   } else {   
-      chartData[1][0] = this.context.user.carbBudget;
-      chartData[3][0] = this.context.user.fatBudget;
-      chartData[5][0] = this.context.user.proteinBudget;
-      for (let i = 0; i < this.context.todayEvents.length; i++) {
-        chartData[0][0] += this.context.todayEvents[i].carbs;
-        chartData[2][0] += this.context.todayEvents[i].fat;
-        chartData[4][0] += this.context.todayEvents[i].protein;
-      }
+    chartData[1][0] = this.context.user.carbBudget;
+    chartData[3][0] = this.context.user.fatBudget;
+    chartData[5][0] = this.context.user.proteinBudget;
+    for (let i = 0; i < this.context.todayEvents.length; i++) {
+      chartData[0][0] += this.context.todayEvents[i].carbs;
+      chartData[2][0] += this.context.todayEvents[i].fat;
+      chartData[4][0] += this.context.todayEvents[i].protein;
+    }
   }
 
   
@@ -53,7 +52,7 @@ render() {
           }]
         }
       }} data={{
-      labels: ['Carbs', 'Fat', 'Protein'],
+        labels: ['Carbs', 'Fat', 'Protein'],
         datasets: [{
           label: 'Current',
           data: [chartData[0], chartData[2], chartData[4]],
@@ -84,8 +83,8 @@ render() {
           ],
           borderWidth: 1
         }
-      ]
-    }} />
+        ]
+      }} />
     </div>
   );
 }

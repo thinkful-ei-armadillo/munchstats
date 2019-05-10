@@ -94,7 +94,7 @@ button{
   border-right: 1px solid;
   border-radius: 2px 0 0 2px;
   width: 40%;
-  color: var(--textColor1)
+  /* color: var(--textColor1) */
 }
 
 .inputField{
@@ -146,4 +146,22 @@ select:focus {
 }
 select option {
 	font-weight:normal;
+}
+
+.mealNutrientStats{
+  margin-top: 50px;
+}
+
+#measurements{
+  max-width: 180px;
+  margin: 10px auto;
+}
+
+#measurementInput{
+  margin-top: 10px;
+}
+
+.autoMarginSides{
+  margin-left: auto;
+  margin-right: auto;
 }
