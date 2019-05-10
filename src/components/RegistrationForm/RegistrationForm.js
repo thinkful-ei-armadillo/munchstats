@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Input, Required, Label } from '../Form/Form';
 import AuthApiService from '../../services/auth-api-service';
+import EventsApiService from '../../services/events-api-service';
 import Button from '../Button/Button';
 import UserContext from '../../contexts/UserContext';
 import Loading from '../Loading/Loading';
@@ -50,6 +51,30 @@ class RegistrationForm extends Component {
             });
         }
       });
+  }
+
+  handleTestLoginClick = ev => {
+    ev.preventDefault();
+        this.context.loadingTrue();
+
+        this.setState({ error: null });
+
+        AuthApiService.postLogin({
+        username: 'test',
+        password: 'pass'
+        })
+        .then(res => {
+            this.context.processLogin(res.authToken);
+            this.props.history.push('/');
+            this.context.loadingFalse();
+            EventsApiService.getTodaysEvents()
+            .then(res => this.context.setTodayEvents(res))
+            .catch(e => this.context.setError(e));
+        })
+        .catch(res => {
+            this.setState({ error: res.error });
+            this.context.loadingFalse();
+        });
   }
 
   lightTheme = () => {

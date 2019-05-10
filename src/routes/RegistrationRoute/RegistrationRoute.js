@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import RegistrationForm from '../../components/RegistrationForm/RegistrationForm';
 import UserContext from '../../contexts/UserContext';
-import AuthApiService from '../../services/auth-api-service';
-import EventsApiService from '../../services/events-api-service';
 
 class RegistrationRoute extends Component {
   static defaultProps = {
@@ -16,30 +14,6 @@ class RegistrationRoute extends Component {
   handleRegistrationSuccess = () => {
     const { history } = this.props;
     history.push('/login');
-  }
-
-  handleTestLoginClick = ev => {
-    ev.preventDefault();
-        this.context.loadingTrue();
-
-        this.setState({ error: null });
-
-        AuthApiService.postLogin({
-        username: 'test',
-        password: 'pass'
-        })
-        .then(res => {
-            this.context.processLogin(res.authToken);
-            this.props.history.push('/');
-            this.context.loadingFalse();
-            EventsApiService.getTodaysEvents()
-            .then(res => this.context.setTodayEvents(res))
-            .catch(e => this.context.setError(e));
-        })
-        .catch(res => {
-            this.setState({ error: res.error });
-            this.context.loadingFalse();
-        });
   }
 
   render() {
