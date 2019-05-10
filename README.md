@@ -12,7 +12,7 @@
 ![Register](https://i.imgur.com/jTl6s57.png)  
 ![Dashboard](https://i.imgur.com/2h9xocv.png)  
 ![Your Meals](https://i.imgur.com/Y4hBz7f.png)  
-![Meal Page](https://i.imgur.com/XiwuS4E.png)  
+![Meal Page](https://i.imgur.com/v9wnMLb.png)  
 ![Add Ingredient](https://i.imgur.com/zYteyAw.png)  
 ![Meal Post-Ingredient](https://i.imgur.com/1DT2Ri0.png)  
 ![Log Dashboard](https://i.imgur.com/umZCpq9.png)  
