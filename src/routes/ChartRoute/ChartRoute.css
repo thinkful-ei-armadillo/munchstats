@@ -12,6 +12,13 @@
     padding:20px;
 }
 
+.calorieChart p a:hover {
+    text-decoration: none;
+}
+.calorieChart p a {
+    text-decoration: underline;
+}
+
 .chartDatePicker {
     border-radius: 10px;
     margin:30px auto 0;

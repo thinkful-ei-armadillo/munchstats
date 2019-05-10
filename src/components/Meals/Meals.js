@@ -152,7 +152,7 @@ export default class Meals extends Component {
               Add Meal
               </Button>
             </form>
-            <i onClick={this.handleModal} className="fas fa-times modalCloser"></i>
+            <i onClick={this.handleModal} className="fas fa-times modalCloser textColor4"></i>
           </ReactModal>
           <section className="mealsContainer">
             {this.context.meals.meal ? this.genUserMeals(this.context.meals.meal) : null}

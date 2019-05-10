@@ -88,13 +88,12 @@ class ChartRoute extends Component {
     if(this.state.end && this.state.start) {
       this.getRange();
     }
-
     return (
       <>
         <section className="chartsPage">          
           {this.state.datePicker && !this.state.start && this.renderDatePickerStart()}
           {this.state.datePicker && this.state.start && this.renderDatePickerEnd()}
-          {!this.state.datePicker && <button className = 'center' onClick = {this.handleClick}>pick a date range</button>}
+          {!this.state.datePicker && <button className = 'center' onClick = {this.handleClick}>Pick a Date Range</button>}
           <h2>{this.state.title}:</h2>
           <h3>Calories:</h3>
           <CalorieChart1 days = {this.state.days} chartData = {this.state.chartData}/>

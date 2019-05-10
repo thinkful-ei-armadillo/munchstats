@@ -171,7 +171,7 @@ export default class Meals extends Component {
         > 
           <h3 className = 'panelHeader backgroundColor2 textColor2'>Search For an Ingredient</h3>
           <AddIngredient handleModal={this.handleModal} history = {this.props.history} />
-          <i onClick={this.handleModal} className="fas fa-times modalCloser"></i>
+          <i onClick={this.handleModal} className="fas fa-times modalCloser textColor4"></i>
         </ReactModal>
       );
     }
