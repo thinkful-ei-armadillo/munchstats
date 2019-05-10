@@ -213,7 +213,7 @@ export default class Meals extends Component {
                 <p className = 'modalOpener' onClick={this.handleModal}>Add Ingredient</p>
               </div>
               <div className="finalIngredients">
-                {(this.state.mealIngredients[0]) ? this.generateFinalIngredients() : 'Nothing so far!'}
+                {(this.state.mealIngredients[0]) ? this.generateFinalIngredients() : <div style={{marginTop:'100px'}}>Nothing so far!</div>}
                 {this.generateModal()}
               </div>
             </div>

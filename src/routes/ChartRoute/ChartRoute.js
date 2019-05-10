@@ -50,7 +50,7 @@ class ChartRoute extends Component {
       <h3>Pick a Start Date</h3>
       <Datetime closeOnSelect={true} defaultValue={moment()} name = 'date' id = 'date' locale={'true'} timeFormat = {false}/>
       <Button type ='submit'>Next</Button>
-      <p onClick = {this.handleClick} style={{cursor: 'pointer', 'margin-top': '10px'}}>cancel</p>
+      <p onClick = {this.handleClick} style={{cursor: 'pointer', marginTop: '10px'}}>cancel</p>
     </form>;
   }
   renderDatePickerEnd() {
@@ -58,7 +58,7 @@ class ChartRoute extends Component {
       <h3>Pick an End Date</h3>
       <Datetime closeOnSelect={true} defaultValue={moment()} inputProps={{ readOnly: true }} timeFormat={false} />
       <Button type ='submit'>Submit</Button>
-      <p onClick = {this.handleClick} style={{cursor: 'pointer', 'margin-top': '10px'}}>cancel</p>
+      <p onClick = {this.handleClick} style={{cursor: 'pointer', marginTop: '10px'}}>cancel</p>
     </form>;
   }
 
