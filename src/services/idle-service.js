@@ -39,6 +39,6 @@ const IdleService = {
       )
     );
   }
-}
+};
 
 export default IdleService;

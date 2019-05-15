@@ -8,6 +8,9 @@
 + [David Haugen](https://github.com/DavidHaugen)  
 + [Bob Nearents](https://github.com/bobnearents)  
 
+### Summary
+Munch Stats is a meal tracking app. What makes Munch Stats different is our approach to building meals within the app. Using the Edamam API, you can build and track your meals ingredient by ingredient and save each meal for multiple trackings. You can also set daily goals for calories, carbohydrates, fat, and/or protein and track how your daily consumption compares to your goals.
+
 ### Screenshots
 ![Register](https://i.imgur.com/jTl6s57.png)  
 ![Dashboard](https://i.imgur.com/2lYKzJj.png)  
@@ -19,9 +22,6 @@
 ![Log Meal](https://i.imgur.com/Uh5uvek.png)  
 ![Profile](https://i.imgur.com/YGfUpwh.png)
 ![Dark Mode](https://i.imgur.com/uNRCnFc.png)  
-
-### Summary
-Munch Stats is a meal tracking app. What makes Munch Stats different is our approach to building meals within the app. Using the Edamam API, you can build and track your meals ingredient by ingredient and save each meal for multiple trackings. You can also set daily goals for calories, carbohydrates, fat, and/or protein and track how your daily consumption compares to your goals.
 
 ### Tech Stack
 + Built with React

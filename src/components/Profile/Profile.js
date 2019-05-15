@@ -67,7 +67,7 @@ export default class Profile extends Component {
       fatBudget,
       carbBudget,
       proteinBudget
-    }
+    };
     AuthApiService.patchUser(updatedUser)
       .then(this.context.setUser(updatedUser));
     

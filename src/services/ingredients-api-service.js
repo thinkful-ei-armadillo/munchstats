@@ -11,7 +11,7 @@ const IngredientsApiService = {
         'authorization': `bearer ${TokenService.getAuthToken()}`
       }
     })
-    .then(res => res.json())
+      .then(res => res.json());
   },
 
   deleteIngredient(ingredient_id) {
@@ -23,7 +23,7 @@ const IngredientsApiService = {
         'authorization': `bearer ${TokenService.getAuthToken()}`
       }
     })
-      .then(res => res.json)
+      .then(res => res.json);
   },
 
   getIngredientsForMeal(id) {
@@ -39,8 +39,8 @@ const IngredientsApiService = {
         (!res.ok)
           ? res.json().then(e => Promise.reject(e))
           : res.json()
-      )
+      );
   }
-}
+};
 
 export default IngredientsApiService;

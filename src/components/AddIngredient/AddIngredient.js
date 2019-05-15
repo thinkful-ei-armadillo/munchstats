@@ -4,7 +4,7 @@ import ProxyApiService from '../../services/proxy-api-service';
 import UserContext from '../../contexts/UserContext';
 import Loading from '../Loading/Loading';
 import Error from '../Error/Error';
-import './AddIngredient.css'
+import './AddIngredient.css';
 
 export default class AddIngredient extends Component {
 

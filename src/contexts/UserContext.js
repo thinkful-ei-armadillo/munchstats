@@ -121,8 +121,8 @@ export class UserProvider extends Component {
         this.setUser({
           ...this.state.user,
           ...res.user[0]
-        })
-      })
+        });
+      });
   }
 
   processLogout = () => {
