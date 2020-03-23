@@ -3,7 +3,7 @@
 + [API Repo](https://github.com/thinkful-ei-armadillo/munchstats-api)  
 
 ### Development Team
-+ [Michael Bramble](https://github.com/michaelbramble)  
++ [Michael Bramble](https://github.com/mwbramble)  
 + [Geordie Connell](https://github.com/geordo9)  
 + [David Haugen](https://github.com/DavidHaugen)  
 + [Bob Nearents](https://github.com/bobnearents)  
