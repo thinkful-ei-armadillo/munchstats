@@ -67,7 +67,7 @@ class AboutRoute extends Component {
             <Button type='submit'>Test Login</Button>
           </form>
           <footer>
-                    Development Team: <a href='https://github.com/michaelbramble'>Michael Bramble</a>, <a href='https://github.com/geordo9'>Geordie Connell</a>, <a href='https://david-haugen.now.sh/'>David Haugen</a>, <a href='https://bobnearents.github.io/portfolio/'>Bob Nearents</a>.
+                    Development Team: <a href='https://github.com/mwbramble'>Michael Bramble</a>, <a href='https://github.com/geordo9'>Geordie Connell</a>, <a href='https://david-haugen.now.sh/'>David Haugen</a>, <a href='https://bobnearents.github.io/portfolio/'>Bob Nearents</a>.
           </footer>
         </section>
       );
